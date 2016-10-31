@@ -5,13 +5,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "materiais")
 public class Materiais {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column
-	private Integer id;
+	private Integer id_material;
 	@Column
 	private String codigo;
 	@Column
@@ -58,11 +60,11 @@ public class Materiais {
 
 
 
-	public Integer getId() {
-		return id;
+	public Integer getId_material() {
+		return id_material;
 	}
-	public void setId(Integer id) {
-		this.id = id;
+	public void setId_material(Integer id_material) {
+		this.id_material = id_material;
 	}
 	public String getCodigo() {
 		return codigo;
@@ -129,7 +131,7 @@ public class Materiais {
 
 	@Override
 	public String toString() {
-		return "Materiais [id=" + id + ", codigo=" + codigo + ", nome=" + nome + ", descricao=" + descricao
+		return "Materiais [id_material=" + id_material + ", codigo=" + codigo + ", nome=" + nome + ", descricao=" + descricao
 				+ ", medida=" + medida + ", fornecedor=" + fornecedor + ", qtdMin=" + qtdMin + ", qtdMax=" + qtdMax
 				+ ", estoque=" + estoque + ", categoria=" + categoria + ", preco=" + preco + "]";
 	}

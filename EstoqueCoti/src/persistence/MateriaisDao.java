@@ -16,7 +16,7 @@ public class MateriaisDao {
 	
 	public List<Materiais> listar() {
 		session = HibernateUtil.getSessionFactory().openSession();
-		query = session.createQuery("SELECT M FROM MATERIAIS M");
+		query = session.createQuery("SELECT M FROM Materiais AS M");
 		List<Materiais> lista = query.list();
 		session.close();
 		

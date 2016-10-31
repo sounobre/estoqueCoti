@@ -20,7 +20,7 @@
 		<div class="panel-body">
 			<div class="tab-content">
 				<div id="home" class="tab-pane active">
-					<form action="">
+					<form action="buscar.html" method="post">
 					
 							<div class="col-lg-2">
 							<select class="form-control">
@@ -28,7 +28,7 @@
 					</select>
 					</div>
 					<div class="col-lg-2">
-							<input type="text" class="form-control"> 
+							<input type="text" class="form-control" name="pesquisarMateriais"> 
 							</div>
 							<span class="input-group-btn " >
 									<button class="btn btn-default" type="submit"
@@ -38,6 +38,38 @@
 							</span>
 							
 					</form>
+					
+					<c:if test="${fn:length(lista) > 0 }">
+						<table class="table table-hover">
+							<tr>
+								<th>Código</th>
+								<th>Nome</th>
+								<th>Descrição</th>
+								<th>Medida</th>
+								<th>Fornecedor</th>
+								<th>Quantidade Mínima</th>
+								<th>Quantidade Máxima</th>
+								<th>Estoque</th>
+								<th>Categoria</th>
+								<th>Preço</th>
+							</tr>
+					<c:forEach items="${lista }" var="mat">
+							<tr>
+								<td>${mat.codigo }</td>
+								<td>${mat.nome }</td>
+								<td>${mat.descricao }</td>
+								<td>${mat.medida }</td>
+								<td>${mat.fornecedor }</td>
+								<td>${mat.qtdMin }</td>
+								<td>${mat.qtdMax }</td>
+								<td>${mat.estoque }</td>
+								<td>${mat.categoria }</td>
+								<td>${mat.preco }</td>
+							</tr>
+					</c:forEach>		
+						</table>
+								
+					</c:if>
 				</div>
 				<div id="about" class="tab-pane">About</div>
 				<div id="profile" class="tab-pane">Profile</div>
