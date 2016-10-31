@@ -25,9 +25,9 @@ public class Materiais {
 	@Column
 	private String fornecedor;
 	@Column
-	private Double qtdMin;
+	private Double qtd_Min;
 	@Column
-	private Double qtdMax;
+	private Double qtd_Max;
 	@Column
 	private Double estoque;
 	@Column
