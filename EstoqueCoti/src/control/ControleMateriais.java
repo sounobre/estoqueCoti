@@ -70,10 +70,15 @@ protected void cadastrar(HttpServletRequest request, HttpServletResponse respons
 		String estoque = request.getParameter("estoque");
 		String categoria = request.getParameter("categoria");
 		String preco = request.getParameter("preco");
+		String outros = request.getParameter("catOutros");
 		
 		Materiais mat = new Materiais();
 		
+		if(outros != null){
+			mat.setCategoria(outros);
+		}else{
 		mat.setCategoria(categoria);
+		}
 		mat.setCodigo(codigo);
 		mat.setDescricao(descricao);
 		mat.setEstoque(new Double (estoque));

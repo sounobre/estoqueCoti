@@ -88,16 +88,19 @@
 												<div class="form-group"
 													style="width: 130px; float: left; margin-left: -38%;margin-top: 10%;">
 													<label for="categoria">Categoria</label> <select
-														name="categoria" class="form-control" type="text">
+														name="categoria" class="form-control" type="text" onchange='CheckColors(this.value);'>
 														<c:forEach items="${mBean.listarCategoria}" var="cat">
-														<option value="${cat }">${cat }</option>
+														<option  value="${cat }">${cat }</option>
+														
+														
+														
 														</c:forEach>
 													</select>
 												</div>
 												<div class="form-group"
-													style="width: 130px; float: left; margin-left: 2%; display: none;">
+													style="width: 130px; float: left; margin-left: -19%;display: none; margin-top: 10%" id="outros">
 													<label for="catOutros">Outros</label> <input name="catOutros"
-														class="form-control" type="text">
+														class="form-control" type="text" >
 												</div>
 
 												<div style="width: 30px; margin-top: 25%;float: right;margin-right: 8%">

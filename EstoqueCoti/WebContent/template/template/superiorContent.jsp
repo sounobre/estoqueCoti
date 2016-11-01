@@ -32,6 +32,16 @@
     <!-- Theme style -->
     <link href="css/style.css" rel="stylesheet" type="text/css" />
 
+<script type="text/javascript">
+function CheckColors(val){
+ var element=document.getElementById('outros');
+ if(val=='outros')
+   element.style.display='block';
+ else  
+   element.style.display='none';
+}
+
+</script> 
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
