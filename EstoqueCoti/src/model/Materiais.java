@@ -35,31 +35,24 @@ public class Materiais {
 	@Column
 	private Double preco;
 	
-	
-	public Materiais(Integer id, String codigo, String nome, String descricao, String medida, String fornecedor,
-			Double qtdMin, Double qtdMax, Double estoque, String categoria, Double preco) {
+	public Materiais(Integer id_material, String codigo, String nome, String descricao, String medida,
+			String fornecedor, Double qtd_Min, Double qtd_Max, Double estoque, String categoria, Double preco) {
 		super();
-		this.id = id;
+		this.id_material = id_material;
 		this.codigo = codigo;
 		this.nome = nome;
 		this.descricao = descricao;
 		this.medida = medida;
 		this.fornecedor = fornecedor;
-		this.qtdMin = qtdMin;
-		this.qtdMax = qtdMax;
+		this.qtd_Min = qtd_Min;
+		this.qtd_Max = qtd_Max;
 		this.estoque = estoque;
 		this.categoria = categoria;
 		this.preco = preco;
 	}
-	
-	
-	
 	public Materiais() {
 		super();
 	}
-
-
-
 	public Integer getId_material() {
 		return id_material;
 	}
@@ -96,17 +89,17 @@ public class Materiais {
 	public void setFornecedor(String fornecedor) {
 		this.fornecedor = fornecedor;
 	}
-	public Double getQtdMin() {
-		return qtdMin;
+	public Double getQtd_Min() {
+		return qtd_Min;
 	}
-	public void setQtdMin(Double qtdMin) {
-		this.qtdMin = qtdMin;
+	public void setQtd_Min(Double qtd_Min) {
+		this.qtd_Min = qtd_Min;
 	}
-	public Double getQtdMax() {
-		return qtdMax;
+	public Double getQtd_Max() {
+		return qtd_Max;
 	}
-	public void setQtdMax(Double qtdMax) {
-		this.qtdMax = qtdMax;
+	public void setQtd_Max(Double qtd_Max) {
+		this.qtd_Max = qtd_Max;
 	}
 	public Double getEstoque() {
 		return estoque;
@@ -126,16 +119,15 @@ public class Materiais {
 	public void setPreco(Double preco) {
 		this.preco = preco;
 	}
-
-
-
 	@Override
 	public String toString() {
-		return "Materiais [id_material=" + id_material + ", codigo=" + codigo + ", nome=" + nome + ", descricao=" + descricao
-				+ ", medida=" + medida + ", fornecedor=" + fornecedor + ", qtdMin=" + qtdMin + ", qtdMax=" + qtdMax
-				+ ", estoque=" + estoque + ", categoria=" + categoria + ", preco=" + preco + "]";
+		return "Materiais [id_material=" + id_material + ", codigo=" + codigo + ", nome=" + nome + ", descricao="
+				+ descricao + ", medida=" + medida + ", fornecedor=" + fornecedor + ", qtd_Min=" + qtd_Min
+				+ ", qtd_Max=" + qtd_Max + ", estoque=" + estoque + ", categoria=" + categoria + ", preco=" + preco
+				+ "]";
 	}
 	
 	
-
+	
+	
 }

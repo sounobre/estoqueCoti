@@ -1,6 +1,7 @@
 package control;
 
 import java.io.IOException;
+import java.lang.ref.ReferenceQueue;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,7 @@ import persistence.MateriaisDao;
 /**
  * Servlet implementation class ControleMateriais
  */
-@WebServlet({"/ControleMateriais", "/template/buscar.html"})
+@WebServlet({"/ControleMateriais", "/template/buscar.html", "/template/cadastrar.html"})
 public class ControleMateriais extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -44,8 +45,9 @@ protected void execute(HttpServletRequest request, HttpServletResponse response)
 		try{
 			
 			if(url.equalsIgnoreCase("/template/buscar.html")){
-				buscar(request, response);
-				
+				buscar(request, response);	
+			}else if(url.equalsIgnoreCase("/template/cadastrar.html")){
+				cadastrar(request,response);
 			}
 			
 		}catch(Exception e){
@@ -53,6 +55,45 @@ protected void execute(HttpServletRequest request, HttpServletResponse response)
 		}
 		
 	}
+
+protected void cadastrar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+	try{
+		
+		String codigo = request.getParameter("codigo");
+		String nome = request.getParameter("nome");
+		String descricao = request.getParameter("descricao");
+		String medida = request.getParameter("unimed");
+		String fornecedor = request.getParameter("fornecedor");
+		String qtd_Min = request.getParameter("qtd_Min");
+		String qtd_Max = request.getParameter("qtd_Max");
+		String estoque = request.getParameter("estoque");
+		String categoria = request.getParameter("categoria");
+		String preco = request.getParameter("preco");
+		
+		Materiais mat = new Materiais();
+		
+		mat.setCategoria(categoria);
+		mat.setCodigo(codigo);
+		mat.setDescricao(descricao);
+		mat.setEstoque(new Double (estoque));
+		mat.setFornecedor(fornecedor);
+		mat.setMedida(medida);
+		mat.setNome(nome);
+		mat.setPreco(new Double(preco));
+		mat.setQtd_Max(new Double(qtd_Max));
+		mat.setQtd_Min(new Double(qtd_Min));
+		
+		MateriaisDao md = new MateriaisDao();
+		md.cadastrar(mat);
+		
+		request.setAttribute("msg", "Cadastro efetuado com sucesso!");
+		request.getRequestDispatcher("/template/cadastro.jsp").forward(request, response);
+		
+	}catch(Exception e){
+		e.printStackTrace();
+	}
+}
 
 protected void buscar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			
