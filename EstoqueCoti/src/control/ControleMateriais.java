@@ -77,9 +77,13 @@ protected void cadastrar(HttpServletRequest request, HttpServletResponse respons
 		Categoria categoria = new Categoria();
 			String descCategoria = request.getParameter("categoria");
 				listarCategoria = new CategoriaDao().listar();
-					for(int a = 0 ; a <= listarCategoria.size(); a++){
-						if(listarCategoria.contains(descCategoria)){
+				
+					for(int a = 0 ; a <= listarCategoria.size() -1 ; a++){
+						if(listarCategoria.get(a).getCategoria().equalsIgnoreCase(descCategoria)){
 							System.out.println("contem");
+							categoria.setCategoria(listarCategoria.get(a).getCategoria());
+							categoria.setDescricao(listarCategoria.get(a).getDescricao());
+							categoria.setId_categoria(listarCategoria.get(a).getId_categoria());
 						}else{
 							System.out.println(" não contem");
 						}
@@ -100,7 +104,7 @@ protected void cadastrar(HttpServletRequest request, HttpServletResponse respons
 		mat.setQtd_Min(new Double(qtd_Min));
 		
 		
-		MateriaisDao md = new MateriaisDao();
+ 		MateriaisDao md = new MateriaisDao();
 		md.cadastrar(mat);
 		
 		request.setAttribute("msg", "Cadastro efetuado com sucesso!");
