@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.Categoria;
 import model.Materiais;
+import persistence.CategoriaDao;
 import persistence.MateriaisDao;
 
 /**
@@ -68,17 +70,25 @@ protected void cadastrar(HttpServletRequest request, HttpServletResponse respons
 		String qtd_Min = request.getParameter("qtd_Min");
 		String qtd_Max = request.getParameter("qtd_Max");
 		String estoque = request.getParameter("estoque");
-		String categoria = request.getParameter("categoria");
+		/*String categoria = request.getParameter("categoria");*/
 		String preco = request.getParameter("preco");
-		String outros = request.getParameter("catOutros");
+		/*String outros = request.getParameter("catOutros");*/
+		
+		Categoria categoria = new Categoria();
+			String descCategoria = request.getParameter("categoria");
+				listarCategoria = new CategoriaDao().listar();
+					for(int a = 0 ; a <= listarCategoria.size(); a++){
+						if(listarCategoria.contains(descCategoria)){
+							System.out.println("contem");
+						}else{
+							System.out.println(" não contem");
+						}
+						
+					}
 		
 		Materiais mat = new Materiais();
 		
-		if(outros != null){
-			mat.setCategoria(outros);
-		}else{
 		mat.setCategoria(categoria);
-		}
 		mat.setCodigo(codigo);
 		mat.setDescricao(descricao);
 		mat.setEstoque(new Double (estoque));
@@ -88,6 +98,7 @@ protected void cadastrar(HttpServletRequest request, HttpServletResponse respons
 		mat.setPreco(new Double(preco));
 		mat.setQtd_Max(new Double(qtd_Max));
 		mat.setQtd_Min(new Double(qtd_Min));
+		
 		
 		MateriaisDao md = new MateriaisDao();
 		md.cadastrar(mat);
@@ -124,6 +135,24 @@ protected void buscar(HttpServletRequest request, HttpServletResponse response) 
 				e.printStackTrace();
 			}
 	
+}
+
+List<Categoria> listarCategoria;
+
+public List<Categoria> getListarCategoria() {
+		try{
+		
+			listarCategoria = new CategoriaDao().listar();
+			System.out.println(listarCategoria);
+			
+		}catch(Exception e){
+			
+		}
+	return listarCategoria;
+}
+
+public void setListarCategoria(List<Categoria> listarCategoria) {
+	this.listarCategoria = listarCategoria;
 }
 
 }

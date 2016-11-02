@@ -1,35 +1,42 @@
 package persistence;
 
+import java.util.ArrayList;
 import java.util.List;
-
 
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import model.Materiais;
+import model.Categoria;
 
-public class MateriaisDao {
+public class CategoriaDao {
+	
 	Session session;
 	Transaction transaction;
 	Query query;
 	
-	public List<Materiais> listar() {
+	public List<Categoria> listar()throws Exception{
 		session = HibernateUtil.getSessionFactory().openSession();
-		query = session.createQuery("SELECT M FROM Materiais AS M");
-		List<Materiais> lista = query.list();
+		List<Categoria> lista = new ArrayList<Categoria>();
+		query = session.createQuery("from Categoria");
+		lista = query.list();
 		session.close();
-		
 		return lista;
 	}
-	
-		
-	public void cadastrar(Materiais materiais)throws Exception {
+
+	public void cadastrar(Categoria c)throws Exception{
 		session = HibernateUtil.getSessionFactory().openSession();
 		transaction = session.beginTransaction();
-		session.save(materiais);
+		session.save(c);
 		transaction.commit();
 		session.close();
-		
 	}
+	
+	/*public List<Categoria> buscar()throws Exception {
+			
+		
+		return lista;
+	}*/
+	
+	
 }

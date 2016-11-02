@@ -19,6 +19,7 @@
 		<property name="format_sql">true</property>
 		
 		<mapping class="model.Materiais"/>
+		<mapping class="model.Categoria"/>
 		
 		
 	</session-factory>

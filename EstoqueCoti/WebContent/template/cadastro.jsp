@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-<jsp:useBean id="mBean" class="control.PopularSelect"></jsp:useBean>
+<jsp:useBean id="cBean" class="control.ControleMateriais"></jsp:useBean>
 <!-- Main content -->
 
 <!--tab nav start-->
@@ -89,8 +89,8 @@
 													style="width: 130px; float: left; margin-left: -38%;margin-top: 10%;">
 													<label for="categoria">Categoria</label> <select
 														name="categoria" class="form-control" type="text" onchange='CheckColors(this.value);'>
-														<c:forEach items="${mBean.listarCategoria}" var="cat">
-														<option  value="${cat }">${cat }</option>
+														<c:forEach items="${cBean.listarCategoria}" var="cat">
+														<option  value="${cat.categoria }">${cat.categoria }</option>
 														
 														
 														

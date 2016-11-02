@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -31,12 +33,20 @@ public class Materiais {
 	@Column
 	private Double estoque;
 	@Column
-	private String categoria;
-	@Column
 	private Double preco;
 	
+	@ManyToOne
+	@JoinColumn(name="id_categoria")
+	private Categoria categoria;
+	
+	public Categoria getCategoria() {
+		return categoria;
+	}
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
 	public Materiais(Integer id_material, String codigo, String nome, String descricao, String medida,
-			String fornecedor, Double qtd_Min, Double qtd_Max, Double estoque, String categoria, Double preco) {
+			String fornecedor, Double qtd_Min, Double qtd_Max, Double estoque, Double preco) {
 		super();
 		this.id_material = id_material;
 		this.codigo = codigo;
@@ -47,7 +57,6 @@ public class Materiais {
 		this.qtd_Min = qtd_Min;
 		this.qtd_Max = qtd_Max;
 		this.estoque = estoque;
-		this.categoria = categoria;
 		this.preco = preco;
 	}
 	public Materiais() {
@@ -107,12 +116,7 @@ public class Materiais {
 	public void setEstoque(Double estoque) {
 		this.estoque = estoque;
 	}
-	public String getCategoria() {
-		return categoria;
-	}
-	public void setCategoria(String categoria) {
-		this.categoria = categoria;
-	}
+	
 	public Double getPreco() {
 		return preco;
 	}
@@ -123,7 +127,7 @@ public class Materiais {
 	public String toString() {
 		return "Materiais [id_material=" + id_material + ", codigo=" + codigo + ", nome=" + nome + ", descricao="
 				+ descricao + ", medida=" + medida + ", fornecedor=" + fornecedor + ", qtd_Min=" + qtd_Min
-				+ ", qtd_Max=" + qtd_Max + ", estoque=" + estoque + ", categoria=" + categoria + ", preco=" + preco
+				+ ", qtd_Max=" + qtd_Max + ", estoque=" + estoque + ", preco=" + preco
 				+ "]";
 	}
 	
