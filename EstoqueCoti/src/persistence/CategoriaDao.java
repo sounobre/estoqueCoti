@@ -18,7 +18,7 @@ public class CategoriaDao {
 	public List<Categoria> listar()throws Exception{
 		session = HibernateUtil.getSessionFactory().openSession();
 		List<Categoria> lista = new ArrayList<Categoria>();
-		query = session.createQuery("from Categoria");
+		query = session.createQuery("SELECT C FROM Categoria AS C");
 		lista = query.list();
 		session.close();
 		return lista;

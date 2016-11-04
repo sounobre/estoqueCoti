@@ -5,7 +5,7 @@
 <hibernate-configuration>
 	<session-factory>
 	
-		<property name="connection.url">jdbc:mysql://localhost/estoquecoti</property>
+		<property name="connection.url">jdbc:mysql://localhost/estoquecoti?createDatabaseIfNotExist=true</property>
 
 		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
 

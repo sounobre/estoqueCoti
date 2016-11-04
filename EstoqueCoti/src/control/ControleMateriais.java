@@ -74,25 +74,10 @@ protected void cadastrar(HttpServletRequest request, HttpServletResponse respons
 		String preco = request.getParameter("preco");
 		/*String outros = request.getParameter("catOutros");*/
 		
-		Categoria categoria = new Categoria();
-			String descCategoria = request.getParameter("categoria");
-				listarCategoria = new CategoriaDao().listar();
-				
-					for(int a = 0 ; a <= listarCategoria.size() -1 ; a++){
-						if(listarCategoria.get(a).getCategoria().equalsIgnoreCase(descCategoria)){
-							System.out.println("contem");
-							categoria.setCategoria(listarCategoria.get(a).getCategoria());
-							categoria.setDescricao(listarCategoria.get(a).getDescricao());
-							categoria.setId_categoria(listarCategoria.get(a).getId_categoria());
-						}else{
-							System.out.println(" não contem");
-						}
-						
-					}
 		
-		Materiais mat = new Materiais();
+Materiais mat = new Materiais();
+List<Materiais> lm = new ArrayList<Materiais>();		
 		
-		mat.setCategoria(categoria);
 		mat.setCodigo(codigo);
 		mat.setDescricao(descricao);
 		mat.setEstoque(new Double (estoque));
@@ -102,6 +87,30 @@ protected void cadastrar(HttpServletRequest request, HttpServletResponse respons
 		mat.setPreco(new Double(preco));
 		mat.setQtd_Max(new Double(qtd_Max));
 		mat.setQtd_Min(new Double(qtd_Min));
+		
+		
+		
+		Categoria categoria = new Categoria();
+			String descCategoria = request.getParameter("categoria");
+				List<Categoria> listarCategoria2 = new ArrayList<Categoria>();
+				listarCategoria2 = new CategoriaDao().listar();
+				
+					for(int a = 0 ; a <= listarCategoria2.size() -1 ; a++){
+						if(listarCategoria2.get(a).getCategoria().equalsIgnoreCase(descCategoria)){
+							System.out.println("contem");
+							categoria.setCategoria(listarCategoria2.get(a).getCategoria());
+							categoria.setDescricao(listarCategoria2.get(a).getDescricao());
+							categoria.setId_categoria(listarCategoria2.get(a).getId_categoria());
+							
+							mat.setCategoria(categoria);
+							
+						}else{
+							System.out.println(" não contem");
+						}
+						
+					}
+		
+		
 		
 		
  		MateriaisDao md = new MateriaisDao();
