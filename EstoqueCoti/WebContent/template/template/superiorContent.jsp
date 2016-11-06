@@ -33,9 +33,9 @@
     <link href="css/style.css" rel="stylesheet" type="text/css" />
 
 <script type="text/javascript">
-function CheckColors(val){
- var element=document.getElementById('outros');
- if(val=='outros')
+function CheckCat(val){
+ var element=document.getElementById('Outros');
+ if(val=='Outros')
    element.style.display='block';
  else  
    element.style.display='none';

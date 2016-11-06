@@ -32,6 +32,18 @@ public class CategoriaDao {
 		session.close();
 	}
 	
+	public void cadastrarOutros()throws Exception{
+		Categoria c = new Categoria();
+		session = HibernateUtil.getSessionFactory().openSession();
+		transaction = session.beginTransaction();
+		c.setId_categoria(null);
+		c.setCategoria("outros");
+		c.setDescricao("Cadastrar outras categorias");
+		session.save(c);
+		transaction.commit();
+		session.close();
+	}
+	
 	/*public List<Categoria> buscar()throws Exception {
 			
 		

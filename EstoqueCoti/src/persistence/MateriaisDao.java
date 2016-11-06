@@ -7,6 +7,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import control.ControleMateriais;
 import model.Materiais;
 
 public class MateriaisDao {
@@ -23,6 +24,15 @@ public class MateriaisDao {
 		return lista;
 	}
 	
+	public List<Materiais> pesquisar(String q) {
+		session = HibernateUtil.getSessionFactory().openSession();
+		query = session.createQuery(q);
+		List<Materiais> lista = query.list();
+		session.close();
+		
+		return lista;
+	}
+	
 		
 	public void cadastrar(Materiais materiais)throws Exception {
 		session = HibernateUtil.getSessionFactory().openSession();
@@ -31,5 +41,13 @@ public class MateriaisDao {
 		transaction.commit();
 		session.close();
 		
+	}
+	
+	public void remover(Materiais materiais) {
+		session = HibernateUtil.getSessionFactory().openSession();
+		transaction = session.beginTransaction();
+		session.delete(materiais);
+		transaction.commit();
+		session.close();
 	}
 }

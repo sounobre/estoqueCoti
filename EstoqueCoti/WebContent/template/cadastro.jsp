@@ -12,7 +12,7 @@
 	<section class="panel general">
 		<header class="panel-heading tab-bg-dark-navy-blue">
 			<ul class="nav nav-tabs">
-				<li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+				<li class="active"><a data-toggle="tab" href="#home">Materiais</a></li>
 				<li class=""><a data-toggle="tab" href="#about">About</a></li>
 				<li class=""><a data-toggle="tab" href="#profile">Profile</a></li>
 				<li class=""><a data-toggle="tab" href="#contact">Contact</a></li>
@@ -24,9 +24,9 @@
 					<section class="panel">
 						<div class="panel-body">
 							<a class="btn btn-xs btn-info"
-								href="#DialogIncluirAlterarMaterial" data-toggle="modal">
+								href="#DialogIncluirMaterial" data-toggle="modal">
 								Novo Material </a>
-							<div id="DialogIncluirAlterarMaterial" class="modal fade"
+							<div id="DialogIncluirMaterial" class="modal fade"
 								aria-hidden="true" aria-labelledby="myModalLabel" role="dialog"
 								tabindex="-1" style="display: none;">
 								<div class="modal-dialog" style="width: 800px;">
@@ -87,8 +87,9 @@
 												</div>
 												<div class="form-group"
 													style="width: 130px; float: left; margin-left: -38%;margin-top: 10%;">
-													<label for="categoria">Categoria</label> <select
+													<label for="categoria">Categoria</label> <select 
 														name="categoria" class="form-control" type="text" onchange='CheckColors(this.value);'>
+														<option selected disabled hidden>Categoria</option>
 														<c:forEach items="${cBean.listarCategoria}" var="cat">
 														<option  value="${cat.categoria }">${cat.categoria }</option>
 														
@@ -98,7 +99,7 @@
 													</select>
 												</div>
 												<div class="form-group"
-													style="width: 130px; float: left; margin-left: -19%;display: none; margin-top: 10%" id="outros">
+													style="width: 130px; float: left; margin-left: -19%;display: none; margin-top: 10%" id="Outros">
 													<label for="catOutros">Outros</label> <input name="catOutros"
 														class="form-control" type="text" >
 												</div>
@@ -117,17 +118,17 @@
 
 
 						<div class="col-lg-2">
-							<select class="form-control">
-								<option>Código</option>
-								<option>Nome</option>
-								<option>Medida</option>
-								<option>Fornecedor</option>
-								<option>Categoria</option>
+							<select name="selectPesquisaMat" class="form-control">
+								<option value="codigo">Código</option>
+								<option value="nome">Nome</option>
+								<option value="medida">Medida</option>
+								<option value="fornecedor">Fornecedor</option>
+								<option value="categoria">Categoria</option>
 
 							</select>
 						</div>
 						<div class="col-lg-2">
-							<input type="text" class="form-control" name="pesquisarMateriais">
+							<input type="text" class="form-control" name="campoPesquisaMat">
 						</div>
 						<span class="input-group-btn ">
 							<button class="btn btn-default" type="submit"
@@ -144,7 +145,8 @@
 					<c:if test="${fn:length(lista) > 0 }">
 						<table class="table table-hover">
 							<tr>
-								<th>Código</th>
+								
+								<th >Código</th>
 								<th>Nome</th>
 								<th>Descrição</th>
 								<th>Medida</th>
@@ -154,10 +156,12 @@
 								<th>Estoque</th>
 								<th>Categoria</th>
 								<th>Preço</th>
+								<th></th>
 							</tr>
 							<c:forEach items="${lista }" var="mat">
 								<tr>
-									<td>${mat.codigo }</td>
+									
+									<td data-codigo="${mat.codigo }">${mat.codigo }</td>
 									<td>${mat.nome }</td>
 									<td>${mat.descricao }</td>
 									<td>${mat.medida }</td>
@@ -165,13 +169,111 @@
 									<td>${mat.qtd_Min }</td>
 									<td>${mat.qtd_Max }</td>
 									<td>${mat.estoque }</td>
-									<td>${mat.categoria }</td>
+									<td>${mat.categoria.categoria }</td>
 									<td>${mat.preco }</td>
+									<td><a href="#DialogAlterarMaterial" class="btn btn-xs btn-info" data-toggle="modal">Alterar</a> 
+										<a href="remover.html?id_material=${mat.id_material }"class="btn btn-xs btn-danger" >Remover</a>
+									</td>
 								</tr>
 							</c:forEach>
 						</table>
 
 					</c:if>
+					
+<!--  ----------------------------------------------Painel para Alteração---------------------------------------------------------------------------- -->
+
+                          <div id="DialogAlterarMaterial" class="modal fade"
+								aria-hidden="true" aria-labelledby="myModalLabel" role="dialog"
+								tabindex="-1" style="display: none;">
+								
+								<div class="modal-dialog" style="width: 800px;">
+									<div class="modal-content">
+									
+										<div class="modal-header">
+											<button class="close" aria-hidden="true" data-dismiss="modal"
+												type="button">×</button>
+											<h4 class="modal-title">Cadastro de Materiais</h4>
+										</div>
+										<div class="modal-body" style="min-height: 500px;">
+
+											<form action="alterar.html" method="post">
+												<div class="form-group" style="width: 80px; float: left;margin-top: 0%">
+													<label for="codigo">Código</label> <input name="codigo"
+														class="form-control" type="text" value="${mat.codigo }">
+												</div>
+												<div class="form-group"
+													style="width: 300px; float: left; margin-top: 9%; margin-left: -10.5%">
+													<label for="nome">Nome</label> <input name="nome"
+														class="form-control" type="text">
+												</div>
+												<div class="form-group"
+													style="width: 430px; float: left; margin-left: 2%; margin-top: 9%;">
+													<label for="descricao">Descrição</label> <input
+														name="descricao" class="form-control" type="text">
+												</div>
+												<div class="form-group"
+													style="width: 130px; float: left; margin-left: 0%; margin-top: 0%">
+													<label for="unimed">Unidade de Medida</label> <input
+														name="unimed" class="form-control" type="text">
+												</div>
+												<div class="form-group"
+													style="width: 155px; float: left; margin-left: 2%;margin-top: 0%">
+													<label for="preco">Preço</label> <input name="preco"
+														class="form-control" type="text">
+												</div>
+												<div class="form-group"
+													style="width: 430px; float: left; margin-left: 2%;margin-top: 0%">
+													<label for="fornecedor">Fornecedor</label> <input
+														name="fornecedor" class="form-control" type="text">
+												</div>
+												<div class="form-group"
+													style="width: 85px; float: left; margin-left: 0%;">
+													<label for="qtdMin">Qtd. Mínima</label> <input
+														name="qtd_Min" class="form-control" type="text">
+												</div>
+												<div class="form-group"
+													style="width: 85px; float: left; margin-left: 2%;">
+													<label for="qtdMax">Qtd. Máxima</label> <input
+														name="qtd_Max" class="form-control" type="text">
+												</div>
+												<div class="form-group"
+													style="width: 85px; float: left; margin-left: 2%;">
+													<label for="estoque">Estoque</label> <input
+														name="estoque" class="form-control" type="text">
+												</div>
+												<div class="form-group"
+													style="width: 130px; float: left; margin-left: -38%;margin-top: 10%;">
+													<label for="categoria">Categoria</label> <select 
+														name="categoria" class="form-control" type="text" onchange='CheckCat(this.value);'>
+														<option selected disabled hidden>Categoria</option>
+														<c:forEach items="${cBean.listarCategoria}" var="cat">
+														<option  value="${cat.categoria }">${cat.categoria }</option>
+														
+														
+														
+														</c:forEach>
+													</select>
+												</div>
+												<div class="form-group"
+													style="width: 130px; float: left; margin-left: -19%;display: none; margin-top: 10%" id="Outros">
+													<label for="catOutros">Outros</label> <input name="catOutros"
+														class="form-control" type="text" >
+												</div>
+
+												<div style="width: 30px; margin-top: 25%;float: right;margin-right: 8%">
+													<button class="btn btn-primary" type="submit">Cadastar</button>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+
+
+
+
+<!--  --------------------------------------------Fim do Painel para Alteração---------------------------------------------------------------------------- -->
+					
 				</div>
 				<div id="about" class="tab-pane">About</div>
 				<div id="profile" class="tab-pane">Profile</div>
