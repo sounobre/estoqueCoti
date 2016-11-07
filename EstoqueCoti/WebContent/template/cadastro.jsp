@@ -88,7 +88,7 @@
 												<div class="form-group"
 													style="width: 130px; float: left; margin-left: -38%;margin-top: 10%;">
 													<label for="categoria">Categoria</label> <select 
-														name="categoria" class="form-control" type="text" onchange='CheckColors(this.value);'>
+														name="categoria" class="form-control" type="text" onchange='CheckCat(this.value);'>
 														<option selected disabled hidden>Categoria</option>
 														<c:forEach items="${cBean.listarCategoria}" var="cat">
 														<option  value="${cat.categoria }">${cat.categoria }</option>
@@ -161,9 +161,9 @@
 							<c:forEach items="${lista }" var="mat">
 								<tr>
 									
-									<td data-codigo="${mat.codigo }">${mat.codigo }</td>
-									<td>${mat.nome }</td>
-									<td>${mat.descricao }</td>
+									<td id="codigo${mat.codigo}">${mat.codigo }</td>
+									<td id="nome${mat.codigo}">${mat.nome }</td>
+									<td id="descricao${mat.codigo}">${mat.descricao }</td>
 									<td>${mat.medida }</td>
 									<td>${mat.fornecedor }</td>
 									<td>${mat.qtd_Min }</td>
@@ -171,7 +171,7 @@
 									<td>${mat.estoque }</td>
 									<td>${mat.categoria.categoria }</td>
 									<td>${mat.preco }</td>
-									<td><a href="#DialogAlterarMaterial" class="btn btn-xs btn-info" data-toggle="modal">Alterar</a> 
+									<td><a href="#DialogAlterarMaterial" class="btn btn-xs btn-info alterar" data-toggle="modal" data-id="${mat.codigo}">Alterar</a> 
 										<a href="remover.html?id_material=${mat.id_material }"class="btn btn-xs btn-danger" >Remover</a>
 									</td>
 								</tr>
@@ -179,6 +179,8 @@
 						</table>
 
 					</c:if>
+					
+					
 					
 <!--  ----------------------------------------------Painel para Alteração---------------------------------------------------------------------------- -->
 
@@ -199,17 +201,17 @@
 											<form action="alterar.html" method="post">
 												<div class="form-group" style="width: 80px; float: left;margin-top: 0%">
 													<label for="codigo">Código</label> <input name="codigo"
-														class="form-control" type="text" value="${mat.codigo }">
+														class="form-control" type="text" >
 												</div>
 												<div class="form-group"
 													style="width: 300px; float: left; margin-top: 9%; margin-left: -10.5%">
 													<label for="nome">Nome</label> <input name="nome"
-														class="form-control" type="text">
+														class="form-control" type="text" id="mnome">
 												</div>
 												<div class="form-group"
 													style="width: 430px; float: left; margin-left: 2%; margin-top: 9%;">
 													<label for="descricao">Descrição</label> <input
-														name="descricao" class="form-control" type="text">
+														name="descricao" class="form-control" type="text" id="mdescricao">
 												</div>
 												<div class="form-group"
 													style="width: 130px; float: left; margin-left: 0%; margin-top: 0%">
