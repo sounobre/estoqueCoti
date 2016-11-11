@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import model.Categoria;
+import model.Materiais;
 
 public class CategoriaDao {
 	
@@ -44,11 +45,15 @@ public class CategoriaDao {
 		session.close();
 	}
 	
-	/*public List<Categoria> buscar()throws Exception {
-			
+	public void alterar(Materiais m)throws Exception {
+			session = HibernateUtil.getSessionFactory().openSession();
+			transaction = session.beginTransaction();
+			session.update(m);
+			transaction.commit();
+			session.close();
 		
-		return lista;
-	}*/
+		
+	}
 	
 	
 }

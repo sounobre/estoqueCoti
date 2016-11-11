@@ -161,17 +161,17 @@
 							<c:forEach items="${lista }" var="mat">
 								<tr>
 									
-									<td id="codigo${mat.codigo}">${mat.codigo }</td>
-									<td id="nome${mat.codigo}">${mat.nome }</td>
-									<td id="descricao${mat.codigo}">${mat.descricao }</td>
-									<td>${mat.medida }</td>
-									<td>${mat.fornecedor }</td>
-									<td>${mat.qtd_Min }</td>
-									<td>${mat.qtd_Max }</td>
-									<td>${mat.estoque }</td>
-									<td>${mat.categoria.categoria }</td>
-									<td>${mat.preco }</td>
-									<td><a href="#DialogAlterarMaterial" class="btn btn-xs btn-info alterar" data-toggle="modal" data-id="${mat.codigo}">Alterar</a> 
+									<td id="codigo${mat.id_material}">${mat.codigo }</td>
+									<td id="nome${mat.id_material}">${mat.nome }</td>
+									<td id="descricao${mat.id_material}">${mat.descricao }</td>
+									<td id="medida${mat.id_material}">${mat.medida }</td>
+									<td id="fornecedor${mat.id_material}">${mat.fornecedor }</td>
+									<td id="qtd_Min${mat.id_material}">${mat.qtd_Min }</td>
+									<td id="qtd_Max${mat.id_material}">${mat.qtd_Max }</td>
+									<td id="estoque${mat.id_material}">${mat.estoque }</td>
+									<td id="categoria${mat.id_material}">${mat.categoria.categoria }</td>
+									<td id="preco${mat.id_material}">${mat.preco }</td>
+									<td><a href="#DialogAlterarMaterial" class="btn btn-xs btn-info alterar" data-toggle="modal" data-id="${mat.id_material}">Alterar</a> 
 										<a href="remover.html?id_material=${mat.id_material }"class="btn btn-xs btn-danger" >Remover</a>
 									</td>
 								</tr>
@@ -201,7 +201,9 @@
 											<form action="alterar.html" method="post">
 												<div class="form-group" style="width: 80px; float: left;margin-top: 0%">
 													<label for="codigo">Código</label> <input name="codigo"
-														class="form-control" type="text" >
+														class="form-control" type="text" id="mcodigo">
+														<input name="id"
+														 type="hidden" id="mid" >
 												</div>
 												<div class="form-group"
 													style="width: 300px; float: left; margin-top: 9%; margin-left: -10.5%">
@@ -216,39 +218,40 @@
 												<div class="form-group"
 													style="width: 130px; float: left; margin-left: 0%; margin-top: 0%">
 													<label for="unimed">Unidade de Medida</label> <input
-														name="unimed" class="form-control" type="text">
+														name="unimed" class="form-control" type="text" id="mmedida">
 												</div>
 												<div class="form-group"
 													style="width: 155px; float: left; margin-left: 2%;margin-top: 0%">
 													<label for="preco">Preço</label> <input name="preco"
-														class="form-control" type="text">
+														class="form-control" type="text" id="mpreco">
 												</div>
 												<div class="form-group"
 													style="width: 430px; float: left; margin-left: 2%;margin-top: 0%">
 													<label for="fornecedor">Fornecedor</label> <input
-														name="fornecedor" class="form-control" type="text">
+														name="fornecedor" class="form-control" type="text" id="mfornecedor">
 												</div>
 												<div class="form-group"
 													style="width: 85px; float: left; margin-left: 0%;">
 													<label for="qtdMin">Qtd. Mínima</label> <input
-														name="qtd_Min" class="form-control" type="text">
+														name="qtd_Min" class="form-control" type="text" id="mqtd_Min">
 												</div>
 												<div class="form-group"
 													style="width: 85px; float: left; margin-left: 2%;">
 													<label for="qtdMax">Qtd. Máxima</label> <input
-														name="qtd_Max" class="form-control" type="text">
+														name="qtd_Max" class="form-control" type="text" id="mqtd_Max">
 												</div>
 												<div class="form-group"
 													style="width: 85px; float: left; margin-left: 2%;">
 													<label for="estoque">Estoque</label> <input
-														name="estoque" class="form-control" type="text">
+														name="estoque" class="form-control" type="text" id="mestoque">
 												</div>
 												<div class="form-group"
 													style="width: 130px; float: left; margin-left: -38%;margin-top: 10%;">
 													<label for="categoria">Categoria</label> <select 
 														name="categoria" class="form-control" type="text" onchange='CheckCat(this.value);'>
-														<option selected disabled hidden>Categoria</option>
+														
 														<c:forEach items="${cBean.listarCategoria}" var="cat">
+														<option selected disabled hidden id="mcategoria" value="mcategoria">${cat.categoria }</option>
 														<option  value="${cat.categoria }">${cat.categoria }</option>
 														
 														
@@ -263,7 +266,7 @@
 												</div>
 
 												<div style="width: 30px; margin-top: 25%;float: right;margin-right: 8%">
-													<button class="btn btn-primary" type="submit">Cadastar</button>
+													<button class="btn btn-primary" type="submit">Alterar</button>
 												</div>
 											</form>
 										</div>

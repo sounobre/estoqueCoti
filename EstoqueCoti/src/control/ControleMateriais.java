@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.firebirdsql.jdbc.parser.JaybirdSqlParser.extractFunction_return;
+
 import model.Categoria;
 import model.Materiais;
 import persistence.CategoriaDao;
@@ -19,7 +21,7 @@ import persistence.MateriaisDao;
 /**
  * Servlet implementation class ControleMateriais
  */
-@WebServlet({ "/ControleMateriais", "/template/buscar.html", "/template/cadastrar.html", "/template/remover.html" })
+@WebServlet({ "/ControleMateriais", "/template/buscar.html", "/template/cadastrar.html", "/template/remover.html", "/template/alterar.html" })
 public class ControleMateriais extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -52,8 +54,9 @@ public class ControleMateriais extends HttpServlet {
 				cadastrar(request, response);
 			} else if (url.equalsIgnoreCase("/template/remover.html")) {
 				remover(request, response);
+			}else if (url.equalsIgnoreCase("/template/alterar.html")) {
+				alterar(request, response);
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -201,5 +204,62 @@ public class ControleMateriais extends HttpServlet {
 	}catch(Exception e){
 		e.printStackTrace();
 	}
+	}
+	
+	protected void alterar(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+	//retorno materiais	
+		Materiais mat = new Materiais();	
+			String id = request.getParameter("id");
+			String codigo = request.getParameter("codigo");
+			String nome   = request.getParameter("nome");
+			String descricao = request.getParameter("descricao");
+			String medida = request.getParameter("unime");
+			String fornecedor = request.getParameter("fornecedor");
+			String qtd_Min = request.getParameter("qtd_Min");
+			String qtd_Max = request.getParameter("qtd_Max");
+			String estoque = request.getParameter("estoque");
+			String preco = request.getParameter("preco");
+		// retorno Categoria
+			String categoria = request.getParameter("categoria");
+			
+			String q = "SELECT M FROM Materiais AS M WHERE M.id_material = " + id;
+			
+			try{
+				
+			List<Materiais>	listaAlt = new MateriaisDao().pesquisar(q);
+			
+			if(listaAlt.get(0).getCodigo().equalsIgnoreCase(codigo) && 
+			  (listaAlt.get(0).getDescricao().equalsIgnoreCase(descricao)) &&
+			  (listaAlt.get(0).getCategoria().getCategoria().equals(categoria)) &&
+			  (listaAlt.get(0).getEstoque().equals(estoque)) &&
+			  (listaAlt.get(0).getFornecedor().equalsIgnoreCase(fornecedor))&&
+			  (listaAlt.get(0).getMedida().equalsIgnoreCase(medida)) &&
+			  (listaAlt.get(0).getNome().equalsIgnoreCase(nome)) &&
+			  (listaAlt.get(0).getPreco().equals(preco)) &&
+			  (listaAlt.get(0).getQtd_Max().equals(qtd_Max)) &&
+			  (listaAlt.get(0).getQtd_Min().equals(qtd_Min))){
+					//mat.setCategoria(categoria);
+					mat.setCodigo(codigo);
+					mat.setDescricao(descricao);
+					mat.setEstoque(new Double(estoque));
+					mat.setFornecedor(fornecedor);
+					mat.setMedida(medida);
+					mat.setNome(nome);
+					mat.setPreco(new Double(preco));
+					mat.setQtd_Max(new Double(qtd_Max));
+					mat.setQtd_Min(new Double(qtd_Min));
+				new MateriaisDao().alterar(mat);
+				
+				System.out.println("olha o código igual");
+			}else{
+				System.out.println("olha o código diferente");
+			}
+				
+				
+				
+			}catch(Exception e){
+				e.printStackTrace();
+			}
 	}
 }

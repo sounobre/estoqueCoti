@@ -50,4 +50,12 @@ public class MateriaisDao {
 		transaction.commit();
 		session.close();
 	}
+	
+	public void alterar(Materiais m) {
+		session = HibernateUtil.getSessionFactory().openSession();
+		transaction = session.beginTransaction();
+		session.update(m);
+		transaction.commit();
+		session.close();
+	}
 }

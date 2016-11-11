@@ -35,11 +35,20 @@
        <script type="text/javascript">
 					
 					$(".alterar").on('click', function(){
-						   var id = $(this).data('id'); //recuperar qual o id da linha
+						   var id = $(this).data('id');$("#mid").val(id); //recuperar qual o id da linha
 						   //agora vamos usar o id da linha para recuperar cada campo..
+						   
+						   var codigo = $('#codigo' + id).text();$("#mcodigo").val(codigo);
 						   var nome = $('#nome' + id).text();$("#mnome").val(nome); //vai retornar nome da linha do botão
 						   var descricao = $('#descricao' + id).text();$("#mdescricao").val(descricao); //vai retornar descricao da linha do botao
-						   //..assim por diante..
+						   var medida = $('#medida' + id).text();$("#mmedida").val(medida);
+						   var fornecedor = $('#fornecedor' + id).text();$("#mfornecedor").val(fornecedor);
+						   var qtd_Min = $('#qtd_Min' + id).text();$("#mqtd_Min").val(qtd_Min);
+						   var qtd_Max = $('#qtd_Max' + id).text();$("#mqtd_Max").val(qtd_Max);
+						   var estoque = $('#estoque' + id).text();$("#mestoque").val(estoque);
+						   var categoria = $('#categoria' + id).text();$("#mcategoria").val(categoria);
+						   var preco = $('#preco' + id).text();$("#mpreco").val(preco);
+						    //..assim por diante..
 						   //agora voce pode jogar esses valores no seu modal
 						   //depois de jogar tudo, voce pode exibir seu modal manualmente:
 						   $("#DialogAlterarMaterial").modal();
