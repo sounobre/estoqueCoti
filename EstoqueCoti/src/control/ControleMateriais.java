@@ -1,6 +1,7 @@
 package control;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.lang.ref.ReferenceQueue;
 import java.util.ArrayList;
 import java.util.List;
@@ -214,14 +215,14 @@ public class ControleMateriais extends HttpServlet {
 			String codigo = request.getParameter("codigo");
 			String nome   = request.getParameter("nome");
 			String descricao = request.getParameter("descricao");
-			String medida = request.getParameter("unime");
+			String medida = request.getParameter("unimed");
 			String fornecedor = request.getParameter("fornecedor");
 			String qtd_Min = request.getParameter("qtd_Min");
 			String qtd_Max = request.getParameter("qtd_Max");
 			String estoque = request.getParameter("estoque");
 			String preco = request.getParameter("preco");
-		// retorno Categoria
-			String categoria = request.getParameter("categoria");
+		
+			PrintWriter out = response.getWriter();
 			
 			String q = "SELECT M FROM Materiais AS M WHERE M.id_material = " + id;
 			
@@ -229,18 +230,38 @@ public class ControleMateriais extends HttpServlet {
 				
 			List<Materiais>	listaAlt = new MateriaisDao().pesquisar(q);
 			
+			
+			
+			// retorno Categoria
+					Categoria cat = new Categoria();
+						String categoria = request.getParameter("categoria");
+						Integer idCategoria;
+						String descCategoria;
+						if(categoria == null){
+							categoria = listaAlt.get(0).getCategoria().getCategoria();
+							idCategoria =  listaAlt.get(0).getCategoria().getId_categoria();
+							descCategoria = listaAlt.get(0).getCategoria().getDescricao();
+							
+							cat.setCategoria(categoria);
+							cat.setId_categoria(idCategoria);
+							cat.setDescricao(descCategoria);
+						}
+						
+		//verifica se houve alteração no material desde o início do processo de alteração no sistema
+						
 			if(listaAlt.get(0).getCodigo().equalsIgnoreCase(codigo) && 
 			  (listaAlt.get(0).getDescricao().equalsIgnoreCase(descricao)) &&
-			  (listaAlt.get(0).getCategoria().getCategoria().equals(categoria)) &&
-			  (listaAlt.get(0).getEstoque().equals(estoque)) &&
+			  (cat.getCategoria().equalsIgnoreCase(categoria)) &&
+			  (listaAlt.get(0).getEstoque().equals(new Double(estoque))) &&
 			  (listaAlt.get(0).getFornecedor().equalsIgnoreCase(fornecedor))&&
 			  (listaAlt.get(0).getMedida().equalsIgnoreCase(medida)) &&
 			  (listaAlt.get(0).getNome().equalsIgnoreCase(nome)) &&
-			  (listaAlt.get(0).getPreco().equals(preco)) &&
-			  (listaAlt.get(0).getQtd_Max().equals(qtd_Max)) &&
-			  (listaAlt.get(0).getQtd_Min().equals(qtd_Min))){
-					//mat.setCategoria(categoria);
+			  (listaAlt.get(0).getPreco().equals(new Double(preco))) &&
+			  (listaAlt.get(0).getQtd_Max().equals(new Double(qtd_Max))) &&
+			  (listaAlt.get(0).getQtd_Min().equals(new Double(qtd_Min)))){
+					mat.setId_material(new Integer(id));
 					mat.setCodigo(codigo);
+					mat.setCategoria(cat);
 					mat.setDescricao(descricao);
 					mat.setEstoque(new Double(estoque));
 					mat.setFornecedor(fornecedor);
@@ -249,14 +270,30 @@ public class ControleMateriais extends HttpServlet {
 					mat.setPreco(new Double(preco));
 					mat.setQtd_Max(new Double(qtd_Max));
 					mat.setQtd_Min(new Double(qtd_Min));
-				new MateriaisDao().alterar(mat);
+					
+					
+					
+ 				new MateriaisDao().alterar(mat);
 				
 				System.out.println("olha o código igual");
 			}else{
+				
+				mat.setId_material(new Integer(id));
+				mat.setCodigo(codigo);
+				mat.setCategoria(cat);
+				mat.setDescricao(descricao);
+				mat.setEstoque(new Double(estoque));
+				mat.setFornecedor(fornecedor);
+				mat.setMedida(medida);
+				mat.setNome(nome);
+				mat.setPreco(new Double(preco));
+				mat.setQtd_Max(new Double(qtd_Max));
+				mat.setQtd_Min(new Double(qtd_Min));
+				new MateriaisDao().alterar(mat);
 				System.out.println("olha o código diferente");
 			}
-				
-				
+			request.setAttribute("msg", "Alteração efetuada com sucesso!");	
+			request.getRequestDispatcher("cadastro.jsp").forward(request, response);	
 				
 			}catch(Exception e){
 				e.printStackTrace();

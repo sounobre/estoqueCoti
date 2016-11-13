@@ -88,7 +88,7 @@
 												<div class="form-group"
 													style="width: 130px; float: left; margin-left: -38%;margin-top: 10%;">
 													<label for="categoria">Categoria</label> <select 
-														name="categoria" class="form-control" type="text" onchange='CheckCat(this.value);'>
+														name="categoria" class="form-control" type="text" onchange='CheckCatCadMat(this.value);'>
 														<option selected disabled hidden>Categoria</option>
 														<c:forEach items="${cBean.listarCategoria}" var="cat">
 														<option  value="${cat.categoria }">${cat.categoria }</option>
@@ -99,7 +99,7 @@
 													</select>
 												</div>
 												<div class="form-group"
-													style="width: 130px; float: left; margin-left: -19%;display: none; margin-top: 10%" id="Outros">
+													style="width: 130px; float: left; margin-left: -19%;display: none; margin-top: 10%" id="outrosCadMat">
 													<label for="catOutros">Outros</label> <input name="catOutros"
 														class="form-control" type="text" >
 												</div>
@@ -248,7 +248,7 @@
 												<div class="form-group"
 													style="width: 130px; float: left; margin-left: -38%;margin-top: 10%;">
 													<label for="categoria">Categoria</label> <select 
-														name="categoria" class="form-control" type="text" onchange='CheckCat(this.value);'>
+														name="categoria" class="form-control" type="text" onchange='CheckCatAltMat(this.value);'>
 														
 														<c:forEach items="${cBean.listarCategoria}" var="cat">
 														<option selected disabled hidden id="mcategoria" value="mcategoria">${cat.categoria }</option>
@@ -260,13 +260,13 @@
 													</select>
 												</div>
 												<div class="form-group"
-													style="width: 130px; float: left; margin-left: -19%;display: none; margin-top: 10%" id="Outros">
+													style="width: 130px; float: left; margin-left: -19%;display: none; margin-top: 10%" id="outrosAltMat">
 													<label for="catOutros">Outros</label> <input name="catOutros"
 														class="form-control" type="text" >
 												</div>
 
 												<div style="width: 30px; margin-top: 25%;float: right;margin-right: 8%">
-													<button class="btn btn-primary" type="submit">Alterar</button>
+													<button class="btn btn-primary" type="submit" onclick="return confirm('Are you sure you want to delete?')" >Alterar</button>
 												</div>
 											</form>
 										</div>

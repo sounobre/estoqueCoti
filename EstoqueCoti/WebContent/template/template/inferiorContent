@@ -33,7 +33,7 @@
         
        
        <script type="text/javascript">
-					
+										
 					$(".alterar").on('click', function(){
 						   var id = $(this).data('id');$("#mid").val(id); //recuperar qual o id da linha
 						   //agora vamos usar o id da linha para recuperar cada campo..
@@ -50,12 +50,13 @@
 						   var preco = $('#preco' + id).text();$("#mpreco").val(preco);
 						    //..assim por diante..
 						   //agora voce pode jogar esses valores no seu modal
-						   //depois de jogar tudo, voce pode exibir seu modal manualmente:
+						   //depois de jogar tudo, voce pode exibir seu modal manualmente:		   
 						   $("#DialogAlterarMaterial").modal();
 						});
+						
 					
 					</script>
-
+		
         
 </body>
 </html>

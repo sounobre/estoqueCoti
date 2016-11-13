@@ -38,7 +38,7 @@ public class CategoriaDao {
 		session = HibernateUtil.getSessionFactory().openSession();
 		transaction = session.beginTransaction();
 		c.setId_categoria(null);
-		c.setCategoria("outros");
+		c.setCategoria("Outros");
 		c.setDescricao("Cadastrar outras categorias");
 		session.save(c);
 		transaction.commit();

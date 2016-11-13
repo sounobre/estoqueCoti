@@ -33,13 +33,21 @@
     <link href="css/style.css" rel="stylesheet" type="text/css" />
 
 <script type="text/javascript">
-function CheckCat(val){
- var element=document.getElementById('Outros');
+function CheckCatCadMat(val){
+ var element=document.getElementById('outrosCadMat');
  if(val=='Outros')
    element.style.display='block';
  else  
    element.style.display='none';
 }
+
+function CheckCatAltMat(val){
+	 var element=document.getElementById('outrosAltMat');
+	 if(val=='Outros')
+	   element.style.display='block';
+	 else  
+	   element.style.display='none';
+	}
 
 </script> 
 
