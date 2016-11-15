@@ -54,6 +54,13 @@
 						   $("#DialogAlterarMaterial").modal();
 						});
 						
+						$('.modal').on('hidden.bs.modal', function(){
+   						 $(this).find('form')[0].reset();
+							});
+							
+						$('a[data-toggle="tab"]').on('click', function (e) {
+  						 $('.form-group input[type="text"]').val('');
+						});	
 					
 					</script>
 		

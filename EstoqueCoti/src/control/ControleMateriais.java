@@ -6,6 +6,7 @@ import java.lang.ref.ReferenceQueue;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,7 +26,8 @@ import persistence.MateriaisDao;
 @WebServlet({ "/ControleMateriais", "/template/buscar.html", "/template/cadastrar.html", "/template/remover.html", "/template/alterar.html" })
 public class ControleMateriais extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	
+		
 	public ControleMateriais() {
 		super();
 
@@ -77,9 +79,8 @@ public class ControleMateriais extends HttpServlet {
 			String qtd_Min = request.getParameter("qtd_Min");
 			String qtd_Max = request.getParameter("qtd_Max");
 			String estoque = request.getParameter("estoque");
-			/* String categoria = request.getParameter("categoria"); */
 			String preco = request.getParameter("preco");
-			/* String outros = request.getParameter("catOutros"); */
+			
 
 			Materiais mat = new Materiais();
 			List<Materiais> lm = new ArrayList<Materiais>();
@@ -95,22 +96,27 @@ public class ControleMateriais extends HttpServlet {
 			mat.setQtd_Min(new Double(qtd_Min));
 
 			Categoria categoria = new Categoria();
-			String descCategoria = request.getParameter("categoria");
+			String nomeCategoria = request.getParameter("categoria");
+			String outrosNomeCategoria = request.getParameter("catOutrosNome");
+			String outrosDescCategoria = request.getParameter("catOutrosDescricao");
 			List<Categoria> listarCategoria2 = new ArrayList<Categoria>();
 			listarCategoria2 = new CategoriaDao().listar();
 
 			for (int a = 0; a <= listarCategoria2.size() - 1; a++) {
-				if (listarCategoria2.get(a).getCategoria().equalsIgnoreCase(descCategoria)) {
+				if (listarCategoria2.get(a).getCategoria().equalsIgnoreCase(nomeCategoria)) {
 					System.out.println("contem");
 					categoria.setCategoria(listarCategoria2.get(a).getCategoria());
 					categoria.setDescricao(listarCategoria2.get(a).getDescricao());
 					categoria.setId_categoria(listarCategoria2.get(a).getId_categoria());
 
 					mat.setCategoria(categoria);
-
-				} else {
-					System.out.println(" não contem");
+				}else if(nomeCategoria.equalsIgnoreCase("outros")){
+					categoria.setCategoria(outrosNomeCategoria);
+					categoria.setDescricao(outrosDescCategoria);
+					categoria.setId_categoria(null);
+					new CategoriaDao().cadastrar(categoria);
 				}
+				
 
 			}
 
@@ -133,20 +139,26 @@ public class ControleMateriais extends HttpServlet {
 		String query;
 
 		try {
-			if (selectPesquisa.equalsIgnoreCase("codigo")) {
-				query = "SELECT M FROM Materiais AS M WHERE M.codigo = '" + campoPesquisa + "'";
-				lista = new MateriaisDao().pesquisar(query);
-			} else {
+			if(campoPesquisa.isEmpty()){
 				MateriaisDao md = new MateriaisDao();
 
 				lista = md.listar();
-
-				if (lista.size() == 0) {
-					System.out.println("NADA");
-				} else {
-					System.out.println(lista.size());
-					System.out.println(lista);
-				}
+			}else if (selectPesquisa.equalsIgnoreCase("codigo")) {
+				query = "SELECT M FROM Materiais AS M WHERE M.codigo = '" + campoPesquisa + "'";
+				lista = new MateriaisDao().pesquisar(query);
+			} else if(selectPesquisa.equalsIgnoreCase("nome")){
+				query = "SELECT M FROM Materiais AS M WHERE M.nome = '" + campoPesquisa + "'";
+				lista = new MateriaisDao().pesquisar(query);
+			}else if(selectPesquisa.equalsIgnoreCase("medida")){
+				query = "SELECT M FROM Materiais AS M WHERE M.medida = '" + campoPesquisa + "'";
+				lista = new MateriaisDao().pesquisar(query);
+			}else if(selectPesquisa.equalsIgnoreCase("fornecedor")){
+				query = "SELECT M FROM Materiais AS M WHERE M.fornecedor = '" + campoPesquisa + "'";
+				lista = new MateriaisDao().pesquisar(query);
+			}else if(selectPesquisa.equalsIgnoreCase("categoria")){
+				query = "SELECT M FROM Materiais M "
+						+ " INNER JOIN M.categoria C WHERE C.categoria = '" + campoPesquisa + "'";
+				lista = new MateriaisDao().pesquisar(query);
 			}
 
 			request.setAttribute("lista", lista);
@@ -237,6 +249,10 @@ public class ControleMateriais extends HttpServlet {
 						String categoria = request.getParameter("categoria");
 						Integer idCategoria;
 						String descCategoria;
+						
+						String outrosNomeCategoriaAlt = request.getParameter("catOutrosNomeAlt");
+						String outrosDescCategoriaAlt = request.getParameter("catOutrosDescricaoAlt");
+						
 						if(categoria == null){
 							categoria = listaAlt.get(0).getCategoria().getCategoria();
 							idCategoria =  listaAlt.get(0).getCategoria().getId_categoria();
@@ -245,20 +261,14 @@ public class ControleMateriais extends HttpServlet {
 							cat.setCategoria(categoria);
 							cat.setId_categoria(idCategoria);
 							cat.setDescricao(descCategoria);
+						}else if(categoria.equalsIgnoreCase("outros")){
+							cat.setCategoria(outrosNomeCategoriaAlt);
+							cat.setDescricao(outrosDescCategoriaAlt);
+							cat.setId_categoria(null);
+							new CategoriaDao().cadastrar(cat);
 						}
-						
-		//verifica se houve alteração no material desde o início do processo de alteração no sistema
-						
-			if(listaAlt.get(0).getCodigo().equalsIgnoreCase(codigo) && 
-			  (listaAlt.get(0).getDescricao().equalsIgnoreCase(descricao)) &&
-			  (cat.getCategoria().equalsIgnoreCase(categoria)) &&
-			  (listaAlt.get(0).getEstoque().equals(new Double(estoque))) &&
-			  (listaAlt.get(0).getFornecedor().equalsIgnoreCase(fornecedor))&&
-			  (listaAlt.get(0).getMedida().equalsIgnoreCase(medida)) &&
-			  (listaAlt.get(0).getNome().equalsIgnoreCase(nome)) &&
-			  (listaAlt.get(0).getPreco().equals(new Double(preco))) &&
-			  (listaAlt.get(0).getQtd_Max().equals(new Double(qtd_Max))) &&
-			  (listaAlt.get(0).getQtd_Min().equals(new Double(qtd_Min)))){
+							
+				
 					mat.setId_material(new Integer(id));
 					mat.setCodigo(codigo);
 					mat.setCategoria(cat);
@@ -269,29 +279,12 @@ public class ControleMateriais extends HttpServlet {
 					mat.setNome(nome);
 					mat.setPreco(new Double(preco));
 					mat.setQtd_Max(new Double(qtd_Max));
-					mat.setQtd_Min(new Double(qtd_Min));
-					
-					
+					mat.setQtd_Min(new Double(qtd_Min));			
 					
  				new MateriaisDao().alterar(mat);
 				
-				System.out.println("olha o código igual");
-			}else{
 				
-				mat.setId_material(new Integer(id));
-				mat.setCodigo(codigo);
-				mat.setCategoria(cat);
-				mat.setDescricao(descricao);
-				mat.setEstoque(new Double(estoque));
-				mat.setFornecedor(fornecedor);
-				mat.setMedida(medida);
-				mat.setNome(nome);
-				mat.setPreco(new Double(preco));
-				mat.setQtd_Max(new Double(qtd_Max));
-				mat.setQtd_Min(new Double(qtd_Min));
-				new MateriaisDao().alterar(mat);
-				System.out.println("olha o código diferente");
-			}
+			
 			request.setAttribute("msg", "Alteração efetuada com sucesso!");	
 			request.getRequestDispatcher("cadastro.jsp").forward(request, response);	
 				

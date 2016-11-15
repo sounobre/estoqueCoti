@@ -35,18 +35,27 @@
 <script type="text/javascript">
 function CheckCatCadMat(val){
  var element=document.getElementById('outrosCadMat');
- if(val=='Outros')
+ var element2=document.getElementById('outrosCadDescMat');
+ if(val=='Outros'){
    element.style.display='block';
- else  
+   element2.style.display='block';
+ }else { 
    element.style.display='none';
+   element2.style.display='none';
+ }
 }
 
 function CheckCatAltMat(val){
 	 var element=document.getElementById('outrosAltMat');
-	 if(val=='Outros')
+	 var element2=document.getElementById('outrosAlrDescMat');
+	 if(val=='Outros'){
 	   element.style.display='block';
-	 else  
+	   element2.style.display='block';
+	 }
+	 else  {
 	   element.style.display='none';
+	   element2.style.display='none';
+	 }
 	}
 
 </script> 
