@@ -13,7 +13,7 @@
 		<header class="panel-heading tab-bg-dark-navy-blue">
 			<ul class="nav nav-tabs">
 				<li class="active"><a data-toggle="tab" href="#home">Materiais</a></li>
-				<li class=""><a data-toggle="tab" href="#about">About</a></li>
+				<li class=""><a data-toggle="tab" href="#categoria">Categoria</a></li>
 				<li class=""><a data-toggle="tab" href="#profile">Profile</a></li>
 				<li class=""><a data-toggle="tab" href="#contact">Contact</a></li>
 			</ul>
@@ -108,7 +108,8 @@
 												</div>
 
 												<div class="form-group"
-													style="width: 300px; float: left; margin-left: 0%; display: none; margin-top: 10%" id="outrosCadDescMat">
+													style="width: 300px; float: left; margin-left: 0%; display: none; margin-top: 10%"
+													id="outrosCadDescMat">
 													<label for="descricao">Descrição da Categoria</label>
 													<textarea name="descricao" class="form-control" type="text"
 														name="catOutrosDescricao"></textarea>
@@ -283,16 +284,17 @@
 										<div class="form-group"
 											style="width: 130px; float: left; margin-left: -19%; display: none; margin-top: 10%"
 											id="outrosAltMat">
-											<label for="catOutros">Outros</label> <input name="catOutrosNomeAlt"
-												class="form-control" type="text">
+											<label for="catOutros">Outros</label> <input
+												name="catOutrosNomeAlt" class="form-control" type="text">
 										</div>
 										<div class="form-group"
-													style="width: 300px; float: left; margin-left: 0%; display: none; margin-top: 10%" id="outrosAlrDescMat">
-													<label for="descricao">Descrição da Categoria</label>
-													<textarea name="descricao" class="form-control" type="text"
-														name="catOutrosDescricaoAlt"></textarea>
+											style="width: 300px; float: left; margin-left: 0%; display: none; margin-top: 10%"
+											id="outrosAlrDescMat">
+											<label for="descricao">Descrição da Categoria</label>
+											<textarea name="descricao" class="form-control" type="text"
+												name="catOutrosDescricaoAlt"></textarea>
 
-												</div>
+										</div>
 
 										<div
 											style="width: 30px; margin-top: 25%; float: right; margin-right: 8%">
@@ -310,7 +312,63 @@
 					<!--  --------------------------------------------Fim do Painel para Alteração---------------------------------------------------------------------------- -->
 
 				</div>
-				<div id="about" class="tab-pane">Categoria</div>
+				
+<!-- -------------------------------------------Início da Tab Categoria ---------------------------------------------------- -->				
+				<div id="categoria" class="tab-pane">
+
+					<section class="panel">
+						<div class="panel-body">
+							<a class="btn btn-xs btn-info" href="#incluirCategoria"
+								data-toggle="modal"> Nova Categoria </a>
+							<div id="incluirCategoria" class="modal fade"
+								aria-hidden="true" aria-labelledby="myModalLabel" role="dialog"
+								tabindex="-1" style="display: none;">
+								<div class="modal-dialog" style="width: 600px;">
+									<div class="modal-content">
+
+										<div class="modal-header">
+											<button class="close" aria-hidden="true" data-dismiss="modal"
+												type="button">×</button>
+											<h4 class="modal-title">Cadastro de Categorias</h4>
+										</div>
+										<div class="modal-body" style="min-height: 350px;">
+
+											<form action="cadastrocat.html" method="post">
+												<div class="form-group"
+													style="width: 130px; float: left; margin-left: 0%; display: block; margin-top: 0%"
+													id="outrosCadMat">
+													<label for="catOutros">Nome da Categoria</label> <input
+														name="cadNomeCat" class="form-control" type="text">
+
+												</div>
+
+												<div class="form-group"
+													style="width: 300px; float: left; margin-left: -23%; display: block; margin-top: 13%"
+													id="outrosCadDescMat">
+													<label for="descricao">Descrição da Categoria</label>
+													<textarea class="form-control" type="text"
+														name="cadDescCat" style="width: 523px; height: 167px;"></textarea>
+
+												</div>
+
+												<div
+													style="width: 30px; margin-top: 50%; float: right; margin-right: 8%">
+													<button class="btn btn-primary" type="submit">Cadastar</button>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+
+<!-- -------------------------------------------------Final da Tab Categoria------------------------------------------------ -->
+
+
+
+
+				</div>
 				<div id="profile" class="tab-pane">Fornecedor</div>
 				<div id="contact" class="tab-pane">Contact</div>
 			</div>
