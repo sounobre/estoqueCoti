@@ -333,21 +333,21 @@
 										</div>
 										<div class="modal-body" style="min-height: 350px;">
 
-											<form action="cadastrocat.html" method="post">
+											<form action="cadastroCat.html" method="post">
 												<div class="form-group"
 													style="width: 130px; float: left; margin-left: 0%; display: block; margin-top: 0%"
-													id="outrosCadMat">
+													>
 													<label for="catOutros">Nome da Categoria</label> <input
-														name="cadNomeCat" class="form-control" type="text">
+														name="nomeCatCadastro" class="form-control" type="text">
 
 												</div>
 
 												<div class="form-group"
 													style="width: 300px; float: left; margin-left: -23%; display: block; margin-top: 13%"
-													id="outrosCadDescMat">
+													>
 													<label for="descricao">Descrição da Categoria</label>
 													<textarea class="form-control" type="text"
-														name="cadDescCat" style="width: 523px; height: 167px;"></textarea>
+														name="descCatCadastro" style="width: 523px; height: 167px;"></textarea>
 
 												</div>
 
@@ -362,6 +362,56 @@
 							</div>
 						</div>
 					</section>
+					
+					<form action="buscaCat.html" method="post">
+
+
+						<div class="col-lg-2">
+							<select name="selectPesquisaMat" class="form-control">
+								
+								<option value="categoria">Categoria</option>
+
+							</select>
+						</div>
+						<div class="col-lg-2">
+							<input type="text" class="form-control" name="campoPesquisaCat">
+						</div>
+						<span class="input-group-btn ">
+							<button class="btn btn-default" type="submit"
+								style="margin-right: 100px">
+								<i class="fa fa-search"></i>
+							</button>
+						</span>
+
+					</form>
+
+
+
+
+					<c:if test="${fn:length(listaCat) > 0 }">
+						<br>
+						<table class="table table-hover">
+							<tr>
+								<th>Nome</th>
+								<th>Descrição</th>								
+								<th></th>
+							</tr>
+							<c:forEach items="${listaCat }" var="cat">
+								<tr>
+									<td id="nome${cat.id_categoria}">${cat.categoria }</td>
+									<td id="descricao${cat.id_categoria}">${cat.descricao }</td>
+									<td><a href="#DialogAlterarMaterial"
+										class="btn btn-xs btn-info alterar" data-toggle="modal"
+										data-id="${cat.id_categoria}">Alterar</a> <a
+										href="remover.html?id_material=${cat.id_categoria }"
+										class="btn btn-xs btn-danger"
+										onclick="return confirm('Tem certeza que deseja remover este item? Após a remoção não terá como recupera-lo')">Remover</a>
+									</td>
+								</tr>
+							</c:forEach>
+						</table>
+
+					</c:if>
 
 <!-- -------------------------------------------------Final da Tab Categoria------------------------------------------------ -->
 

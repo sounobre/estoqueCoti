@@ -99,18 +99,9 @@ public class ControleMateriais extends HttpServlet {
 			String nomeCategoria = request.getParameter("categoria");
 			String outrosNomeCategoria = request.getParameter("catOutrosNome");
 			String outrosDescCategoria = request.getParameter("catOutrosDescricao");
-			List<Categoria> listarCategoria2 = new ArrayList<Categoria>();
-			listarCategoria2 = new CategoriaDao().listar();
+			
 
-			for (int a = 0; a <= listarCategoria2.size() - 1; a++) {
-				if (listarCategoria2.get(a).getCategoria().equalsIgnoreCase(nomeCategoria)) {
-					System.out.println("contem");
-					categoria.setCategoria(listarCategoria2.get(a).getCategoria());
-					categoria.setDescricao(listarCategoria2.get(a).getDescricao());
-					categoria.setId_categoria(listarCategoria2.get(a).getId_categoria());
-
-					mat.setCategoria(categoria);
-				}else if(nomeCategoria.equalsIgnoreCase("outros")){
+			 if(nomeCategoria.equalsIgnoreCase("outros")){
 					categoria.setCategoria(outrosNomeCategoria);
 					categoria.setDescricao(outrosDescCategoria);
 					categoria.setId_categoria(null);
@@ -118,7 +109,7 @@ public class ControleMateriais extends HttpServlet {
 				}
 				
 
-			}
+			
 
 			MateriaisDao md = new MateriaisDao();
 			md.cadastrar(mat);
