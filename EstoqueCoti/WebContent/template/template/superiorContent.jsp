@@ -146,3 +146,6 @@ function CheckCatAltMat(val){
                     </aside>
 
                     <aside class="right-side">
+                    
+                    
+                    

@@ -60,6 +60,26 @@
 							
 					
 					</script>
+					
+					<script type="text/javascript">
+										
+					$(".alterarCat").on('click', function(){
+						   var id = $(this).data('id');$("#mid").val(id); //recuperar qual o id da linha
+						   //agora vamos usar o id da linha para recuperar cada campo..
+						   
+						   var nome = $('#nome' + id).text();$("#mnome").val(nome);
+						   var descricao = $('#descricao' + id).text();$("#mdescricao").val(descricao); //vai retornar nome da linha do botão
+						   	   
+						   $("#DialogAlterarMaterial").modal();
+						});
+						
+						//apaga os dados qdo fecha o modal
+						$('.modal').on('hidden.bs.modal', function(){
+   						 $(this).find('form')[0].reset();
+							});
+							
+					
+					</script>
 		
         
 </body>

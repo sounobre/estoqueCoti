@@ -13,7 +13,7 @@ import model.Categoria;
 import persistence.CategoriaDao;
 
 
-@WebServlet({"/ControleCategorias", "/template/cadastroCat.html","/template/buscaCat.html"})
+@WebServlet({"/ControleCategorias", "/template/cadastroCat.html","/template/buscaCat.html", "/template/excluirCat.html", "/template/alterarCat.html"})
 public class ControleCategorias extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -43,6 +43,10 @@ protected void execute(HttpServletRequest request, HttpServletResponse response)
 				cadastrar(request,response);
 			}else if(url.equalsIgnoreCase("/template/buscaCat.html")){
 				buscar(request, response);
+			}else if(url.equalsIgnoreCase("/template/excluirCat.html")){
+				excluir(request, response);
+			}else if(url.equalsIgnoreCase("/template/alterarCat.html")){
+				alterar(request, response);
 			}
 		
 	}
@@ -62,7 +66,7 @@ protected void cadastrar(HttpServletRequest request, HttpServletResponse respons
 			new CategoriaDao().cadastrar(categoria);
 			
 			request.setAttribute("msg", "Cadastro de categoria efetuado com sucesso!");
-			request.getRequestDispatcher("/template/cadastro.jsp").forward(request, response);
+			request.getRequestDispatcher("/template/cadCategoria.jsp").forward(request, response);
 			
 	}catch(Exception e){
 		e.printStackTrace();
@@ -76,7 +80,49 @@ protected void buscar(HttpServletRequest request, HttpServletResponse response) 
 			List<Categoria>	listaCat = new CategoriaDao().listar();
 			
 			request.setAttribute("listaCat", listaCat);
-			request.getRequestDispatcher("cadastro.jsp#categoria").forward(request, response);
+			request.getRequestDispatcher("cadCategoria.jsp").forward(request, response);
+				
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+}
+
+protected void excluir(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+			try{
+				Categoria categoria = new Categoria();
+				String idCategoria = request.getParameter("idCategoria");
+				
+				categoria.setId_categoria(new Integer(idCategoria));
+				
+				new CategoriaDao().remover(categoria);
+				
+				request.setAttribute("msg", "Categoria removida com Sucesso");
+				request.getRequestDispatcher("cadCategoria.jsp").forward(request, response);
+				
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+}
+
+protected void alterar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+			try{
+				
+				String id = request.getParameter("id");
+				String nome = request.getParameter("nomeCategoria");
+				String descricao = request.getParameter("descricaoCategoria");
+				
+				Categoria categoria = new Categoria();
+				
+				categoria.setId_categoria(new Integer(id));
+				categoria.setCategoria(nome);
+				categoria.setDescricao(descricao);
+				
+				new CategoriaDao().alterarCat(categoria);
+				
+				request.setAttribute("msg", "Categoria Alterada com Sucesso");
+				request.getRequestDispatcher("cadCategoria.jsp").forward(request, response);
 				
 			}catch(Exception e){
 				e.printStackTrace();
@@ -84,3 +130,25 @@ protected void buscar(HttpServletRequest request, HttpServletResponse response) 
 }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

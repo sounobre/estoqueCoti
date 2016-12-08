@@ -55,5 +55,23 @@ public class CategoriaDao {
 		
 	}
 	
+	public void alterarCat(Categoria categoria)throws Exception {
+		session = HibernateUtil.getSessionFactory().openSession();
+		transaction = session.beginTransaction();
+		session.update(categoria);
+		transaction.commit();
+		session.close();
+	
+	
+}
+	
+	public void remover(Categoria categoria)throws Exception{
+		session= HibernateUtil.getSessionFactory().openSession();
+		transaction = session.beginTransaction();
+		session.delete(categoria);
+		transaction.commit();
+		session.close();
+	}
+	
 	
 }
