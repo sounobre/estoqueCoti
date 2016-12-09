@@ -380,3 +380,4 @@
 <!-- /.content -->
 ${msg }
 <jsp:include page="template/inferiorContent"></jsp:include>
+            
