@@ -1,21 +1,49 @@
 package model;
 
-public class Pessoa {
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+
+
+@Entity
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class Pessoa implements Serializable{
+	@Id
+	@GeneratedValue(strategy= GenerationType.AUTO)
+	@Column
+	private Integer idPessoa;
+	@Column
 	private String nome;
+	@Column
 	private String telefone;
+	@Column
 	private String endereco;
-	private String cep;
-	private String bairro;
-	private String cidade;
-	private String estado;
-	private String email;
 	
-	public Pessoa(String nome, String telefone, String endereco, String cep, String bairro, String cidade,
-			String estado, String email) {
+	private String numeroDoEndereco;
+	@Column
+	private String cep;
+	@Column
+	private String bairro;
+	@Column 
+	private String cidade;
+	@Column
+	private String estado;
+	@Column
+	private String email;
+	public Pessoa(Integer idPessoa, String nome, String telefone, String endereco, String numeroDoEndereco, String cep,
+			String bairro, String cidade, String estado, String email) {
 		super();
+		this.idPessoa = idPessoa;
 		this.nome = nome;
 		this.telefone = telefone;
 		this.endereco = endereco;
+		this.numeroDoEndereco = numeroDoEndereco;
 		this.cep = cep;
 		this.bairro = bairro;
 		this.cidade = cidade;
@@ -25,60 +53,15 @@ public class Pessoa {
 	public Pessoa() {
 		super();
 	}
-	public String getNome() {
-		return nome;
-	}
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-	public String getTelefone() {
-		return telefone;
-	}
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
-	}
-	public String getEndereco() {
-		return endereco;
-	}
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
-	}
-	public String getCep() {
-		return cep;
-	}
-	public void setCep(String cep) {
-		this.cep = cep;
-	}
-	public String getBairro() {
-		return bairro;
-	}
-	public void setBairro(String bairro) {
-		this.bairro = bairro;
-	}
-	public String getCidade() {
-		return cidade;
-	}
-	public void setCidade(String cidade) {
-		this.cidade = cidade;
-	}
-	public String getEstado() {
-		return estado;
-	}
-	public void setEstado(String estado) {
-		this.estado = estado;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
 	@Override
 	public String toString() {
-		return "Pessoa [nome=" + nome + ", telefone=" + telefone + ", endereco=" + endereco + ", cep=" + cep
-				+ ", bairro=" + bairro + ", cidade=" + cidade + ", estado=" + estado + ", email=" + email + "]";
+		return "Pessoa [idPessoa=" + idPessoa + ", nome=" + nome + ", telefone=" + telefone + ", endereco=" + endereco
+				+ ", numeroDoEndereco=" + numeroDoEndereco + ", cep=" + cep + ", bairro=" + bairro + ", cidade="
+				+ cidade + ", estado=" + estado + ", email=" + email + "]";
 	}
 	
 	
-
+	
 }
+	
+	
