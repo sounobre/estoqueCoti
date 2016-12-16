@@ -96,14 +96,14 @@
 												<div class="form-group"
 													style="width: 230px; float: left; margin-left: 0%; display: block; margin-top: 0%">
 													<label for="catOutros">Cidade</label> <input
-														name="nomeCatCadastro" class="form-control" type="text">
+														name="cidadeFornecedor" class="form-control" type="text">
 
 												</div>
 												
 												<div class="form-group"
 													style="width: 80px; float: left; margin-left: 2%; display: block; margin-top: 0%">
 													<label for="catOutros">Estado</label> <input
-														name="nomeCatCadastro" class="form-control" type="text">
+														name="estadoFornecedor" class="form-control" type="text">
 
 												</div>
 												

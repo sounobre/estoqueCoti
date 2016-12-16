@@ -3,6 +3,7 @@
 "-//Hibernate/Hibernate Configuration DTD//EN"
 "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
+
 	<session-factory>
 	
 		<property name="connection.url">jdbc:mysql://localhost/estoquecoti?createDatabaseIfNotExist=true</property>
@@ -19,8 +20,13 @@
 		<property name="format_sql">true</property>
 		
 		<mapping class="model.Materiais"/>
+		
+	
 		<mapping class="model.Categoria"/>
-		<mapping class="model.Pessoa"/>
+		<mapping class="model.Fornecedor"/>
+		<mapping class="model.Pessoa" />
+		
+		
 		
 		
 		
