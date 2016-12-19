@@ -48,7 +48,7 @@
 													style="width: 230px; float: left; margin-left: 0%; display: block; margin-top: 0%">
 													<label for="nomeFornecedor">Nome do Fornecedor</label> <input
 														name="nomeFornecedor" class="form-control" type="text">
-
+													
 												</div>
 												
 												<div class="form-group"
@@ -110,28 +110,28 @@
 												<div class="form-group"
 													style="width: 200px; float: left; margin-left: 2%; display: block; margin-top: 0%">
 													<label for="catOutros">E-mail</label> <input
-														name="nomeCatCadastro" class="form-control" type="text">
+														name="emailFornecedor" class="form-control" type="text">
 
 												</div>
 																					
 												<div class="form-group"
 													style="width: 162px; float: left; margin-left: 2%; display: block; margin-top: 0%">
 													<label for="catOutros">Nome do Contato</label> <input
-														name="nomeCatCadastro" class="form-control" type="text">
+														name="nomeDoContatoFornecedor" class="form-control" type="text">
 
 												</div>
 												
 												<div class="form-group"
 													style="width: 200px; float: left; margin-left: 0%; display: block; margin-top: 0%">
 													<label for="catOutros">CNPJ</label> <input
-														name="nomeCatCadastro" class="form-control" type="text">
+														name="cnpjFornecedor" class="form-control" type="text">
 
 												</div>
 												
 												<div class="form-group"
 													style="width: 130px; float: left; margin-left: 2%; display: block; margin-top: 0%">
 													<label for="catOutros">Início das Atividades</label> <input
-														name="nomeCatCadastro" class="form-control" type="text">
+														name="inicioAtividadesFornecedor" class="form-control" type="text">
 
 												</div>
 												
@@ -154,7 +154,8 @@
 						<div class="col-lg-2">
 							<select name="selectPesquisaMat" class="form-control">
 
-								<option value="categoria">Categoria</option>
+								<option value="categoria">Nome</option>
+								<option value="produto">Produto</option>
 
 							</select>
 						</div>
@@ -170,31 +171,50 @@
 
 					</form>
 
-
-
-
-					<c:if test="${fn:length(listaCat) > 0 }">
+					<c:if test="${fn:length(listaFornecedores) > 0 }">
+					
 						<br>
-						<table class="table table-hover">
-							<tr>
-								<th>Nome</th>
-								<th>Descrição</th>
-								<th></th>
-							</tr>
-							<c:forEach items="${listaCat }" var="cat">
+							<table class="table table-hover">
 								<tr>
-									<td id="nome${cat.id_categoria}">${cat.categoria }</td>
-									<td id="descricao${cat.id_categoria}">${cat.descricao }</td>
-									<td><a href="#alterarCategoria"
-										class="btn btn-xs btn-info alterarCat" data-toggle="modal"
-										data-id="${cat.id_categoria}">Alterar</a> <a
-										href="excluirCat.html?idCategoria=${cat.id_categoria }"
-										class="btn btn-xs btn-danger">Remover</a></td>
+									<th>Nome</th>
+									<th>Código</th>
+									<th>Telefone</th>
+									<th>Endereço</th>
+									<th>Nº</th>
+									<th>Cep</th>
+									<th>Bairro</th>
+									<th>Cidade</th>
+									<th>Estado</th>
+									<th>E-mail</th>
+									<th>Nome do Contato</th>
+									<th>CNPJ</th>
+									<th>Início das Atividades</th>
 								</tr>
-							</c:forEach>
-						</table>
-
+								
+								<c:forEach items="${listaFornecedores }" var="forn">
+								<tr>
+									<td id="nome${forn.id}">			 ${forn.nome }</td>
+									<td id="codigo${forn.id}">			 ${forn.codigo }</td>
+									<td id="telefone${forn.id}">		 ${forn.telefone }</td>
+									<td id="endereco${forn.id}">		 ${forn.endereco }</td>
+									<td id="numero${forn.id}">			 ${forn.numeroDoEndereco }</td>
+									<td id="cep${forn.id}">				 ${forn.cep }</td>
+									<td id="bairro${forn.id}">			 ${forn.bairro }</td>
+									<td id="cidade${forn.id}">			 ${forn.cidade }</td>
+									<td id="estado${forn.id}">			 ${forn.estado }</td>
+									<td id="email${forn.id}">			 ${forn.email }</td>
+									<td id="nomecontato${forn.id}"> 	 ${forn.pessoaContato }</td>
+									<td id="cnpj${forn.id}">			 ${forn.cnpj }</td>
+									<td id="inicioAtividades${forn.id}"> ${forn.inicioAtividades }</td>
+								</tr>	
+								
+								
+								</c:forEach>	
+							</table>	
 					</c:if>
+
+
+					
 
 					<!-- -------------------------------------------------Final cadastro Categoria------------------------------------------------ -->
 
