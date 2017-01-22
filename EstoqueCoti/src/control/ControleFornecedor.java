@@ -1,7 +1,10 @@
 package control;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -16,7 +19,7 @@ import model.Fornecedor;
 import persistence.FornecedorDao;
 
 
-@WebServlet({"/ControleFornecedor", "/template/cadastroFornecedor.html","/template/buscaFornecedor.html"})
+@WebServlet({"/ControleFornecedor", "/template/cadastroFornecedor.html","/template/buscaFornecedor.html", "/template/excluirForn.html"})
 public class ControleFornecedor extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -43,9 +46,12 @@ protected void execute(HttpServletRequest request, HttpServletResponse response)
 			cadastrar(request, response);
 		}else if(url.equalsIgnoreCase("/template/buscaFornecedor.html")){
 			buscar(request, response);
+		}else if("/template/excluirForn.html".equalsIgnoreCase(url)){
+			excluir(request, response);
 		}
 	}
 
+@SuppressWarnings("deprecation")
 protected void cadastrar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			try{
 							
@@ -65,11 +71,13 @@ protected void cadastrar(HttpServletRequest request, HttpServletResponse respons
 				
 				String[] data = inicioAtividades.split("/");
 				
-				GregorianCalendar cal = new GregorianCalendar(new Integer(data[2]), new Integer(data[1]) - 1, new Integer(data[0]));
+				Calendar cal = Calendar.getInstance();
 				
-				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-								
-				System.out.println(sdf.format(cal.getTime()));
+				cal.set(new Integer(data[2]), new Integer(data[1]) - 1, new Integer(data[0]));
+				
+				
+				
+				
 				
 				Fornecedor f = new Fornecedor();
 				f.setBairro(bairro);
@@ -81,7 +89,7 @@ protected void cadastrar(HttpServletRequest request, HttpServletResponse respons
 				f.setEndereco(endereco);
 				f.setEstado(estado);
 				f.setid(null);
-				f.setInicioAtividades( new Date (sdf.format(cal.getTime())));
+				f.setInicioAtividades(cal.getTime());
 				f.setNome(nome);
 				f.setNumeroDoEndereco(numeroDoEndereco);
 				f.setPessoaContato(pessoaContato);
@@ -104,10 +112,45 @@ protected void cadastrar(HttpServletRequest request, HttpServletResponse respons
 }
 
 protected void buscar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Fornecedor> listaFornecedores = new FornecedorDao().listarFornecedores();
 		
+	try{
+	List<Fornecedor> listaFornecedores = new FornecedorDao().listarFornecedores();
+	
+	Integer i = 0;
+	Fornecedor f = new Fornecedor();
+	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+	
+		
+	
+	
+	
+	//System.out.println(listaFornecedores +" " + data );
+	
 		request.setAttribute("listaFornecedores", listaFornecedores);
 		request.getRequestDispatcher("cadFornecedores.jsp").forward(request, response);
+		
+	}catch(Exception e){
+		e.printStackTrace();
+	}
 }
+protected void excluir(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try{
+	    Fornecedor f = new Fornecedor();
+		String id = request.getParameter("id");
+		
+		f.setid(new Integer (id));
+		
+		new FornecedorDao().excluir(f);
+		
+		request.setAttribute("msg", "Excluído com sucesso");
+		request.getRequestDispatcher("cadFornecedores.jsp").forward(request, response);
+		
+		}catch(Exception e ){
+			e.printStackTrace();
+		}
+		
+	
+}
+
 
 }

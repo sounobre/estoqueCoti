@@ -1,3 +1,5 @@
+<%@page import="java.util.List"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <jsp:include page="template/superiorContent.jsp"></jsp:include>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -5,6 +7,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <jsp:useBean id="FBean" class="control.ControleMateriais"></jsp:useBean>
+<jsp:useBean id="Fclass" class="model.Fornecedor"></jsp:useBean>
+<%@ page import="model.Fornecedor" %>
+<%@ page import="persistence.FornecedorDao" %>
 <!-- Main content -->
 
 <!--tab nav start-->
@@ -48,94 +53,96 @@
 													style="width: 230px; float: left; margin-left: 0%; display: block; margin-top: 0%">
 													<label for="nomeFornecedor">Nome do Fornecedor</label> <input
 														name="nomeFornecedor" class="form-control" type="text">
-													
+
 												</div>
-												
+
 												<div class="form-group"
 													style="width: 130px; float: left; margin-left: 2%; display: block; margin-top: 0%">
 													<label for="codFornecedor">Código</label> <input
 														name="codFornecedor" class="form-control" type="text">
 
 												</div>
-												
+
 												<div class="form-group"
 													style="width: 130px; float: left; margin-left: 2%; display: block; margin-top: 0%">
 													<label for="telFornecedor">Telefone</label> <input
 														name="telFornecedor" class="form-control" type="text">
 
 												</div>
-												
+
 												<div class="form-group"
 													style="width: 182px; float: left; margin-left: 2%; display: block; margin-top: 0%">
 													<label for="cepFornecedor">CEP</label> <input
 														name="cepFornecedor" class="form-control" type="text">
 
 												</div>
-												
+
 												<div class="form-group"
 													style="width: 330px; float: left; margin-left: 0%; display: block; margin-top: 0%">
 													<label for="endFornecedor">Endereço</label> <input
 														name="endFornecedor" class="form-control" type="text">
 
 												</div>
-												
+
 												<div class="form-group"
 													style="width: 130px; float: left; margin-left: 2%; display: block; margin-top: 0%">
 													<label for="numEndFornecedor">Número</label> <input
 														name="numEndFornecedor" class="form-control" type="text">
 
 												</div>
-																								
+
 												<div class="form-group"
 													style="width: 230px; float: left; margin-left: 2%; display: block; margin-top: 0%">
 													<label for="bairroFornecedor">Bairro</label> <input
 														name="bairroFornecedor" class="form-control" type="text">
 
 												</div>
-												
+
 												<div class="form-group"
 													style="width: 230px; float: left; margin-left: 0%; display: block; margin-top: 0%">
 													<label for="catOutros">Cidade</label> <input
 														name="cidadeFornecedor" class="form-control" type="text">
 
 												</div>
-												
+
 												<div class="form-group"
 													style="width: 80px; float: left; margin-left: 2%; display: block; margin-top: 0%">
 													<label for="catOutros">Estado</label> <input
 														name="estadoFornecedor" class="form-control" type="text">
 
 												</div>
-												
+
 												<div class="form-group"
 													style="width: 200px; float: left; margin-left: 2%; display: block; margin-top: 0%">
 													<label for="catOutros">E-mail</label> <input
 														name="emailFornecedor" class="form-control" type="text">
 
 												</div>
-																					
+
 												<div class="form-group"
 													style="width: 162px; float: left; margin-left: 2%; display: block; margin-top: 0%">
 													<label for="catOutros">Nome do Contato</label> <input
-														name="nomeDoContatoFornecedor" class="form-control" type="text">
+														name="nomeDoContatoFornecedor" class="form-control"
+														type="text">
 
 												</div>
-												
+
 												<div class="form-group"
 													style="width: 200px; float: left; margin-left: 0%; display: block; margin-top: 0%">
 													<label for="catOutros">CNPJ</label> <input
 														name="cnpjFornecedor" class="form-control" type="text">
 
 												</div>
-												
+
 												<div class="form-group"
 													style="width: 130px; float: left; margin-left: 2%; display: block; margin-top: 0%">
 													<label for="catOutros">Início das Atividades</label> <input
-														name="inicioAtividadesFornecedor" class="form-control" type="text">
+														name="inicioAtividadesFornecedor" class="form-control"
+														type="text">
 
 												</div>
-												
-												
+
+
 												<div
 													style="width: 30px; margin-top: 12%; float: right; margin-right: 8%">
 													<button class="btn btn-primary" type="submit">Cadastar</button>
@@ -172,49 +179,72 @@
 					</form>
 
 					<c:if test="${fn:length(listaFornecedores) > 0 }">
-					
+
 						<br>
-							<table class="table table-hover">
+						<table class="table table-hover">
+							<tr>
+								<th>Nome</th>
+								<th>Código</th>
+								<th>Telefone</th>
+								<th>Endereço</th>
+								<th>Nº</th>
+								<th>Cep</th>
+								<th>Bairro</th>
+								<th>Cidade</th>
+								<th>Estado</th>
+								<th>E-mail</th>
+								<th>Nome do Contato</th>
+								<th>CNPJ</th>
+								<th>Início das Atividades</th>
+								<th></th>
+							</tr>
+
+							<c:forEach items="${listaFornecedores }" var="forn">
 								<tr>
-									<th>Nome</th>
-									<th>Código</th>
-									<th>Telefone</th>
-									<th>Endereço</th>
-									<th>Nº</th>
-									<th>Cep</th>
-									<th>Bairro</th>
-									<th>Cidade</th>
-									<th>Estado</th>
-									<th>E-mail</th>
-									<th>Nome do Contato</th>
-									<th>CNPJ</th>
-									<th>Início das Atividades</th>
+									<td id="nome${forn.id}">${forn.nome }</td>
+									<td id="codigo${forn.id}">${forn.codigo }</td>
+									<td id="telefone${forn.id}">${forn.telefone }</td>
+									<td id="endereco${forn.id}">${forn.endereco }</td>
+									<td id="numero${forn.id}">${forn.numeroDoEndereco }</td>
+									<td id="cep${forn.id}">${forn.cep }</td>
+									<td id="bairro${forn.id}">${forn.bairro }</td>
+									<td id="cidade${forn.id}">${forn.cidade }</td>
+									<td id="estado${forn.id}">${forn.estado }</td>
+									<td id="email${forn.id}">${forn.email }</td>
+									<td id="nomecontato${forn.id}">${forn.pessoaContato }</td>
+									<td id="cnpj${forn.id}">${forn.cnpj }</td>
+									<td id="inicioAtividades${forn.id}">
+								<!--  		${forn.inicioAtividades} -->
+										<% 
+										List<Fornecedor> listaFornecedores = new FornecedorDao().listarFornecedores();
+										Integer i = 0;
+										Fornecedor f = new Fornecedor();
+										SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+										//String data =  sdf.format(f.getInicioAtividades());
+										
+										
+										f.setid(listaFornecedores.get(i).getid());
+										f.setInicioAtividades(listaFornecedores.get(i).getInicioAtividades());	
+											String data =  sdf.format(f.getInicioAtividades());
+											out.print(f.getInicioFormatado());
+											//System.out.println(f.getInicioFormatado());
+											i=i+1;
+										 %>
+										</td>
+									<td><a href="#alterarFornecedor"
+										class="btn btn-xs btn-info alterarFornecedor"
+										data-togle="modal" data-id = "${forn.id }">Alterar</a> <a
+										href="excluirForn.html?id=${forn.id }"
+										class="btn btn-xs btn-danger">Remover</a></td>
 								</tr>
-								
-								<c:forEach items="${listaFornecedores }" var="forn">
-								<tr>
-									<td id="nome${forn.id}">			 ${forn.nome }</td>
-									<td id="codigo${forn.id}">			 ${forn.codigo }</td>
-									<td id="telefone${forn.id}">		 ${forn.telefone }</td>
-									<td id="endereco${forn.id}">		 ${forn.endereco }</td>
-									<td id="numero${forn.id}">			 ${forn.numeroDoEndereco }</td>
-									<td id="cep${forn.id}">				 ${forn.cep }</td>
-									<td id="bairro${forn.id}">			 ${forn.bairro }</td>
-									<td id="cidade${forn.id}">			 ${forn.cidade }</td>
-									<td id="estado${forn.id}">			 ${forn.estado }</td>
-									<td id="email${forn.id}">			 ${forn.email }</td>
-									<td id="nomecontato${forn.id}"> 	 ${forn.pessoaContato }</td>
-									<td id="cnpj${forn.id}">			 ${forn.cnpj }</td>
-									<td id="inicioAtividades${forn.id}"> ${forn.inicioAtividades }</td>
-								</tr>	
-								
-								
-								</c:forEach>	
-							</table>	
+
+
+							</c:forEach>
+						</table>
 					</c:if>
 
 
-					
+
 
 					<!-- -------------------------------------------------Final cadastro Categoria------------------------------------------------ -->
 
@@ -226,7 +256,7 @@
 
 					<!-- -------------------------------------------------Início da altera Categoria------------------------------------------------ -->
 
-					
+
 
 
 

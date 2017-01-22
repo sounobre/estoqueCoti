@@ -37,10 +37,19 @@ public class FornecedorDao {
 			session = HibernateUtil.getSessionFactory().openSession();
 			List<Fornecedor> listaFornecedores = new ArrayList<Fornecedor>();
 			query = session.createQuery("FROM Fornecedor");
+			
 			listaFornecedores = query.list();
 			session.close();
 			return listaFornecedores;
 			
+		}
+		
+		public void excluir(Fornecedor f) {
+			session = HibernateUtil.getSessionFactory().openSession();
+			transaction = session.beginTransaction();
+			session.delete(f);
+			transaction.commit();
+			session.close();
 		}
 
 }

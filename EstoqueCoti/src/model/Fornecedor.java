@@ -1,15 +1,18 @@
 package model;
 
+
+
+
+
 import java.util.Date;
+import java.text.SimpleDateFormat;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.ForeignKey;
+
+
 
 
 
@@ -27,6 +30,7 @@ public class Fornecedor extends Pessoa{
 	private String cnpj;
 	@Column
 	private Date inicioAtividades;
+	
 	public Fornecedor(Integer id, String nome, String telefone, String endereco, String numeroDoEndereco,
 			String cep, String bairro, String cidade, String estado, String email, Integer codigo, String pessoaContato,
 			String cnpj, Date inicioAtividades) {
@@ -57,15 +61,24 @@ public class Fornecedor extends Pessoa{
 	public void setCnpj(String cnpj) {
 		this.cnpj = cnpj;
 	}
-	public Date getInicioAtividades() {
+	
+	
+	public  Date getInicioAtividades()  {
+			
+		
 		return inicioAtividades;
 	}
-	public void setInicioAtividades(Date inicioAtividades) {
-		this.inicioAtividades = inicioAtividades;
+	public void setInicioAtividades( java.util.Date inicioAtividades) {
+		this.inicioAtividades = (Date) inicioAtividades;
 	}
 	
 	
 	
+	public String getInicioFormatado() { 
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		String data = sdf.format(inicioAtividades);
+		return  data;
+		}
 	
 	
 	
