@@ -120,7 +120,16 @@ protected void buscar(HttpServletRequest request, HttpServletResponse response) 
 	Fornecedor f = new Fornecedor();
 	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 	
-		
+	while ( i < listaFornecedores.size() ) {
+		f.setid(listaFornecedores.get(i).getid());
+		f.setInicioAtividades(listaFornecedores.get(i).getInicioAtividades());	
+			String data1 =  sdf.format(f.getInicioAtividades());
+			System.out.println(listaFornecedores);
+			System.out.println(data1);
+			System.out.println(f.getInicioFormatado());
+			
+			i=i+1;
+		}
 	
 	
 	
