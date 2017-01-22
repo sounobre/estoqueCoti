@@ -127,7 +127,7 @@ protected void buscar(HttpServletRequest request, HttpServletResponse response) 
 			System.out.println(listaFornecedores);
 			System.out.println(data1);
 			System.out.println(f.getInicioFormatado());
-			
+			request.setAttribute("aa", data1);
 			i=i+1;
 		}
 	

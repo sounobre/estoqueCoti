@@ -7,9 +7,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <jsp:useBean id="FBean" class="control.ControleMateriais"></jsp:useBean>
+<jsp:useBean id="Fcontrole" class="control.ControleFornecedor"></jsp:useBean>
 <jsp:useBean id="Fclass" class="model.Fornecedor"></jsp:useBean>
 <%@ page import="model.Fornecedor" %>
 <%@ page import="persistence.FornecedorDao" %>
+<%@ page import="control.ControleFornecedor" %>
 <!-- Main content -->
 
 <!--tab nav start-->
@@ -199,7 +201,16 @@
 								<th></th>
 							</tr>
 
+<%List<Fornecedor> listaFornecedores = new FornecedorDao().listarFornecedores();
+							Integer i = 0;
+							Fornecedor f = new Fornecedor();
+							SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+						 %> 
+				 			
+								
 							<c:forEach items="${listaFornecedores }" var="forn">
+							
+							
 								<tr>
 									<td id="nome${forn.id}">${forn.nome }</td>
 									<td id="codigo${forn.id}">${forn.codigo }</td>
@@ -215,20 +226,19 @@
 									<td id="cnpj${forn.id}">${forn.cnpj }</td>
 									<td id="inicioAtividades${forn.id}">
 								<!--  		${forn.inicioAtividades} -->
+								
 										<% 
-										List<Fornecedor> listaFornecedores = new FornecedorDao().listarFornecedores();
-										Integer i = 0;
-										Fornecedor f = new Fornecedor();
-										SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-										//String data =  sdf.format(f.getInicioAtividades());
+										
+										
 										
 										
 										f.setid(listaFornecedores.get(i).getid());
 										f.setInicioAtividades(listaFornecedores.get(i).getInicioAtividades());	
 											String data =  sdf.format(f.getInicioAtividades());
-											out.print(f.getInicioFormatado());
-											//System.out.println(f.getInicioFormatado());
+										out.print( Fcontrole.getServletInfo());
+											System.out.println(f.getInicioFormatado());
 											i=i+1;
+							
 										 %>
 										</td>
 									<td><a href="#alterarFornecedor"
