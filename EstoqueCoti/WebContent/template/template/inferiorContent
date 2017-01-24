@@ -29,32 +29,50 @@
         <!-- Director App -->
         <script src="js/Director/app.js" type="text/javascript"></script>
         
-   <!--    <script type="text/javascript">
-       		$(.alterarFornecedor).on('click', function(){
-       			var id = $(this).data('id'); $("#fid").val(id);
-       			
-       			var nome =  			$('#nome' + id).text(); $("fnome").val(nome);
-       			var codigo = 			$('#codigo' + id).text(); $("fcodigo").val(codigo);
-       			var telefone =			$('#telefone' + id).text(); $("ftelefone").val(telefone);
-       			var endereco = 			$('#endereco' + id).text(); $("fendereco").val(endereco);
-       			var numero = 			$('#numero' + id).text(); $("fnumero").val(numero);
-       			var cep = 				$('#cep' + id).text(); $("fcep").val(cep);
-       			var bairro = 			$('#bairro' + id).text(); $("fbairro").val(bairro);
-       			var cidade = 			$('#cidade' + id).text(); $("fcidade").val(cidade);
-       			var estado = 			$('#estado' + id).text(); $("festado").val(estado);
-       			var email = 			$('#email' + id).text(); $("femail").val(email);
-       			var nomecontato = 		$('#nomecontato' + id).text(); $("fnomecontato").val(nomecontato);
-       			var cnpj =				$('#cnpj' + id).text(); $("fcnpj").val(cnpj);
-       			var inicioAtividades =  $('#inicioAtividades' + id).text(); $("finicioAtividades").val(inicioAtividades);
+      <script type="text/javascript">
+         
+       		$(".alteraFornecedor").on('click', function(){
+       		var id = $(this).data('id'); $("#fid").val(id);
+       			 
+       			var nome =  			$('#nome' + id).text(); 	 	$("#fnome").val(nome);
+       			var codigo = 			$('#codigo' + id).text(); 	 	$("#fcodigo").val(codigo);
+       			var telefone =			$('#telefone' + id).text();  	$("#ftelefone").val(telefone);
+       			var endereco = 			$('#endereco' + id).text();  	$("#fendereco").val(endereco);
+       			var numero = 			$('#numero' + id).text();   	$("#fnumero").val(numero);
+       			var cep = 				$('#cep' + id).text();			$("#fcep").val(cep);
+       			var bairro = 			$('#bairro' + id).text(); 	 	$("#fbairro").val(bairro);
+       			var cidade = 			$('#cidade' + id).text(); 	 	$("#fcidade").val(cidade);
+       			var estado = 			$('#estado' + id).text();		$("#festado").val(estado);
+       			var email = 			$('#email' + id).text(); 	 	$("#femail").val(email);
+       			var nomecontato = 		$('#nomecontato' + id).text();  $("#fnomecontato").val(nomecontato);
+       			var cnpj =				$('#cnpj' + id).text(); 		$("#fcnpj").val(cnpj);
+       			var inicioAtividades =  $('#inicioAtividades' + id).text(); $("#finicioAtividades").val(inicioAtividades);
        		
+       			$("#alterarFornecedor").modal();
        		});
+       			
+       $('.modal').on('hidden.bs.modal', function(){
+   						 $(this).find('form')[0].reset();
+							});
+							
+							
+		$('#pesqForn').change(function(){
+  	var tipo = $("#pesqForn option:selected").text();
+    if (tipo != 'Todos') {
+      $('#inputPesqForn').attr('disabled', false);
+      $('#btnPesquisarPagInicial').attr('disabled', false);
+   } else if(tipo == 'Todos'){
+   $('#inputPesqForn').attr('disabled', true);
+   $('#btnPesquisarPagInicial').attr('disabled', false);
+   } 
+  });					
        		
-       	</script>	-->
-        
-       
+       	</script>	
+             
        <script type="text/javascript">
 										
 					$(".alterar").on('click', function(){
+						   
 						   var id = $(this).data('id');$("#mid").val(id); //recuperar qual o id da linha
 						   //agora vamos usar o id da linha para recuperar cada campo..
 						   
@@ -74,9 +92,7 @@
 						   $("#DialogAlterarMaterial").modal();
 						});
 						
-						$('.modal').on('hidden.bs.modal', function(){
-   						 $(this).find('form')[0].reset();
-							});
+						
 							
 					
 					</script>
@@ -93,10 +109,7 @@
 						   $("#DialogAlterarMaterial").modal();
 						});
 						
-						//apaga os dados qdo fecha o modal
-						$('.modal').on('hidden.bs.modal', function(){
-   						 $(this).find('form')[0].reset();
-							});
+						
 							
 					
 					</script>

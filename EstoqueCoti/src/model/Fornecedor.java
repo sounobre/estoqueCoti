@@ -5,8 +5,6 @@ package model;
 
 
 import java.util.Date;
-import java.text.SimpleDateFormat;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -68,17 +66,19 @@ public class Fornecedor extends Pessoa{
 		
 		return inicioAtividades;
 	}
-	public void setInicioAtividades( java.util.Date inicioAtividades) {
-		this.inicioAtividades = (Date) inicioAtividades;
+	public void setInicioAtividades( Date inicioAtividades) {
+		this.inicioAtividades = inicioAtividades;
 	}
 	
 	
 	
-	public String getInicioFormatado() { 
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		String data = sdf.format(inicioAtividades);
-		return  data;
-		}
+	
+	@Override
+	public String toString() {
+		
+		return super.toString() + "Fornecedor [codigo=" + codigo + ", pessoaContato=" + pessoaContato + ", cnpj=" + cnpj
+				+ ", inicioAtividades=" + inicioAtividades + "]";
+	}
 	
 	
 	

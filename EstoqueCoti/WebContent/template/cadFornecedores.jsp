@@ -9,9 +9,9 @@
 <jsp:useBean id="FBean" class="control.ControleMateriais"></jsp:useBean>
 <jsp:useBean id="Fcontrole" class="control.ControleFornecedor"></jsp:useBean>
 <jsp:useBean id="Fclass" class="model.Fornecedor"></jsp:useBean>
-<%@ page import="model.Fornecedor" %>
-<%@ page import="persistence.FornecedorDao" %>
-<%@ page import="control.ControleFornecedor" %>
+<%@ page import="model.Fornecedor"%>
+<%@ page import="persistence.FornecedorDao"%>
+<%@ page import="control.ControleFornecedor"%>
 <!-- Main content -->
 
 <!--tab nav start-->
@@ -20,7 +20,7 @@
 		<header class="panel-heading tab-bg-dark-navy-blue">
 			<ul class="nav nav-tabs">
 
-				<li class="active"><a data-toggle="tab" href="#categoria">Fornecedor</a></li>
+				<li class="active"><a data-toggle="tab" href="#fornecedor">Fornecedor</a></li>
 				<li class=""><a data-toggle="tab" href="#profile">texto</a></li>
 				<li class=""><a data-toggle="tab" href="#contact">Contact</a></li>
 			</ul>
@@ -30,14 +30,14 @@
 
 
 
-				<!-- -------------------------------------------Início da Tab Categoria ---------------------------------------------------- -->
-				<div id="categoria" class="tab-pane active">
+				<!-- -------------------------------------------Início da Tab Fornecedor ---------------------------------------------------- -->
+				<div id="fornecedor" class="tab-pane active">
 
 					<section class="panel">
 						<div class="panel-body">
-							<a class="btn btn-xs btn-info" href="#incluirCategoria"
+							<a class="btn btn-xs btn-info" href="#incluirFornecedor"
 								data-toggle="modal"> Novo Fornecedor </a>
-							<div id="incluirCategoria" class="modal fade" aria-hidden="true"
+							<div id="incluirFornecedor" class="modal fade" aria-hidden="true"
 								aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
 								style="display: none;">
 								<div class="modal-dialog" style="width: 800px;">
@@ -102,28 +102,28 @@
 
 												<div class="form-group"
 													style="width: 230px; float: left; margin-left: 0%; display: block; margin-top: 0%">
-													<label for="catOutros">Cidade</label> <input
+													<label for="cidadeFornecedor">Cidade</label> <input
 														name="cidadeFornecedor" class="form-control" type="text">
 
 												</div>
 
 												<div class="form-group"
 													style="width: 80px; float: left; margin-left: 2%; display: block; margin-top: 0%">
-													<label for="catOutros">Estado</label> <input
+													<label for="estadoFornecedor">Estado</label> <input
 														name="estadoFornecedor" class="form-control" type="text">
 
 												</div>
 
 												<div class="form-group"
 													style="width: 200px; float: left; margin-left: 2%; display: block; margin-top: 0%">
-													<label for="catOutros">E-mail</label> <input
+													<label for="emailFornecedor">E-mail</label> <input
 														name="emailFornecedor" class="form-control" type="text">
 
 												</div>
 
 												<div class="form-group"
 													style="width: 162px; float: left; margin-left: 2%; display: block; margin-top: 0%">
-													<label for="catOutros">Nome do Contato</label> <input
+													<label for="nomeDoContatoFornecedor">Nome do Contato</label> <input
 														name="nomeDoContatoFornecedor" class="form-control"
 														type="text">
 
@@ -131,14 +131,14 @@
 
 												<div class="form-group"
 													style="width: 200px; float: left; margin-left: 0%; display: block; margin-top: 0%">
-													<label for="catOutros">CNPJ</label> <input
+													<label for="cnpjFornecedor">CNPJ</label> <input
 														name="cnpjFornecedor" class="form-control" type="text">
 
 												</div>
 
 												<div class="form-group"
 													style="width: 130px; float: left; margin-left: 2%; display: block; margin-top: 0%">
-													<label for="catOutros">Início das Atividades</label> <input
+													<label for="inicioAtividadesFornecedor">Início das Atividades</label> <input
 														name="inicioAtividadesFornecedor" class="form-control"
 														type="text">
 
@@ -161,19 +161,22 @@
 
 
 						<div class="col-lg-2">
-							<select name="selectPesquisaMat" class="form-control">
-
-								<option value="categoria">Nome</option>
-								<option value="produto">Produto</option>
+							<select name="selectPesquisaForn" class="form-control" id="pesqForn">
+								<option hidden="hidden" selected="selected">Pesquisar Por?</option>
+								<option value="todos" id="todos">Todos</option>
+								<option value="nome" id="nome">Nome</option>
+								<option value="codigo" id="codigo">Código</option>
+								<option value="cnpj" id="cnpj">CNPJ</option>
+								
 
 							</select>
 						</div>
 						<div class="col-lg-2">
-							<input type="text" class="form-control" name="campoPesquisaCat">
+							<input type="text" class="form-control" name="campoPesquisaForn" id="inputPesqForn" disabled="disabled">
 						</div>
 						<span class="input-group-btn ">
 							<button class="btn btn-default" type="submit"
-								style="margin-right: 100px">
+								style="margin-right: 100px" id="btnPesquisarPagInicial" disabled="disabled">
 								<i class="fa fa-search"></i>
 							</button>
 						</span>
@@ -201,16 +204,11 @@
 								<th></th>
 							</tr>
 
-<%List<Fornecedor> listaFornecedores = new FornecedorDao().listarFornecedores();
-							Integer i = 0;
-							Fornecedor f = new Fornecedor();
-							SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-						 %> 
-				 			
-								
+
+
 							<c:forEach items="${listaFornecedores }" var="forn">
-							
-							
+
+
 								<tr>
 									<td id="nome${forn.id}">${forn.nome }</td>
 									<td id="codigo${forn.id}">${forn.codigo }</td>
@@ -224,28 +222,14 @@
 									<td id="email${forn.id}">${forn.email }</td>
 									<td id="nomecontato${forn.id}">${forn.pessoaContato }</td>
 									<td id="cnpj${forn.id}">${forn.cnpj }</td>
-									<td id="inicioAtividades${forn.id}">
-								<!--  		${forn.inicioAtividades} -->
-								
-										<% 
-										
-										
-										
-										
-										f.setid(listaFornecedores.get(i).getid());
-										f.setInicioAtividades(listaFornecedores.get(i).getInicioAtividades());	
-											String data =  sdf.format(f.getInicioAtividades());
-										out.print( Fcontrole.getServletInfo());
-											System.out.println(f.getInicioFormatado());
-											i=i+1;
-							
-										 %>
-										</td>
+									<td id="inicioAtividades${forn.id}"><fmt:formatDate
+											value="${forn.inicioAtividades}" pattern="dd/MM/yyyy" /></td>
 									<td><a href="#alterarFornecedor"
-										class="btn btn-xs btn-info alterarFornecedor"
-										data-togle="modal" data-id = "${forn.id }">Alterar</a> <a
+										class="btn btn-xs btn-info alteraFornecedor"
+										data-toggle="modal" data-id="${forn.id }">Alterar</a> <a
 										href="excluirForn.html?id=${forn.id }"
-										class="btn btn-xs btn-danger">Remover</a></td>
+										class="btn btn-xs btn-danger"
+										onclick="return confirm('Tem certeza que deseja remover este item? Após a remoção não terá como recupera-lo')">Remover</a></td>
 								</tr>
 
 
@@ -256,7 +240,7 @@
 
 
 
-					<!-- -------------------------------------------------Final cadastro Categoria------------------------------------------------ -->
+					<!-- -------------------------------------------------Final cadastro Fornecedor------------------------------------------------ -->
 
 
 
@@ -264,13 +248,129 @@
 
 
 
-					<!-- -------------------------------------------------Início da altera Categoria------------------------------------------------ -->
+					<!-- -------------------------------------------------Início da altera fornecedor------------------------------------------------ -->
+
+					<div id="alterarFornecedor" class="modal fade" aria-hidden="true"
+						aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
+						style="display: none;">
+						<div class="modal-dialog" style="width: 800px;">
+							<div class="modal-content">
+
+								<div class="modal-header">
+									<button class="close" aria-hidden="true" data-dismiss="modal"
+										type="button">×</button>
+									<h4 class="modal-title">Alterar Fornecedor</h4>
+								</div>
+								<div class="modal-body" style="min-height: 400px;">
+
+									<form action="alteraFornecedor.html" method="post">
+										<div class="form-group"
+											style="width: 230px; float: left; margin-left: 0%; display: block; margin-top: 0%">
+											<label for="nomeFornecedor">Nome do Fornecedor</label> <input
+												name="nomeFornecedor" id="fnome" class="form-control" type="text">
+												<input name="id" type="hidden" id="fid">
+										</div>
+
+										<div class="form-group"
+											style="width: 130px; float: left; margin-left: 2%; display: block; margin-top: 0%">
+											<label for="codFornecedor">Código</label> <input
+												name="codFornecedor" id="fcodigo" class="form-control" type="text">
+
+										</div>
+
+										<div class="form-group"
+											style="width: 130px; float: left; margin-left: 2%; display: block; margin-top: 0%">
+											<label for="telFornecedor">Telefone</label> <input
+												name="telFornecedor" id="ftelefone" class="form-control" type="text">
+
+										</div>
+
+										<div class="form-group"
+											style="width: 182px; float: left; margin-left: 2%; display: block; margin-top: 0%">
+											<label for="cepFornecedor">CEP</label> <input
+												name="cepFornecedor" id="fcep" class="form-control" type="text">
+
+										</div>
+
+										<div class="form-group"
+											style="width: 330px; float: left; margin-left: 0%; display: block; margin-top: 0%">
+											<label for="endFornecedor">Endereço</label> <input
+												name="endFornecedor" id="fendereco" class="form-control" type="text">
+
+										</div>
+
+										<div class="form-group"
+											style="width: 130px; float: left; margin-left: 2%; display: block; margin-top: 0%">
+											<label for="numEndFornecedor">Número</label> <input
+												name="numEndFornecedor" id="fnumero" class="form-control" type="text">
+
+										</div>
+
+										<div class="form-group"
+											style="width: 230px; float: left; margin-left: 2%; display: block; margin-top: 0%">
+											<label for="bairroFornecedor">Bairro</label> <input
+												name="bairroFornecedor" id="fbairro" class="form-control" type="text">
+
+										</div>
+
+										<div class="form-group"
+											style="width: 230px; float: left; margin-left: 0%; display: block; margin-top: 0%">
+											<label for="cidadeFornecedor">Cidade</label> <input
+												name="cidadeFornecedor" id="fcidade" class="form-control" type="text">
+
+										</div>
+
+										<div class="form-group"
+											style="width: 80px; float: left; margin-left: 2%; display: block; margin-top: 0%">
+											<label for="estadoFornecedor">Estado</label> <input
+												name="estadoFornecedor" id="festado" class="form-control" type="text">
+
+										</div>
+
+										<div class="form-group"
+											style="width: 200px; float: left; margin-left: 2%; display: block; margin-top: 0%">
+											<label for=emailFornecedor>E-mail</label> <input
+												name="emailFornecedor" id="femail" class="form-control" type="text">
+
+										</div>
+
+										<div class="form-group"
+											style="width: 162px; float: left; margin-left: 2%; display: block; margin-top: 0%">
+											<label for="nomeDoContatoFornecedor">Nome do Contato</label> <input
+												name="nomeDoContatoFornecedor" id="fnomecontato" class="form-control"
+												type="text">
+
+										</div>
+
+										<div class="form-group"
+											style="width: 200px; float: left; margin-left: 0%; display: block; margin-top: 0%">
+											<label for="cnpjFornecedor">CNPJ</label> <input
+												name="cnpjFornecedor" id="fcnpj" class="form-control" type="text">
+
+										</div>
+
+										<div class="form-group"
+											style="width: 130px; float: left; margin-left: 2%; display: block; margin-top: 0%">
+											<label for="inicioAtividadesFornecedor">Início das Atividades</label> <input
+												name="inicioAtividadesFornecedor" id="finicioAtividades" class="form-control"
+												type="text">
+
+										</div>
+
+
+										<div
+											style="width: 30px; margin-top: 12%; float: right; margin-right: 8%">
+											<button class="btn btn-primary" type="submit">Alterar</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
 
 
 
-
-
-					<!-- -------------------------------------------------Final da Tab  Categoria------------------------------------------------ -->
+					<!-- -------------------------------------------------Final da Tab  Fornecedor------------------------------------------------ -->
 
 
 

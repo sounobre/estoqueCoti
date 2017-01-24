@@ -57,6 +57,9 @@ function CheckCatAltMat(val){
 	   element2.style.display='none';
 	 }
 	}
+	
+
+	
 
 </script> 
 
