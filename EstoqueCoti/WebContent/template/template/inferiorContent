@@ -50,6 +50,29 @@
        		
        			$("#alterarFornecedor").modal();
        		});
+       		
+       		
+       	$(".alteraFuncionario").on('click', function(){
+       		var id = $(this).data('id'); $("#fid").val(id);
+       			 
+       			var nome =  			$('#nome' + id).text(); 	 	$("#funome").val(nome);
+       			var perfil = 			$('#perfil' + id).text(); 	 	$("#fuperfil").val(perfil);
+       			var telefone =			$('#telefone' + id).text();  	$("#futelefone").val(telefone);
+       			var endereco = 			$('#endereco' + id).text();  	$("#fuendereco").val(endereco);
+       			var numero = 			$('#numero' + id).text();   	$("#funumero").val(numero);
+       			var cep = 				$('#cep' + id).text();			$("#fucep").val(cep);
+       			var bairro = 			$('#bairro' + id).text(); 	 	$("#fubairro").val(bairro);
+       			var cidade = 			$('#cidade' + id).text(); 	 	$("#fucidade").val(cidade);
+       			var estado = 			$('#estado' + id).text();		$("#fuestado").val(estado);
+       			var email = 			$('#email' + id).text(); 	 	$("#fuemail").val(email);
+       			var cargo = 			$('#cargo' + id).text();  		$("#fucargo").val(cargo);
+       			var salario =			$('#salario' + id).text(); 		$("#fusalario").val(salario);
+       			var setor = 			$('#setor' + id).text(); 		$("#fusetor").val(setor);
+       			var identidade =		$('#identidade' + id).text(); 	$("#fuidentidade").val(identidade);
+       			
+       			$("#alterarFuncionario").modal();
+       		});	
+       		
        			
        $('.modal').on('hidden.bs.modal', function(){
    						 $(this).find('form')[0].reset();

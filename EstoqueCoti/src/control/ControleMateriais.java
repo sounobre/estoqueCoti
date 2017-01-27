@@ -16,8 +16,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.firebirdsql.jdbc.parser.JaybirdSqlParser.extractFunction_return;
 
 import model.Categoria;
+import model.Fornecedor;
 import model.Materiais;
 import persistence.CategoriaDao;
+import persistence.FornecedorDao;
 import persistence.MateriaisDao;
 
 /**
@@ -83,7 +85,7 @@ public class ControleMateriais extends HttpServlet {
 			
 
 			Materiais mat = new Materiais();
-			List<Materiais> lm = new ArrayList<Materiais>();
+		
 
 			mat.setCodigo(codigo);
 			mat.setDescricao(descricao);
@@ -108,7 +110,6 @@ public class ControleMateriais extends HttpServlet {
 					new CategoriaDao().cadastrar(categoria);
 				}
 				
-
 			
 
 			MateriaisDao md = new MateriaisDao();

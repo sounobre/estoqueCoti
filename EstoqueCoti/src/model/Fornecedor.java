@@ -4,9 +4,16 @@ package model;
 
 
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 
@@ -29,6 +36,9 @@ public class Fornecedor extends Pessoa{
 	@Column
 	private Date inicioAtividades;
 	
+	
+
+	
 	public Fornecedor(Integer id, String nome, String telefone, String endereco, String numeroDoEndereco,
 			String cep, String bairro, String cidade, String estado, String email, Integer codigo, String pessoaContato,
 			String cnpj, Date inicioAtividades) {
@@ -40,7 +50,11 @@ public class Fornecedor extends Pessoa{
 	}
 	public Fornecedor() {
 		super();
+		
+		
 	}
+	
+	 
 	public Integer getCodigo() {
 		return codigo;
 	}

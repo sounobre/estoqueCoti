@@ -5,6 +5,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <jsp:useBean id="cBean" class="control.ControleMateriais"></jsp:useBean>
+<jsp:useBean id="fBean" class="persistence.FornecedorDao"></jsp:useBean>
+<jsp:useBean id="cDaoBean" class="persistence.MateriaisDao"></jsp:useBean>
+
 <!-- Main content -->
 
 <!--tab nav start-->
@@ -65,10 +68,24 @@
 													<label for="preco">Preço</label> <input name="preco"
 														class="form-control" type="text">
 												</div>
-												<div class="form-group"
-													style="width: 430px; float: left; margin-left: 2%; margin-top: 0%">
+												
+												
+												<div class="form-group">
+												<label for="fornecedor">Fornecedor</label>
+												<select name="fornecedor" class="form-control" type="text" style="width: 430px; float: left; margin-left: 2%; margin-top: 0%">
+												<option selected disabled hidden>Fornecedor</option>
+												<c:forEach items="${fBean.listarFornecedores() }" var="forn">
+												<option value="${forn.nome }">${forn.nome} </option>
+												
+												</c:forEach>
+																	
+												
+												</select>
+												
+												
+												<!-- 	style="width: 430px; float: left; margin-left: 2%; margin-top: 0%">
 													<label for="fornecedor">Fornecedor</label> <input
-														name="fornecedor" class="form-control" type="text">
+														name="fornecedor" class="form-control" type="text">  -->
 												</div>
 												<div class="form-group"
 													style="width: 85px; float: left; margin-left: 0%;">
@@ -179,7 +196,9 @@
 									<td id="nome${mat.id_material}">${mat.nome }</td>
 									<td id="descricao${mat.id_material}">${mat.descricao }</td>
 									<td id="medida${mat.id_material}">${mat.medida }</td>
-									<td id="fornecedor${mat.id_material}">${mat.fornecedor }</td>
+									
+									
+								<td id="fornecedor${mat.id_material}">${mat.fornecedor }</td> 
 									<td id="qtd_Min${mat.id_material}">${mat.qtd_Min }</td>
 									<td id="qtd_Max${mat.id_material}">${mat.qtd_Max }</td>
 									<td id="estoque${mat.id_material}">${mat.estoque }</td>

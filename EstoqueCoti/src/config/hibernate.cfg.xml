@@ -25,6 +25,7 @@
 		<mapping class="model.Categoria"/>
 		<mapping class="model.Fornecedor"/>
 		<mapping class="model.Pessoa" />
+		<mapping class="model.Funcionario" />
 		
 		
 		
