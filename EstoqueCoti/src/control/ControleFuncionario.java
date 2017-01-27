@@ -175,7 +175,7 @@ protected void alterar(HttpServletRequest request, HttpServletResponse response)
 			String cargo = request.getParameter("cargoDoFuncionario");
 			String salario = request.getParameter("salarioDoFuncionario");
 			String setor =  request.getParameter("setorDoFuncionario");
-			String identidade = request.getParameter("identidadedoFuncionario");
+			String identidade = request.getParameter("identidadeDoFuncionário");
 			Integer id = new Integer (request.getParameter("id"));
 			
 			Funcionario f = new Funcionario();
