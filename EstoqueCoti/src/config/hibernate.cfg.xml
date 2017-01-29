@@ -20,12 +20,11 @@
 		<property name="format_sql">true</property>
 		
 		<mapping class="model.Materiais"/>
-		
-	
 		<mapping class="model.Categoria"/>
 		<mapping class="model.Fornecedor"/>
 		<mapping class="model.Pessoa" />
 		<mapping class="model.Funcionario" />
+		<mapping class="model.Local" />
 		
 		
 		

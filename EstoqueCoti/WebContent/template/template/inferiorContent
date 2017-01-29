@@ -30,6 +30,64 @@
         <script src="js/Director/app.js" type="text/javascript"></script>
         
       <script type="text/javascript">
+      
+          
+      
+      
+      
+       $("#checkLocal").change(function(){
+       if($(this).prop('checked') == true)
+        {
+	   document.getElementById('nomeNovoLocal').style.display='none';
+	   document.getElementById('nomeLocalExistente').style.display='block';
+	   $("#checkLocal1").attr("checked","checked");
+	 } });
+	 
+	  $("#checkLocal1").change(function(){
+       if($(this).prop('checked') == false)
+        {
+	   
+	   document.getElementById('nomeNovoLocal').style.display='block';
+	   document.getElementById('nomeLocalExistente').style.display='none';
+	   $("#checkLocal").removeAttr("checked");
+	 } });
+	 
+	 
+	 $("#checkCorredor").change(function(){
+       if($(this).prop('checked') == true)
+        {
+	   document.getElementById('nomeNovoCorredor').style.display='none';
+	   document.getElementById('nomeCorredorExistente').style.display='block';
+	   $("#checkCorredor1").attr("checked","checked");
+	 } });
+	 
+	  $("#checkCorredor1").change(function(){
+       if($(this).prop('checked') == false)
+        {
+	   
+	   document.getElementById('nomeNovoCorredor').style.display='block';
+	   document.getElementById('nomeCorredorExistente').style.display='none';
+	   $("#checkCorredor").removeAttr("checked");
+	 } });
+	 
+	 
+	 $("#checkPrateleira").change(function(){
+       if($(this).prop('checked') == true)
+        {
+	   document.getElementById('nomeNovaPrateleira').style.display='none';
+	   document.getElementById('nomePrateleiraExistente').style.display='block';
+	   $("#checkPrateleira1").attr("checked","checked");
+	 } });
+	 
+	  $("#checkPrateleira1").change(function(){
+       if($(this).prop('checked') == false)
+        {
+	   
+	   document.getElementById('nomeNovaPrateleira').style.display='block';
+	   document.getElementById('nomePrateleiraExistente').style.display='none';
+	   $("#checkPrateleira").removeAttr("checked");
+	 } });
+	
          
        		$(".alteraFornecedor").on('click', function(){
        		var id = $(this).data('id'); $("#fid").val(id);
