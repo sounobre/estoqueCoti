@@ -151,6 +151,20 @@
 														type="text">
 
 												</div>
+												
+												<div class="form-group"
+													style="width: 130px; float: left; margin-left: 2%; display: block; margin-top: 0%">
+													<label for="loginDoFuncionario">Login</label> <input
+														name="loginDoFuncionario" class="form-control" type="text">
+
+												</div>
+												
+												<div class="form-group"
+													style="width: 130px; float: left; margin-left: 2%; display: block; margin-top: 0%">
+													<label for="senhaDoFuncionario">Senha</label> <input
+														name="senhaDoFuncionario" class="form-control" type="text">
+
+												</div>
 
 
 												<div
@@ -210,6 +224,8 @@
 								<th>Setor</th>
 								<th>Cargo</th>
 								<th>Identidade</th>
+								<th>Login</th>
+								<th>Senha</th>
 								<th></th>
 							</tr>
 
@@ -233,6 +249,8 @@
 									<td id="setor${func.id}">${func.setor }</td>
 									<td id="cargo${func.id}">${func.cargo}</td>
 									<td id="identidade${func.id}">${func.identidade}</td>
+									<td id="login${func.id}">${func.login}</td>
+									<td id="senha${func.id}">${func.senha}</td>
 									<td><a href="#alterarFuncionario"
 										class="btn btn-xs btn-info alteraFuncionario"
 										data-toggle="modal" data-id="${func.id }">Alterar</a> <a
@@ -373,6 +391,20 @@
 												type="text">
 
 										</div>
+										
+										<div class="form-group"
+													style="width: 130px; float: left; margin-left: 2%; display: block; margin-top: 0%">
+													<label for="loginDoFuncionario">Login</label> <input
+														name="loginDoFuncionario" id="fulogin" class="form-control" type="text">
+
+												</div>
+												
+												<div class="form-group"
+													style="width: 130px; float: left; margin-left: 2%; display: block; margin-top: 0%">
+													<label for="senhaDoFuncionario">Senha</label> <input
+														name="senhaDoFuncionario" id="fusenha" class="form-control" type="text">
+
+												</div>
 
 
 										<div

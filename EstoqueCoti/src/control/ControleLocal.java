@@ -42,9 +42,9 @@ public class ControleLocal extends HttpServlet {
 protected void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			try{
 				
-				String url = request.getContextPath();
+				String url = request.getServletPath();
 				
-				if(url.equalsIgnoreCase("/template/cadastrarLocal.html")){
+				if(url.equalsIgnoreCase("/template/cadastroLocal.html")){
 					cadastro(request, response);
 				}
 				
@@ -56,7 +56,7 @@ protected void execute(HttpServletRequest request, HttpServletResponse response)
 protected void cadastro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try{
 			
-			String id = request.getParameter("lId");
+			//Integer id = new Integer(request.getParameter("lId"));
 			String localNovo = request.getParameter("nomeDoNovoLocal");
 			String localExistente = request.getParameter("nomeDoLocalExistente");
 			String codLocal = request.getParameter("codDoLocal");
@@ -70,13 +70,31 @@ protected void cadastro(HttpServletRequest request, HttpServletResponse response
 			String codPrateleira = request.getParameter("codDaPrateleira");
 			String descprateleira = request.getParameter("descDaPrateleira");
 			
-			String q = "SELECT L.lNome, L.cNome, L.pNome FROM Local WHERE L.lNome = "+ localNovo + " AND L.cNome = "+ corredorNovo +" AND L.pNome = "+ prateleiraNova;
+			String q = "SELECT L.lNome, L.cNome, L.pNome FROM Local L WHERE L.lNome = '"+ localNovo + "' AND L.cNome = '"+ corredorNovo +"' AND L.pNome = '"+ prateleiraNova+"'";
 			
 			if(new LocalDao().validarDuoplicidadeDeLocal(q).isEmpty()){
-				Local l = new Local();
+				Local lo = new Local();
+				lo.setlId(null);
+				lo.setlNome(localNovo);
+				lo.setlCodigo(codLocal);
+				lo.setLdescricao(descLocal);
+				lo.setcNome(corredorNovo);
+				lo.setcCodigo(codCorredor);
+				lo.setcDescricao(descCorredor);
+				lo.setpNome(prateleiraNova);
+				lo.setpCodigo(codPrateleira);
+				lo.setpDescricao(descprateleira);
+				
+				new LocalDao().cadastrar(lo);
+				
+				request.setAttribute("msg", "Local Cadastrado com Sucesso!");
+				request.getRequestDispatcher("cadLocais.jsp").forward(request, response);
 				
 				
 			}
+			
+			request.setAttribute("msg", "Local Já Cadastrado!");
+			request.getRequestDispatcher("cadLocais.jsp").forward(request, response);
 			
 			
 		}catch(Exception e){

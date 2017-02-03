@@ -18,15 +18,21 @@ public class Funcionario extends Pessoa{
 	private String perfil;
 	@Column
 	private String identidade;
+	@Column
+	private String login;
+	@Column
+	private String senha;
 	public Funcionario(Integer id, String nome, String telefone, String endereco, String numeroDoEndereco, String cep,
 			String bairro, String cidade, String estado, String email, String cargo, String salario, String setor,
-			String perfil, String identidade) {
+			String perfil, String identidade, String login, String senha) {
 		super(id, nome, telefone, endereco, numeroDoEndereco, cep, bairro, cidade, estado, email);
 		this.cargo = cargo;
 		this.salario = salario;
 		this.setor = setor;
 		this.perfil = perfil;
 		this.identidade = identidade;
+		this.login = login;
+		this.senha = senha;
 	}
 	public Funcionario() {
 		super();
@@ -61,11 +67,26 @@ public class Funcionario extends Pessoa{
 	public void setIdentidade(String identidade) {
 		this.identidade = identidade;
 	}
+	public String getLogin() {
+		return login;
+	}
+	public void setLogin(String login) {
+		this.login = login;
+	}
+	public String getSenha() {
+		return senha;
+	}
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
 	@Override
 	public String toString() {
 		return "Funcionario [cargo=" + cargo + ", salario=" + salario + ", setor=" + setor + ", perfil=" + perfil
-				+ ", identidade=" + identidade + "]";
+				+ ", identidade=" + identidade + ", login=" + login + ", senha=" + senha + "]";
 	}
+	
+	
+	
 	
 }
 	

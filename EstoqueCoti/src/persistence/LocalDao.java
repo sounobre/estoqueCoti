@@ -2,6 +2,7 @@ package persistence;
 
 import java.util.List;
 
+import org.firebirdsql.jdbc.parser.JaybirdSqlParser.returningClause_return;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -29,5 +30,13 @@ public List<Local> validarDuoplicidadeDeLocal(String q) {
 		session.close();
 		return lista;
 	}
-
+public List<String> locaisExistentes() {
+		session = HibernateUtil.getSessionFactory().openSession();
+		transaction = session.beginTransaction();
+		query = session.createQuery("select L.lNome from Local group by L.lNome");
+		List<String> lista = query.list();
+		session.close();
+		return lista;
+	
+}
 }

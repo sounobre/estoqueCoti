@@ -127,6 +127,8 @@
        			var salario =			$('#salario' + id).text(); 		$("#fusalario").val(salario);
        			var setor = 			$('#setor' + id).text(); 		$("#fusetor").val(setor);
        			var identidade =		$('#identidade' + id).text(); 	$("#fuidentidade").val(identidade);
+       			var login =				$('#login' + id).text(); 		$("#fulogin").val(login);
+       			var senha =				$('#senha' + id).text(); 		$("#fusenha").val(senha);
        			
        			$("#alterarFuncionario").modal();
        		});	

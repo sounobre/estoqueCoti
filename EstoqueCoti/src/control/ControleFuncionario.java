@@ -74,6 +74,8 @@ protected void cadastrar(HttpServletRequest request, HttpServletResponse respons
 				String salario = request.getParameter("salarioDoFuncionario");
 				String setor =  request.getParameter("setordoFuncionario");
 				String identidade = request.getParameter("identidadedoFuncionario");
+				String login = request.getParameter("loginDoFuncionario");
+				String senha = request.getParameter("senhaDoFuncionario");
 				
 				Funcionario f = new Funcionario();
 				f.setBairro(bairro);
@@ -91,6 +93,8 @@ protected void cadastrar(HttpServletRequest request, HttpServletResponse respons
 				f.setSetor(setor);
 				f.setTelefone(telefone);
 				f.setIdentidade(identidade);
+				f.setSenha(senha);
+				f.setLogin(login);
 				
 				if(new FuncionarioDao().verificaIdentidade(identidade).size() > 0){
 					request.setAttribute("msg", "Funcionario Já cadastrado");
@@ -177,6 +181,8 @@ protected void alterar(HttpServletRequest request, HttpServletResponse response)
 			String setor =  request.getParameter("setorDoFuncionario");
 			String identidade = request.getParameter("identidadeDoFuncionário");
 			Integer id = new Integer (request.getParameter("id"));
+			String login = request.getParameter("loginDoFuncionario");
+			String senha = request.getParameter("senhaDoFuncionario");
 			
 			Funcionario f = new Funcionario();
 			f.setBairro(bairro);
@@ -194,6 +200,8 @@ protected void alterar(HttpServletRequest request, HttpServletResponse response)
 			f.setSetor(setor);
 			f.setTelefone(telefone);
 			f.setIdentidade(identidade);
+			f.setSenha(senha);
+			f.setLogin(login);
 		
 			new FuncionarioDao().alterar(f);
 			

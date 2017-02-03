@@ -1,5 +1,3 @@
-<%@page import="java.util.List"%>
-<%@page import="java.text.SimpleDateFormat"%>
 <jsp:include page="template/superiorContent.jsp"></jsp:include>
 
 
@@ -7,12 +5,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-<jsp:useBean id="FBean" class="control.ControleMateriais"></jsp:useBean>
-<jsp:useBean id="Fcontrole" class="control.ControleFornecedor"></jsp:useBean>
-<jsp:useBean id="Fclass" class="model.Fornecedor"></jsp:useBean>
-<%@ page import="model.Fornecedor"%>
-<%@ page import="persistence.FornecedorDao"%>
-<%@ page import="control.ControleFornecedor"%>
+
+
+
 <!-- Main content -->
 
 <!--tab nav start-->
@@ -53,78 +48,80 @@
 
 											<form action="cadastroLocal.html" method="post">
 												<div class="form-group"
-													style="width: 230px; float: left; margin-left: 0%; display: block; margin-top: 0%" id="nomeNovoLocal">
+													style="width: 230px; float: left; margin-left: 0%; display: block; margin-top: 0%"
+													id="nomeNovoLocal">
 													<label for="nomeDoNovoLocal">Nome do Local </label> <input
 														name="nomeDoNovoLocal" class="form-control" type="text">
 													<div class="checkbox">
-													<label>
-													<input name="localExistente"
-														type="checkbox" id="checkLocal" /> Local Existente
-														
+														<label> <input name="localExistente"
+															type="checkbox" id="checkLocal" /> Local Existente
+
 														</label>
-													</div>			
-												</div>
-												
-												
-												
-												<div class="form-group"
-													style="width: 230px; float: left; margin-left: 0%; display: none; margin-top: 0%" id="nomeLocalExistente">
-													<label for="nomeDoLocalExistente">Nome do Local222 </label> <input
-														name="nomeDoLocalExistente" class="form-control" type="text">
-													<div class="checkbox">
-													<label>
-													<input name="localExistente"
-														type="checkbox" id="checkLocal1"  /> Local Existente
-														
-														</label>
-													</div>			
+													</div>
 												</div>
 
-												
+
+
+												<div class="form-group"
+													style="width: 230px; float: left; margin-left: 0%; display: none; margin-top: 0%"
+													id="nomeLocalExistente">
+													<label for="nomeDoLocalExistente">Nome do Local222
+													</label> <input name="nomeDoLocalExistente" class="form-control"
+														type="text">
+													<div class="checkbox">
+														<label> <input name="localExistente"
+															type="checkbox" id="checkLocal1" /> Local Existente
+
+														</label>
+													</div>
+												</div>
+
+
 
 
 
 												<div class="form-group"
 													style="width: 130px; float: left; margin-left: 2%; display: block; margin-top: 0%">
 													<label for="codDoLocal">Código</label> <input
-														name="codDoLocal" class="form-control"  type="text">
+														name="codDoLocal" class="form-control" type="text">
 
 												</div>
 
 												<div class="form-group"
 													style="width: 130px; float: left; margin-left: 2%; display: block; margin-top: 0%">
-													<label for="descDoLocal">Descrição do Local</label> <textarea 
-														name="descDoLocal" class="form-control; " style="width: 345px; height: 146px; resize:none "  ></textarea>
+													<label for="descDoLocal">Descrição do Local</label>
+													<textarea name="descDoLocal" class="form-control; "
+														style="width: 345px; height: 146px; resize: none"></textarea>
 
 												</div>
 
 												<div class="form-group"
-													style="width: 230px; float: left; margin-left: -69%; display: block; margin-top: 25%" id="nomeNovoCorredor">
-													<label for="nomeDoNovoCorredor">Corredor</label>
-													<input name="nomeDoNovoCorredor" class="form-control"
-														type="text">
-														<div class="checkbox">
-													<label>
-													<input name="localExistente"
-														type="checkbox" id="checkCorredor" /> Corredor Existente
-														
+													style="width: 230px; float: left; margin-left: -69%; display: block; margin-top: 25%"
+													id="nomeNovoCorredor">
+													<label for="nomeDoNovoCorredor">Corredor</label> <input
+														name="nomeDoNovoCorredor" class="form-control" type="text">
+													<div class="checkbox">
+														<label> <input name="localExistente"
+															type="checkbox" id="checkCorredor" /> Corredor Existente
+
 														</label>
-													</div>	
+													</div>
 
 												</div>
-												
+
 												<div class="form-group"
-													style="width: 230px; float: left; margin-left: -69%; display: none; margin-top: 25%" id="nomeCorredorExistente">
-													<label for="nomeDoCorredorExistente">Corredor222</label>
-													<input name="nomeDoCorredorExistente" class="form-control"
+													style="width: 230px; float: left; margin-left: -69%; display: none; margin-top: 25%"
+													id="nomeCorredorExistente">
+													<label for="nomeDoCorredorExistente">Corredor222</label> <input
+														name="nomeDoCorredorExistente" class="form-control"
 														type="text">
-														<div class="checkbox">
-													<label>
-													<input name="localExistente"
-														type="checkbox" id="checkCorredor1" /> Corredor Existente
-														
+													<div class="checkbox">
+														<label> <input name="localExistente"
+															type="checkbox" id="checkCorredor1" /> Corredor
+															Existente
+
 														</label>
-													</div>	
+													</div>
 
 												</div>
 
@@ -137,39 +134,44 @@
 
 												<div class="form-group"
 													style="width: 150px; float: left; margin-left: -17%; display: block; margin-top: 25%">
-													<label for="descDoCorredor">Descrição do Corredor</label> <textarea
-														name="descDoCorredor" class="form-control" style="width: 345px; height: 146px; resize:none "></textarea>
+													<label for="descDoCorredor">Descrição do Corredor</label>
+													<textarea name="descDoCorredor" class="form-control"
+														style="width: 345px; height: 146px; resize: none"></textarea>
 
 												</div>
 
 												<div class="form-group"
-													style="width: 230px; float: left; margin-left: 0%; display: block; margin-top: 0%" id="nomeNovaPrateleira">
+													style="width: 230px; float: left; margin-left: 0%; display: block; margin-top: 0%"
+													id="nomeNovaPrateleira">
 													<label for="nomeDaNovaPrateleira">Prateleira</label> <input
-														name="nomeDaNovaPrateleira" class="form-control" type="text">
-														<div class="checkbox">
-													<label>
-													<input name="localExistente"
-														type="checkbox" id="checkPrateleira" /> Prateleira Existente
-														
+														name="nomeDaNovaPrateleira" class="form-control"
+														type="text">
+													<div class="checkbox">
+														<label> <input name="localExistente"
+															type="checkbox" id="checkPrateleira" /> Prateleira
+															Existente
+
 														</label>
-													</div>	
+													</div>
 
 												</div>
-												
+
 												<div class="form-group"
-													style="width: 230px; float: left; margin-left: 0%; display: none; margin-top: 0%" id="nomePrateleiraExistente">
-													<label for="nomeDaPrateleiraExistente">Prateleira222</label> <input
-														name="nomeDaPrateleiraExistente" class="form-control" type="text">
-														<div class="checkbox">
-													<label>
-													<input name="localExistente"
-														type="checkbox" id="checkPrateleira1" /> Prateleira Existente
-														
+													style="width: 230px; float: left; margin-left: 0%; display: none; margin-top: 0%"
+													id="nomePrateleiraExistente">
+													<label for="nomeDaPrateleiraExistente">Prateleira222</label>
+													<input name="nomeDaPrateleiraExistente"
+														class="form-control" type="text">
+													<div class="checkbox">
+														<label> <input name="localExistente"
+															type="checkbox" id="checkPrateleira1" /> Prateleira
+															Existente
+
 														</label>
-													</div>	
+													</div>
 
 												</div>
-												
+
 
 												<div class="form-group"
 													style="width: 130px; float: left; margin-left: 2%; display: block; margin-top: 0%">
@@ -180,8 +182,10 @@
 
 												<div class="form-group"
 													style="width: 150px; float: left; margin-left: 2%; display: block; margin-top: 0%">
-													<label for="descDaPrateleira">Descrição da Prateleira</label> <textarea
-														name="descDaPrateleira" class="form-control" style="width: 345px; height: 146px; resize:none "></textarea>
+													<label for="descDaPrateleira">Descrição da
+														Prateleira</label>
+													<textarea name="descDaPrateleira" class="form-control"
+														style="width: 345px; height: 146px; resize: none"></textarea>
 
 												</div>
 
@@ -189,7 +193,8 @@
 
 												<div
 													style="width: 30px; margin-top: 26%; float: right; margin-right: 18%">
-													<button class="btn btn-primary" type="submit">Cadastar / Alterar</button>
+													<button class="btn btn-primary" type="submit">Cadastar
+														/ Alterar</button>
 												</div>
 											</form>
 										</div>
@@ -199,7 +204,7 @@
 						</div>
 					</section>
 
-					<form action="buscaFornecedor.html" method="post">
+					<!-- 		<form action="buscaFornecedor.html" method="post">
 
 
 						<div class="col-lg-2">
@@ -268,8 +273,7 @@
 									<td id="email${forn.id}">${forn.email }</td>
 									<td id="nomecontato${forn.id}">${forn.pessoaContato }</td>
 									<td id="cnpj${forn.id}">${forn.cnpj }</td>
-									<td id="inicioAtividades${forn.id}"><fmt:formatDate
-											value="${forn.inicioAtividades}" pattern="dd/MM/yyyy" /></td>
+									<td id="inicioAtividades${forn.id}"><</td>
 									<td><a href="#alterarFornecedor"
 										class="btn btn-xs btn-info alteraFornecedor"
 										data-toggle="modal" data-id="${forn.id }">Alterar</a> <a
@@ -283,7 +287,7 @@
 						</table>
 					</c:if>
 
-
+ -->
 
 
 					<!-- -------------------------------------------------Final cadastro Fornecedor------------------------------------------------ -->
@@ -296,7 +300,7 @@
 
 					<!-- -------------------------------------------------Início da altera fornecedor------------------------------------------------ -->
 
-					<div id="alterarFornecedor" class="modal fade" aria-hidden="true"
+					<!--  	<div id="alterarFornecedor" class="modal fade" aria-hidden="true"
 						aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
 						style="display: none;">
 						<div class="modal-dialog" style="width: 800px;">
@@ -423,7 +427,7 @@
 							</div>
 						</div>
 					</div>
-
+-->
 
 
 					<!-- -------------------------------------------------Final da Tab  Fornecedor------------------------------------------------ -->
