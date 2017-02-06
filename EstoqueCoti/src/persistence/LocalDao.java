@@ -39,4 +39,20 @@ public List<String> locaisExistentes() {
 		return lista;
 	
 }
+public void atualizar(Local l) {
+	session = HibernateUtil.getSessionFactory().openSession();
+	transaction = session.beginTransaction();
+	session.update(l);
+	transaction.commit();
+	session.close();
+}
+public List<Local> buscar(String q) {
+	session = HibernateUtil.getSessionFactory().openSession();
+	transaction = session.beginTransaction();
+	query = session.createQuery(q);
+	List<Local> lista = query.list();
+	session.close();
+	return lista;
+}
+
 }

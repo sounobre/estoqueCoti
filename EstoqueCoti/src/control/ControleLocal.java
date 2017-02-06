@@ -1,11 +1,15 @@
 package control;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.firebirdsql.jdbc.parser.JaybirdSqlParser.extractFunction_return;
 
 import model.Local;
 import persistence.LocalDao;
@@ -13,7 +17,7 @@ import persistence.LocalDao;
 /**
  * Servlet implementation class ControleLocal
  */
-@WebServlet({"/ControleLocal","/template/cadastroLocal.html"})
+@WebServlet({"/ControleLocal","/template/cadastroLocal.html", "/template/buscarLocal.html"})
 public class ControleLocal extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -46,6 +50,8 @@ protected void execute(HttpServletRequest request, HttpServletResponse response)
 				
 				if(url.equalsIgnoreCase("/template/cadastroLocal.html")){
 					cadastro(request, response);
+				}else if(url.equalsIgnoreCase("/template/buscarLocal.html")){
+					buscar(request, response);
 				}
 				
 			}catch(Exception e){
@@ -91,10 +97,15 @@ protected void cadastro(HttpServletRequest request, HttpServletResponse response
 				request.getRequestDispatcher("cadLocais.jsp").forward(request, response);
 				
 				
+			}else{
+				
+							
+				
+				request.setAttribute("msg", "Local Já Cadastrado!");
+				request.getRequestDispatcher("cadLocais.jsp").forward(request, response);
 			}
 			
-			request.setAttribute("msg", "Local Já Cadastrado!");
-			request.getRequestDispatcher("cadLocais.jsp").forward(request, response);
+			
 			
 			
 		}catch(Exception e){
@@ -102,4 +113,21 @@ protected void cadastro(HttpServletRequest request, HttpServletResponse response
 		}
 }
 
+protected void buscar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	try{
+		String q = "select L from Local L";
+		
+		List<Local> listaLocal = new LocalDao().buscar(q);
+		
+		request.setAttribute("listaLocal", listaLocal);
+		request.getRequestDispatcher("cadLocais.jsp").forward(request, response);
+		
+	}catch(Exception e){
+		e.printStackTrace();
+	}
+	
+	
+}
+	
 }

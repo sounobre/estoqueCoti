@@ -54,7 +54,7 @@
 														name="nomeDoNovoLocal" class="form-control" type="text">
 													<div class="checkbox">
 														<label> <input name="localExistente"
-															type="checkbox" id="checkLocal" /> Local Existente
+															type="hidden" id="checkLocal" /> Local Existente
 
 														</label>
 													</div>
@@ -62,7 +62,7 @@
 
 
 
-												<div class="form-group"
+											<!--  	<div class="form-group"
 													style="width: 230px; float: left; margin-left: 0%; display: none; margin-top: 0%"
 													id="nomeLocalExistente">
 													<label for="nomeDoLocalExistente">Nome do Local222
@@ -75,6 +75,7 @@
 														</label>
 													</div>
 												</div>
+												-->
 
 
 
@@ -102,14 +103,14 @@
 														name="nomeDoNovoCorredor" class="form-control" type="text">
 													<div class="checkbox">
 														<label> <input name="localExistente"
-															type="checkbox" id="checkCorredor" /> Corredor Existente
+															type="hidden" id="checkCorredor" /> Corredor Existente
 
 														</label>
 													</div>
 
 												</div>
 
-												<div class="form-group"
+											<!--  	<div class="form-group"
 													style="width: 230px; float: left; margin-left: -69%; display: none; margin-top: 25%"
 													id="nomeCorredorExistente">
 													<label for="nomeDoCorredorExistente">Corredor222</label> <input
@@ -123,7 +124,7 @@
 														</label>
 													</div>
 
-												</div>
+												</div> -->
 
 												<div class="form-group"
 													style="width: 130px; float: left; margin-left: -36%; display: block; margin-top: 25%">
@@ -148,7 +149,7 @@
 														type="text">
 													<div class="checkbox">
 														<label> <input name="localExistente"
-															type="checkbox" id="checkPrateleira" /> Prateleira
+															type="hidden" id="checkPrateleira" /> Prateleira
 															Existente
 
 														</label>
@@ -156,7 +157,7 @@
 
 												</div>
 
-												<div class="form-group"
+										<!--  		<div class="form-group"
 													style="width: 230px; float: left; margin-left: 0%; display: none; margin-top: 0%"
 													id="nomePrateleiraExistente">
 													<label for="nomeDaPrateleiraExistente">Prateleira222</label>
@@ -170,7 +171,7 @@
 														</label>
 													</div>
 
-												</div>
+												</div> -->
 
 
 												<div class="form-group"
@@ -204,23 +205,23 @@
 						</div>
 					</section>
 
-					<!-- 		<form action="buscaFornecedor.html" method="post">
+					 		<form action="buscarLocal.html" method="post">
 
 
 						<div class="col-lg-2">
 							<select name="selectPesquisaForn" class="form-control"
-								id="pesqForn">
+								id="pesqForn" >
 								<option hidden="hidden" selected="selected">Pesquisar
 									Por?</option>
 								<option value="todos" id="todos">Todos</option>
-								<option value="nome" id="nome">Nome</option>
-								<option value="codigo" id="codigo">Código</option>
-								<option value="cnpj" id="cnpj">CNPJ</option>
+								<option value="nome" id="nome">Local</option>
+								<option value="codigo" id="codigo">Corredor</option>
+								<option value="cnpj" id="cnpj">Prateleira</option>
 
 
 							</select>
 						</div>
-						<div class="col-lg-2">
+						<div class="col-lg-2" >
 							<input type="text" class="form-control" name="campoPesquisaForn"
 								id="inputPesqForn" disabled="disabled">
 						</div>
@@ -234,50 +235,44 @@
 
 					</form>
 
-					<c:if test="${fn:length(listaFornecedores) > 0 }">
+					<c:if test="${fn:length(listaLocal) > 0 }">
 
 						<br>
 						<table class="table table-hover">
 							<tr>
-								<th>Nome</th>
+								<th>Local</th>
 								<th>Código</th>
-								<th>Telefone</th>
-								<th>Endereço</th>
-								<th>Nº</th>
-								<th>Cep</th>
-								<th>Bairro</th>
-								<th>Cidade</th>
-								<th>Estado</th>
-								<th>E-mail</th>
-								<th>Nome do Contato</th>
-								<th>CNPJ</th>
-								<th>Início das Atividades</th>
+								<th>Descrição</th>
+								<th>Prateleira</th>
+								<th>Código</th>
+								<th>Descrição</th>
+								<th>Prateleira</th>
+								<th>Código</th>
+								<th>Descrição</th>
+								
 								<th></th>
 							</tr>
 
 
 
-							<c:forEach items="${listaFornecedores }" var="forn">
+							<c:forEach items="${listaLocal }" var="local">
 
 
 								<tr>
-									<td id="nome${forn.id}">${forn.nome }</td>
-									<td id="codigo${forn.id}">${forn.codigo }</td>
-									<td id="telefone${forn.id}">${forn.telefone }</td>
-									<td id="endereco${forn.id}">${forn.endereco }</td>
-									<td id="numero${forn.id}">${forn.numeroDoEndereco }</td>
-									<td id="cep${forn.id}">${forn.cep }</td>
-									<td id="bairro${forn.id}">${forn.bairro }</td>
-									<td id="cidade${forn.id}">${forn.cidade }</td>
-									<td id="estado${forn.id}">${forn.estado }</td>
-									<td id="email${forn.id}">${forn.email }</td>
-									<td id="nomecontato${forn.id}">${forn.pessoaContato }</td>
-									<td id="cnpj${forn.id}">${forn.cnpj }</td>
-									<td id="inicioAtividades${forn.id}"><</td>
-									<td><a href="#alterarFornecedor"
-										class="btn btn-xs btn-info alteraFornecedor"
-										data-toggle="modal" data-id="${forn.id }">Alterar</a> <a
-										href="excluirForn.html?id=${forn.id }"
+									<td id="local${local.lId}">${local.nome }</td>
+									<td id="lcodigo${local.lId}">${local.codigo }</td>
+									<td id="ldescricao${local.lId}">${local.telefone }</td>
+									<td id="corredor${local.lId}">${local.endereco }</td>
+									<td id="ccodigo${local.lId}">${local.numeroDoEndereco }</td>
+									<td id="cdescricao${local.lId}">${local.cep }</td>
+									<td id="prateleira${local.lId}">${local.bairro }</td>
+									<td id="pcodigo${local.lId}">${local.cidade }</td>
+									<td id="pdescricao${local.lId}">${local.estado }</td>
+									
+									<td><a href="#alterarLocal"
+										class="btn btn-xs btn-info alteraLocal"
+										data-toggle="modal" data-id="${local.lId }">Alterar</a> <a
+										href="excluirForn.html?id=${local.lId }"
 										class="btn btn-xs btn-danger"
 										onclick="return confirm('Tem certeza que deseja remover este item? Após a remoção não terá como recupera-lo')">Remover</a></td>
 								</tr>
@@ -287,7 +282,7 @@
 						</table>
 					</c:if>
 
- -->
+ 
 
 
 					<!-- -------------------------------------------------Final cadastro Fornecedor------------------------------------------------ -->
