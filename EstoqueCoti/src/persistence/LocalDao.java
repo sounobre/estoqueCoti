@@ -54,5 +54,11 @@ public List<Local> buscar(String q) {
 	session.close();
 	return lista;
 }
-
+public void remover(Local l) {
+	session = HibernateUtil.getSessionFactory().openSession();
+	transaction = session.beginTransaction();
+	session.delete(l);
+	transaction.commit();
+	session.close();
+}
 }

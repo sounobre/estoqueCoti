@@ -53,8 +53,8 @@
 													<label for="nomeDoNovoLocal">Nome do Local </label> <input
 														name="nomeDoNovoLocal" class="form-control" type="text">
 													<div class="checkbox">
-														<label> <input name="localExistente"
-															type="hidden" id="checkLocal" /> Local Existente
+														<label> <input name="localExistente" type="hidden"
+															id="checkLocal" /> <!-- Local Existente -->
 
 														</label>
 													</div>
@@ -62,7 +62,7 @@
 
 
 
-											<!--  	<div class="form-group"
+												<!--  	<div class="form-group"
 													style="width: 230px; float: left; margin-left: 0%; display: none; margin-top: 0%"
 													id="nomeLocalExistente">
 													<label for="nomeDoLocalExistente">Nome do Local222
@@ -102,15 +102,15 @@
 													<label for="nomeDoNovoCorredor">Corredor</label> <input
 														name="nomeDoNovoCorredor" class="form-control" type="text">
 													<div class="checkbox">
-														<label> <input name="localExistente"
-															type="hidden" id="checkCorredor" /> Corredor Existente
+														<label> <input name="localExistente" type="hidden"
+															id="checkCorredor" /> <!-- Corredor Existente -->
 
 														</label>
 													</div>
 
 												</div>
 
-											<!--  	<div class="form-group"
+												<!--  	<div class="form-group"
 													style="width: 230px; float: left; margin-left: -69%; display: none; margin-top: 25%"
 													id="nomeCorredorExistente">
 													<label for="nomeDoCorredorExistente">Corredor222</label> <input
@@ -148,16 +148,16 @@
 														name="nomeDaNovaPrateleira" class="form-control"
 														type="text">
 													<div class="checkbox">
-														<label> <input name="localExistente"
-															type="hidden" id="checkPrateleira" /> Prateleira
-															Existente
+														<label> <input name="localExistente" type="hidden"
+															id="checkPrateleira" /> <!--  Prateleira
+															Existente -->
 
 														</label>
 													</div>
 
 												</div>
 
-										<!--  		<div class="form-group"
+												<!--  		<div class="form-group"
 													style="width: 230px; float: left; margin-left: 0%; display: none; margin-top: 0%"
 													id="nomePrateleiraExistente">
 													<label for="nomeDaPrateleiraExistente">Prateleira222</label>
@@ -194,8 +194,7 @@
 
 												<div
 													style="width: 30px; margin-top: 26%; float: right; margin-right: 18%">
-													<button class="btn btn-primary" type="submit">Cadastar
-														/ Alterar</button>
+													<button class="btn btn-primary" type="submit">Cadastar</button>
 												</div>
 											</form>
 										</div>
@@ -205,12 +204,12 @@
 						</div>
 					</section>
 
-					 		<form action="buscarLocal.html" method="post">
+					<form action="buscarLocal.html" method="post">
 
 
 						<div class="col-lg-2">
 							<select name="selectPesquisaForn" class="form-control"
-								id="pesqForn" >
+								id="pesqForn">
 								<option hidden="hidden" selected="selected">Pesquisar
 									Por?</option>
 								<option value="todos" id="todos">Todos</option>
@@ -221,7 +220,7 @@
 
 							</select>
 						</div>
-						<div class="col-lg-2" >
+						<div class="col-lg-2">
 							<input type="text" class="form-control" name="campoPesquisaForn"
 								id="inputPesqForn" disabled="disabled">
 						</div>
@@ -249,7 +248,7 @@
 								<th>Prateleira</th>
 								<th>Código</th>
 								<th>Descrição</th>
-								
+
 								<th></th>
 							</tr>
 
@@ -259,19 +258,19 @@
 
 
 								<tr>
-									<td id="local${local.lId}">${local.nome }</td>
-									<td id="lcodigo${local.lId}">${local.codigo }</td>
-									<td id="ldescricao${local.lId}">${local.telefone }</td>
-									<td id="corredor${local.lId}">${local.endereco }</td>
-									<td id="ccodigo${local.lId}">${local.numeroDoEndereco }</td>
-									<td id="cdescricao${local.lId}">${local.cep }</td>
-									<td id="prateleira${local.lId}">${local.bairro }</td>
-									<td id="pcodigo${local.lId}">${local.cidade }</td>
-									<td id="pdescricao${local.lId}">${local.estado }</td>
-									
+									<td id="local${local.lId}">${local.lNome }</td>
+									<td id="lcodigo${local.lId}">${local.lCodigo }</td>
+									<td id="ldescricao${local.lId}">${local.ldescricao }</td>
+									<td id="corredor${local.lId}">${local.cNome }</td>
+									<td id="ccodigo${local.lId}">${local.cCodigo }</td>
+									<td id="cdescricao${local.lId}">${local.cDescricao }</td>
+									<td id="prateleira${local.lId}">${local.pNome }</td>
+									<td id="pcodigo${local.lId}">${local.pCodigo }</td>
+									<td id="pdescricao${local.lId}">${local.pDescricao }</td>
+
 									<td><a href="#alterarLocal"
-										class="btn btn-xs btn-info alteraLocal"
-										data-toggle="modal" data-id="${local.lId }">Alterar</a> <a
+										class="btn btn-xs btn-info alteraLocal" data-toggle="modal"
+										data-id="${local.lId }">Alterar</a> <a
 										href="excluirForn.html?id=${local.lId }"
 										class="btn btn-xs btn-danger"
 										onclick="return confirm('Tem certeza que deseja remover este item? Após a remoção não terá como recupera-lo')">Remover</a></td>
@@ -282,7 +281,7 @@
 						</table>
 					</c:if>
 
- 
+
 
 
 					<!-- -------------------------------------------------Final cadastro Fornecedor------------------------------------------------ -->
@@ -293,9 +292,9 @@
 
 
 
-					<!-- -------------------------------------------------Início da altera fornecedor------------------------------------------------ -->
+					<!-- -------------------------------------------------Início da altera local------------------------------------------------ -->
 
-					<!--  	<div id="alterarFornecedor" class="modal fade" aria-hidden="true"
+					<div id="alterarLocal" class="modal fade" aria-hidden="true"
 						aria-labelledby="myModalLabel" role="dialog" tabindex="-1"
 						style="display: none;">
 						<div class="modal-dialog" style="width: 800px;">
@@ -306,115 +305,164 @@
 										type="button">×</button>
 									<h4 class="modal-title">Alterar Fornecedor</h4>
 								</div>
-								<div class="modal-body" style="min-height: 400px;">
+								<div class="modal-body" style="min-height: 650px;">
 
-									<form action="alteraFornecedor.html" method="post">
+									<form action="alteraLocal.html" method="post">
 										<div class="form-group"
-											style="width: 230px; float: left; margin-left: 0%; display: block; margin-top: 0%">
-											<label for="nomeFornecedor">Nome do Fornecedor</label> <input
-												name="nomeFornecedor" id="fnome" class="form-control"
-												type="text"> <input name="id" type="hidden" id="fid">
+											style="width: 230px; float: left; margin-left: 0%; display: block; margin-top: 0%"
+											id="nomeNovoLocal">
+											<label for="nomeDoNovoLocal">Nome do Local </label> <input
+												name="nomeDoNovoLocal" class="form-control" type="text"
+												id="flNome">
+												<input name="Lid" type="hidden" id="flId">
+											<div class="checkbox">
+												<label> <input name="localExistente" type="hidden"
+													id="checkLocal" /> <!-- Local Existente -->
+
+												</label>
+											</div>
 										</div>
+
+
+
+										<!--  	<div class="form-group"
+													style="width: 230px; float: left; margin-left: 0%; display: none; margin-top: 0%"
+													id="nomeLocalExistente">
+													<label for="nomeDoLocalExistente">Nome do Local222
+													</label> <input name="nomeDoLocalExistente" class="form-control"
+														type="text">
+													<div class="checkbox">
+														<label> <input name="localExistente"
+															type="checkbox" id="checkLocal1" /> Local Existente
+
+														</label>
+													</div>
+												</div>
+												-->
+
+
+
+
 
 										<div class="form-group"
 											style="width: 130px; float: left; margin-left: 2%; display: block; margin-top: 0%">
-											<label for="codFornecedor">Código</label> <input
-												name="codFornecedor" id="fcodigo" class="form-control"
-												type="text">
-
-										</div>
-
-										<div class="form-group"
-											style="width: 130px; float: left; margin-left: 2%; display: block; margin-top: 0%">
-											<label for="telFornecedor">Telefone</label> <input
-												name="telFornecedor" id="ftelefone" class="form-control"
-												type="text">
-
-										</div>
-
-										<div class="form-group"
-											style="width: 182px; float: left; margin-left: 2%; display: block; margin-top: 0%">
-											<label for="cepFornecedor">CEP</label> <input
-												name="cepFornecedor" id="fcep" class="form-control"
-												type="text">
-
-										</div>
-
-										<div class="form-group"
-											style="width: 330px; float: left; margin-left: 0%; display: block; margin-top: 0%">
-											<label for="endFornecedor">Endereço</label> <input
-												name="endFornecedor" id="fendereco" class="form-control"
-												type="text">
-
-										</div>
-
-										<div class="form-group"
-											style="width: 130px; float: left; margin-left: 2%; display: block; margin-top: 0%">
-											<label for="numEndFornecedor">Número</label> <input
-												name="numEndFornecedor" id="fnumero" class="form-control"
-												type="text">
-
-										</div>
-
-										<div class="form-group"
-											style="width: 230px; float: left; margin-left: 2%; display: block; margin-top: 0%">
-											<label for="bairroFornecedor">Bairro</label> <input
-												name="bairroFornecedor" id="fbairro" class="form-control"
-												type="text">
-
-										</div>
-
-										<div class="form-group"
-											style="width: 230px; float: left; margin-left: 0%; display: block; margin-top: 0%">
-											<label for="cidadeFornecedor">Cidade</label> <input
-												name="cidadeFornecedor" id="fcidade" class="form-control"
-												type="text">
-
-										</div>
-
-										<div class="form-group"
-											style="width: 80px; float: left; margin-left: 2%; display: block; margin-top: 0%">
-											<label for="estadoFornecedor">Estado</label> <input
-												name="estadoFornecedor" id="festado" class="form-control"
-												type="text">
-
-										</div>
-
-										<div class="form-group"
-											style="width: 200px; float: left; margin-left: 2%; display: block; margin-top: 0%">
-											<label for=emailFornecedor>E-mail</label> <input
-												name="emailFornecedor" id="femail" class="form-control"
-												type="text">
-
-										</div>
-
-										<div class="form-group"
-											style="width: 162px; float: left; margin-left: 2%; display: block; margin-top: 0%">
-											<label for="nomeDoContatoFornecedor">Nome do Contato</label>
-											<input name="nomeDoContatoFornecedor" id="fnomecontato"
-												class="form-control" type="text">
-
-										</div>
-
-										<div class="form-group"
-											style="width: 200px; float: left; margin-left: 0%; display: block; margin-top: 0%">
-											<label for="cnpjFornecedor">CNPJ</label> <input
-												name="cnpjFornecedor" id="fcnpj" class="form-control"
-												type="text">
+											<label for="codDoLocal">Código</label> <input
+												name="codDoLocal" class="form-control" type="text"
+												id="flCodigo">
 
 										</div>
 
 										<div class="form-group"
 											style="width: 130px; float: left; margin-left: 2%; display: block; margin-top: 0%">
-											<label for="inicioAtividadesFornecedor">Início das
-												Atividades</label> <input name="inicioAtividadesFornecedor"
-												id="finicioAtividades" class="form-control" type="text">
+											<label for="descDoLocal">Descrição do Local</label>
+											<textarea name="descDoLocal" class="form-control; "
+												style="width: 345px; height: 146px; resize: none"
+												id="fldescricao"></textarea>
 
 										</div>
+
+										<div class="form-group"
+											style="width: 230px; float: left; margin-left: -69%; display: block; margin-top: 25%"
+											id="nomeNovoCorredor">
+											<label for="nomeDoNovoCorredor">Corredor</label> <input
+												name="nomeDoNovoCorredor" class="form-control" type="text"
+												id="fcNome">
+											<div class="checkbox">
+												<label> <input name="localExistente" type="hidden"
+													id="checkCorredor" /> <!-- Corredor Existente -->
+
+												</label>
+											</div>
+
+										</div>
+
+										<!--  	<div class="form-group"
+													style="width: 230px; float: left; margin-left: -69%; display: none; margin-top: 25%"
+													id="nomeCorredorExistente">
+													<label for="nomeDoCorredorExistente">Corredor222</label> <input
+														name="nomeDoCorredorExistente" class="form-control"
+														type="text">
+													<div class="checkbox">
+														<label> <input name="localExistente"
+															type="checkbox" id="checkCorredor1" /> Corredor
+															Existente
+
+														</label>
+													</div>
+
+												</div> -->
+
+										<div class="form-group"
+											style="width: 130px; float: left; margin-left: -36%; display: block; margin-top: 25%">
+											<label for="codDoCorredor">Código</label> <input
+												name="codDoCorredor" class="form-control" type="text"
+												id="fcCodigo">
+
+										</div>
+
+										<div class="form-group"
+											style="width: 150px; float: left; margin-left: -17%; display: block; margin-top: 25%">
+											<label for="descDoCorredor">Descrição do Corredor</label>
+											<textarea name="descDoCorredor" class="form-control"
+												style="width: 345px; height: 146px; resize: none"
+												id="fcDescricao"></textarea>
+
+										</div>
+
+										<div class="form-group"
+											style="width: 230px; float: left; margin-left: 0%; display: block; margin-top: 0%"
+											id="nomeNovaPrateleira">
+											<label for="nomeDaNovaPrateleira">Prateleira</label> <input
+												name="nomeDaNovaPrateleira" class="form-control" type="text"
+												id="fpNome">
+											<div class="checkbox">
+												<label> <input name="localExistente" type="hidden"
+													id="checkPrateleira" /> <!--  Prateleira
+															Existente -->
+
+												</label>
+											</div>
+
+										</div>
+
+										<!--  		<div class="form-group"
+													style="width: 230px; float: left; margin-left: 0%; display: none; margin-top: 0%"
+													id="nomePrateleiraExistente">
+													<label for="nomeDaPrateleiraExistente">Prateleira222</label>
+													<input name="nomeDaPrateleiraExistente"
+														class="form-control" type="text">
+													<div class="checkbox">
+														<label> <input name="localExistente"
+															type="checkbox" id="checkPrateleira1" /> Prateleira
+															Existente
+
+														</label>
+													</div>
+
+												</div> -->
+
+
+										<div class="form-group"
+											style="width: 130px; float: left; margin-left: 2%; display: block; margin-top: 0%">
+											<label for="codDaPrateleira">Código</label> <input
+												name="codDaPrateleira" class="form-control" type="text"
+												id="fpCodigo">
+
+										</div>
+
+										<div class="form-group"
+											style="width: 150px; float: left; margin-left: 2%; display: block; margin-top: 0%">
+											<label for="descDaPrateleira">Descrição da Prateleira</label>
+											<textarea name="descDaPrateleira" class="form-control"
+												style="width: 345px; height: 146px; resize: none"
+												id="fpDescricao"></textarea>
+
+										</div>
+
 
 
 										<div
-											style="width: 30px; margin-top: 12%; float: right; margin-right: 8%">
+											style="width: 30px; margin-top: 26%; float: right; margin-right: 14%">
 											<button class="btn btn-primary" type="submit">Alterar</button>
 										</div>
 									</form>
@@ -422,10 +470,9 @@
 							</div>
 						</div>
 					</div>
--->
 
 
-					<!-- -------------------------------------------------Final da Tab  Fornecedor------------------------------------------------ -->
+					<!-- -------------------------------------------------Final da Tab altera local------------------------------------------------ -->
 
 
 

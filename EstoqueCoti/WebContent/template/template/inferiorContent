@@ -132,7 +132,21 @@
        			
        			$("#alterarFuncionario").modal();
        		});	
-       		
+       	
+       	$(".alteraLocal").on('click', function(){
+       		var id = $(this).data('id'); $("#flId").val(id);
+       			var lNome 		=  			$('#local' + id).text(); 	 	$("#flNome").val(lNome);
+       			var lcodigo 	= 			$('#lcodigo' + id).text(); 	 	$("#flCodigo").val(lcodigo);
+       			var ldescricao  =			$('#ldescricao' + id).text();   $("#fldescricao").val(ldescricao);
+       			var cNome 		= 			$('#corredor' + id).text();   	$("#fcNome").val(cNome);
+       			var cCodigo 	= 			$('#ccodigo' + id).text();   	$("#fcCodigo").val(cCodigo);
+       			var cDescricao  = 			$('#cdescricao' + id).text();	$("#fcDescricao").val(cDescricao);
+       			var pNome 		= 			$('#prateleira' + id).text();   $("#fpNome").val(pNome);
+       			var pCodigo 	= 			$('#pcodigo' + id).text(); 	 	$("#fpCodigo").val(pCodigo);
+       			var pDescricao 	= 			$('#pdescricao' + id).text();	$("#fpDescricao").val(pDescricao);
+       			
+       			$("#.alterarLocal").modal();
+       	});	
        			
        $('.modal').on('hidden.bs.modal', function(){
    						 $(this).find('form')[0].reset();
