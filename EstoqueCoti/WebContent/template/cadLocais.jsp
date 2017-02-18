@@ -271,7 +271,7 @@
 									<td><a href="#alterarLocal"
 										class="btn btn-xs btn-info alteraLocal" data-toggle="modal"
 										data-id="${local.lId }">Alterar</a> <a
-										href="excluirForn.html?id=${local.lId }"
+										href="excluirLoc.html?id=${local.lId }"
 										class="btn btn-xs btn-danger"
 										onclick="return confirm('Tem certeza que deseja remover este item? Após a remoção não terá como recupera-lo')">Remover</a></td>
 								</tr>

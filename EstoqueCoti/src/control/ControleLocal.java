@@ -17,7 +17,7 @@ import persistence.LocalDao;
 /**
  * Servlet implementation class ControleLocal
  */
-@WebServlet({"/ControleLocal","/template/cadastroLocal.html", "/template/buscarLocal.html","/template/alteraLocal.html"})
+@WebServlet({"/ControleLocal","/template/cadastroLocal.html", "/template/buscarLocal.html","/template/alteraLocal.html","/template/excluirLoc.html"})
 public class ControleLocal extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -54,6 +54,8 @@ protected void execute(HttpServletRequest request, HttpServletResponse response)
 					buscar(request, response);
 				}else if(url.equalsIgnoreCase("/template/alteraLocal.html")){
 					alterar(request, response);
+				}else if (url.equalsIgnoreCase("/template/excluirLoc.html")){
+					remover(request, response);
 				}
 			}catch(Exception e){
 				e.printStackTrace();
@@ -174,7 +176,7 @@ protected void alterar(HttpServletRequest request, HttpServletResponse response)
 }
 protected void remover(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	try{
-		Integer id = new Integer(request.getParameter("lId"));
+		Integer id = new Integer(request.getParameter("id"));
 		
 		Local l = new Local();
 		l.setlId(id);
