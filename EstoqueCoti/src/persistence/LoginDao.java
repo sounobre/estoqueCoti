@@ -4,11 +4,14 @@ import java.io.ObjectInputStream.GetField;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.firebirdsql.jdbc.parser.JaybirdSqlParser.function_return;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import model.Fornecedor;
 import model.Funcionario;
+import model.Pessoa;
 
 
 public class LoginDao {
@@ -19,7 +22,8 @@ public class LoginDao {
 	public Boolean logar(String login, String senha) {
 		session = HibernateUtil.getSessionFactory().openSession();
 		transaction = session.beginTransaction();
-		query = session.createQuery("select F.login, F.senha from Funcionario F where F.login = "+login+" and F.senha = "+senha);
+		query = session.createQuery("select F.login, F.senha from Funcionario F where F.login = '"+login+"' and F.senha = "+senha);
+			System.out.println(query.list().size());
 			if(query.list().size() == 1){
 				return true;
 			}else
@@ -27,14 +31,11 @@ public class LoginDao {
 		
 	}
 	
-	public Funcionario buscarUsuario(String email) {
+	public Funcionario buscarUsuario(String login) {
 		session = HibernateUtil.getSessionFactory().openSession();
 		transaction = session.beginTransaction();
-		query = session.createQuery("select F from Funcionario F where F.email = "+email);
-		
-		Funcionario func = new Funcionario();
-		func.setid(((int) query.getParameterValue(1)));
-		System.out.println(query.getParameterValue(1));
+		query = session.createQuery("select F from Funcionario F where F.login = '"+login+"'");
+		Funcionario func = (Funcionario) query.uniqueResult();
 		session.close();
 		return func;
 	}

@@ -81,7 +81,8 @@ public class Funcionario extends Pessoa{
 	}
 	@Override
 	public String toString() {
-		return "Funcionario [cargo=" + cargo + ", salario=" + salario + ", setor=" + setor + ", perfil=" + perfil
+		
+		return super.toString() + "Funcionario [cargo=" + cargo + ", salario=" + salario + ", setor=" + setor + ", perfil=" + perfil
 				+ ", identidade=" + identidade + ", login=" + login + ", senha=" + senha + "]";
 	}
 	

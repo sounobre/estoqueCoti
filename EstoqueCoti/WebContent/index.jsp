@@ -8,7 +8,7 @@
 </head>
 <body>
 			<div>
-          	<form action="inicio.html" method="post"> 
+          	<form action="Logar" method="post"> 
           		<label for="login">Login </label>     
                 <input type="text" name="login">
                 
@@ -22,5 +22,6 @@
                 <input type="submit" value="Entrar">
              </form>   
           </div>
+          ${msg}
 </body>
 </html>
