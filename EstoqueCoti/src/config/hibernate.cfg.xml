@@ -25,6 +25,7 @@
 		<mapping class="model.Pessoa" />
 		<mapping class="model.Funcionario" />
 		<mapping class="model.Local" />
+		<mapping class="model.MovimentacaoEstoque" />
 		
 		
 		

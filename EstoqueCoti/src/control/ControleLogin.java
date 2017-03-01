@@ -19,7 +19,7 @@ import persistence.LoginDao;
 /**
  * Servlet implementation class ControleLogin
  */
-@WebServlet({"/ControleLogin","/Logar", "/template/logout.html"})
+@WebServlet({"/ControleLogin","/login.html", "/template/logout.html"})
 public class ControleLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -48,7 +48,7 @@ protected void execute(HttpServletRequest request, HttpServletResponse response)
 			
 				String url = request.getServletPath();
 				
-				if(url.equalsIgnoreCase("/Logar")){
+				if(url.equalsIgnoreCase("/login.html")){
 					String login = request.getParameter("login");
 					String senha = request.getParameter("senha");
 					
@@ -63,7 +63,7 @@ protected void execute(HttpServletRequest request, HttpServletResponse response)
 					response.sendRedirect("template/indCadastro.jsp");
 				}else{
 					request.setAttribute("msg", "<div class = 'alert alert-info'>"+ "Email ou senha Incorretos!"+"</div>");
-					request.getRequestDispatcher("../index.jsp").forward(request, response);
+					request.getRequestDispatcher("index.jsp").forward(request, response);
 				}
 					
 				}else if(url.equalsIgnoreCase("/template/logout.html")){

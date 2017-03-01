@@ -8,7 +8,7 @@
 </head>
 <body>
 			<div>
-          	<form action="Logar" method="post"> 
+          	<form action="login.html" method="post"> 
           		<label for="login">Login </label>     
                 <input type="text" name="login">
                 
