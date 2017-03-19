@@ -109,6 +109,16 @@
        			$("#alterarFornecedor").modal();
        		});
        		
+       		$(".entradaMateriais").on('click', function(){
+       			var id = $(this).data('id'); $("#fid").val(id);
+       			
+       			var nome = 		$('#nome' + id).text();		$("#fnome").val(nome);
+       			var codigo = 	$('#codigo' + id).text();	    $("#fcodigo").val(codigo);
+       			var categoria = $('#categoria' + id).text();   $("#fcategoria").val(categoria);
+       			
+       			$("#entradaMateriais").modal();
+       		});
+       		
        		
        	$(".alteraFuncionario").on('click', function(){
        		var id = $(this).data('id'); $("#fid").val(id);

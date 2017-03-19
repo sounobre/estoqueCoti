@@ -59,10 +59,7 @@
 								<th>Nome</th>
 								<th>Código</th>
 								<th>Categoria</th>
-								<th>Local</th>
-								<th>Qtd. Mínima</th>
-								<th>Qtd. Máxima</th>
-								<th>Em Estoque</th>
+								
 								<th></th>
 							</tr>
 
@@ -72,17 +69,14 @@
 
 
 								<tr>
-									<td id="nome${list.id}">${list.nome }</td>
-									<td id="codigo${list.id}">${list.codigo }</td>
-									<td id="telefone${list.id}">${list.telefone }</td>
-									<td id="endereco${list.id}">${list.endereco }</td>
-									<td id="numero${list.id}">${list.numeroDoEndereco }</td>
-									<td id="cep${list.id}">${list.cep }</td>
-									<td id="bairro${list.id}">${list.bairro }</td>
+									<td id="nome${list.id_material}">${list.nome }</td>
+									<td id="codigo${list.id_material}">${list.codigo }</td>
+									<td id="categoria${list.id_material}">${list.categoria.categoria }</td>
 									
-									<td><a href="#DialogEntradaMaterial"
-										class="btn btn-xs btn-info alteraFornecedor"
-										data-toggle="modal" data-id="${list.id }">Entrada</a> </td>
+									
+									<td><a href="entradaMateriais"
+										class="btn btn-xs btn-info entradaMateriais"
+										data-toggle="modal" data-id="${list.id_material }">Entrada</a> </td>
 								</tr>
 
 
@@ -93,9 +87,9 @@
 						
 						
 						
-							<a class="btn btn-xs btn-info" href="#DialogEntradaMaterial"
+							<a class="btn btn-xs btn-info" href="#entradaMateriais"
 								data-toggle="modal"> Entrada de Materiais </a>
-							<div id="DialogEntradaMaterial" class="modal fade"
+							<div id="entradaMateriais" class="modal fade"
 								aria-hidden="true" aria-labelledby="myModalLabel" role="dialog"
 								tabindex="-1" style="display: none;">
 								<div class="modal-dialog" style="width: 550px;">
@@ -113,19 +107,20 @@
 												<div class="form-group"
 													style="width: 200px; float: left; margin-top: 0%; margin-left: 0%">
 													<label for="nome">Nome</label> <input name="nome"
-														class="form-control" type="text">
+														class="form-control" type="text" id="fnome">
+														<input name="id" type="hidden" id="fid">
 												</div>			
 					
 												<div class="form-group"
 													style="width: 80px; float: left; margin-top: 0%; margin-left: 2%">
 													<label for="codigo">Código</label> <input name="codigo"
-														class="form-control" type="text">
+														class="form-control" type="text" id="fcodigo">
 												</div>
 																						
 												<div class="form-group"
 													style="width: 200px; float: left; margin-top: 0%; margin-left: 2%">
 													<label for="categoria">categoria</label> <input name="categoria"
-														class="form-control" type="text">
+														class="form-control" type="text" id="fcategoria">
 												</div>
 												
 												<div class="form-group"

@@ -62,12 +62,14 @@ protected void buscar(HttpServletRequest request, HttpServletResponse response) 
 		if(tipoPesquisa.equalsIgnoreCase("todos")){
 			query = "select M.nome, M.codigo, C.categoria from Materiais M  "
 					+ " inner join M.categoria as C";
+			List<MovimentacaoEstoque> listaDeMateriais = new MovimentacaoDao().buscar();
+			request.setAttribute("listaDeMateriais", listaDeMateriais);
+			request.getRequestDispatcher("entradaEstoque.jsp").forward(request, response);
 		}
 		
-		List<MovimentacaoEstoque> listaDeMateriais = new MovimentacaoDao().buscar(query);
 		
-		request.setAttribute("listaDeMateriais", listaDeMateriais);
-		request.getRequestDispatcher("entradaEstoque.jsp").forward(request, response);
+		
+		
 		
 		
 		

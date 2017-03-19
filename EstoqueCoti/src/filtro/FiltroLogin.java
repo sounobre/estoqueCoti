@@ -27,7 +27,7 @@ import javax.servlet.http.HttpSession;
 					, 
 		urlPatterns = { 
 				"/FiltroLogin", 
-				"/template/*"
+			//	"/template/*"
 		})
 public class FiltroLogin implements Filter {
 
