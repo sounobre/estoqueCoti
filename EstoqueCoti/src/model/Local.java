@@ -131,6 +131,13 @@ public class Local {
 	public void setpDescricao(String pDescricao) {
 		this.pDescricao = pDescricao;
 	}
+
+	@Override
+	public String toString() {
+		return "Local [lId=" + lId + ", lNome=" + lNome + ", lCodigo=" + lCodigo + ", ldescricao=" + ldescricao
+				+ ", cNome=" + cNome + ", cCodigo=" + cCodigo + ", cDescricao=" + cDescricao + ", pNome=" + pNome
+				+ ", pCodigo=" + pCodigo + ", pDescricao=" + pDescricao + "]";
+	}
 	
 	
 	

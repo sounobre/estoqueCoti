@@ -5,7 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <jsp:useBean id="cBean" class="control.ControleMateriais"></jsp:useBean>
-<jsp:useBean id="fBean" class="persistence.FornecedorDao"></jsp:useBean>
+<jsp:useBean id="locBean" class="persistence.LocalDao"></jsp:useBean>
 <jsp:useBean id="cDaoBean" class="persistence.MateriaisDao"></jsp:useBean>
 
 <!-- Main content -->
@@ -131,10 +131,29 @@
 												</div>
 												
 												<div class="form-group"
-													style="width: 330px; float: left; margin-left: 2%; margin-top: 0%">
+													style="width: 80px; float: left; margin-left: 2%; margin-top: 0%">
+													<label for="local">Local</label> 
+													<select name="local" >
+												<option selected disabled hidden>Local</option>
+												<c:forEach items="${locBean.todosOsLocais() }" var="loc">
+												<option value="${loc.lNome }" > ${loc.lNome} </option>
+												</c:forEach>
+												</select>
+												</div>
+												
+																							
+												<div class="form-group"
+													style="width: 80px; float: left; margin-left: 2%; margin-top: 0%">
 													<label for="local">Local de Estoque</label> <input
 														name="local" class="form-control" type="text">
 												</div>
+												
+												<div class="form-group"
+													style="width: 80px; float: left; margin-left: 2%; margin-top: 0%">
+													<label for="local">Local de Estoque</label> <input
+														name="local" class="form-control" type="text">
+												</div>
+												
 												<div class="form-group"
 													style="width: 130px; float: left; margin-left: 0%; margin-top: 0%">
 													<label for="qtdEstoque">Qtd. em Estoque</label> <input name="qtdEstoque"
