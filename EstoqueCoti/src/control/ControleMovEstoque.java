@@ -2,6 +2,7 @@ package control;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +14,7 @@ import model.MovimentacaoEstoque;
 import persistence.MovimentacaoDao;
 
 
-@WebServlet({"/ControleMovEstoque","/template/buscaMaterialExist.html"})
+@WebServlet({"/ControleMovEstoque","/template/buscaMaterialExist.html","/template/cadEntradaEstq.html"})
 public class ControleMovEstoque extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -42,6 +43,9 @@ protected void execute(HttpServletRequest request, HttpServletResponse response)
 				if(url.equalsIgnoreCase("/template/buscaMaterialExist.html")){
 					buscar(request, response);
 				}
+				else if (url.equalsIgnoreCase("/template/cadEntradaEstq.html")){
+					verificaExistencia(request, response);
+				}
 				
 				
 				
@@ -67,12 +71,22 @@ protected void buscar(HttpServletRequest request, HttpServletResponse response) 
 			request.getRequestDispatcher("entradaEstoque.jsp").forward(request, response);
 		}
 		
-		
-		
-		
-		
-		
-		
+	}catch(Exception e){
+			e.printStackTrace();
+		}
+}
+
+protected void verificaExistencia(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try{
+			
+			String codigo = request.getParameter("codigo");
+			String query = "select M from MovimentacaoEstoque M where M.codigo = " + codigo;
+			
+			if (new MovimentacaoDao().existCadastrado(query).isEmpty()){
+				request.setAttribute("modalEntrada", "<Strong>Este produto não está cadastrado no estoque</strong>");
+			}
+			
+			
 		}catch(Exception e){
 			e.printStackTrace();
 		}

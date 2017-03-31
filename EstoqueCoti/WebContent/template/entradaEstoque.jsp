@@ -7,6 +7,7 @@
 <jsp:useBean id="cBean" class="control.ControleMateriais"></jsp:useBean>
 <jsp:useBean id="locBean" class="persistence.LocalDao"></jsp:useBean>
 <jsp:useBean id="cDaoBean" class="persistence.MateriaisDao"></jsp:useBean>
+<jsp:useBean id="movBean" class="persistence.MovimentacaoDao"></jsp:useBean>
 
 <!-- Main content -->
 
@@ -76,7 +77,7 @@
 									
 									<td><a href="entradaMateriais"
 										class="btn btn-xs btn-info entradaMateriais"
-										data-toggle="modal" data-id="${list.id_material }">Entrada</a> </td>
+										data-toggle="modal" data-id="${list.id_material }" onclick="movBean.existCadastrado(${list.codigo })">Entrada</a> </td>
 								</tr>
 
 
@@ -102,7 +103,7 @@
 										</div>
 										<div class="modal-body" style="min-height: 300px;">
 
-											<form action="cadastrar.html" method="post">
+											<form action="cadEntradaEstq.html" method="post">
 					
 												<div class="form-group"
 													style="width: 200px; float: left; margin-top: 0%; margin-left: 0%">
@@ -131,27 +132,14 @@
 												</div>
 												
 												<div class="form-group"
-													style="width: 80px; float: left; margin-left: 2%; margin-top: 0%">
+													style="width: 360px; float: left; margin-left: 2%; margin-top: 0%">
 													<label for="local">Local</label> 
-													<select name="local" >
+													<select name="local" class="form-control m-b-10">
 												<option selected disabled hidden>Local</option>
 												<c:forEach items="${locBean.todosOsLocais() }" var="loc">
-												<option value="${loc.lNome }" > ${loc.lNome} </option>
+												<option value="${loc.lNome }" > ${loc.lNome} - ${loc.cNome } - ${loc.pNome }</option>
 												</c:forEach>
 												</select>
-												</div>
-												
-																							
-												<div class="form-group"
-													style="width: 80px; float: left; margin-left: 2%; margin-top: 0%">
-													<label for="local">Local de Estoque</label> <input
-														name="local" class="form-control" type="text">
-												</div>
-												
-												<div class="form-group"
-													style="width: 80px; float: left; margin-left: 2%; margin-top: 0%">
-													<label for="local">Local de Estoque</label> <input
-														name="local" class="form-control" type="text">
 												</div>
 												
 												<div class="form-group"
@@ -179,6 +167,8 @@
 													<button class="btn btn-primary" type="submit">Entrada de Material</button>
 												</div>
 											</form>
+											
+											${modalEntrada }
 										</div>
 									</div>
 								</div>

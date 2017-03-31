@@ -67,30 +67,14 @@ public void remover(Local l) {
 public List<Local> todosOsLocais() {
 	session = HibernateUtil.getSessionFactory().openSession();
 	List<Local> listal = new ArrayList<Local>();
-	query = session.createQuery("SELECT L.lNome, L.cNome, L.pNome from Local as L");
+	query = session.createQuery(" from Local ");
 	listal = query.list();
 	session.close();
-	System.out.println(listal);
+	
 	return listal;
 }
 
 
 
-public List<Local> todosOsCorredores() {
-	session = HibernateUtil.getSessionFactory().openSession();
-	List<Local> listac = new ArrayList<Local>();
-	query = session.createQuery("select c.cNome from Local c ");
-	listac = query.list();
-	session.close();
-	return listac;
-}
 
-public List<Local> todasAsPrateleiras() {
-	session = HibernateUtil.getSessionFactory().openSession();
-	List<Local> listap = new ArrayList<Local>();
-	query = session.createQuery("select p.pNome from Local p ");
-	listap = query.list();
-	session.close();
-	return listap;
-}
 }
