@@ -37,17 +37,13 @@ public class MovimentacaoDao {
 		return lista;
 
 }
-	public String existCadastrado(String q) {
+	public List<MovimentacaoEstoque> existCadastrado(String q) {
 		session = HibernateUtil.getSessionFactory().openSession();
 		List<MovimentacaoEstoque> VerificaExistencia = new ArrayList<MovimentacaoEstoque>();
-		query = session.createQuery("select M from MovimentacaoEstoque M where M.codigo = " + q);
+		query = session.createQuery(q);
 		VerificaExistencia = query.list();
 		session.close();
-		if (VerificaExistencia.isEmpty()){
-			return "<strong> Material não cadastrado no estoque </strong>";
-		}else{
-			return "<strong> Material cadastrado no estoque </strong>";
-		}
+		return VerificaExistencia;
 			
 		
 	}

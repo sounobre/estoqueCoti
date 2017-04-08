@@ -81,9 +81,13 @@ protected void verificaExistencia(HttpServletRequest request, HttpServletRespons
 			
 			String codigo = request.getParameter("codigoTeste");
 			String query = "select M from MovimentacaoEstoque M where M.codigo = " + codigo;
+			List<MovimentacaoEstoque> listamovestoque = new MovimentacaoDao().existCadastrado(query);
 			
 			if (new MovimentacaoDao().existCadastrado(query).isEmpty()){
-				request.setAttribute("modalEntrada", "<Strong>Este produto não está cadastrado no estoque</strong>");
+				request.setAttribute("modalEntrada1", "<Strong>Este produto não está cadastrado no estoque</strong>");
+			}
+			else{
+				request.setAttribute("modalEntrada", listamovestoque);
 			}
 			
 			
