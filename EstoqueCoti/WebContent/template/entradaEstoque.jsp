@@ -77,7 +77,7 @@
 									
 									<td><a href="entradaMateriais"
 										class="btn btn-xs btn-info entradaMateriais"
-										data-toggle="modal" data-id="${list.id_material }" onclick="movBean.existCadastrado(${list.codigo })">Entrada</a> </td>
+										data-toggle="modal" name="codigoTeste" data-id="${list.id_material }" >Entrada</a> </td>
 								</tr>
 
 
