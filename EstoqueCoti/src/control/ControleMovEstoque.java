@@ -1,6 +1,7 @@
 package control;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 import java.util.Set;
 
@@ -9,6 +10,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
 
 import model.MovimentacaoEstoque;
 import persistence.MovimentacaoDao;
@@ -79,16 +82,24 @@ protected void buscar(HttpServletRequest request, HttpServletResponse response) 
 protected void verificaExistencia(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try{
 			
+			
+			
 			String codigo = request.getParameter("codigoTeste");
 			String query = "select M from MovimentacaoEstoque M where M.codigo = " + codigo;
 			List<MovimentacaoEstoque> listamovestoque = new MovimentacaoDao().existCadastrado(query);
 			
-			if (new MovimentacaoDao().existCadastrado(query).isEmpty()){
-				request.setAttribute("modalEntrada1", "<Strong>Este produto não está cadastrado no estoque</strong>");
-			}
-			else{
-				request.setAttribute("modalEntrada", listamovestoque);
-			}
+			listamovestoque = new MovimentacaoDao().existCadastrado(query);
+			
+			String json = new Gson().toJson(listamovestoque);
+			
+			System.out.println(json.toString());
+			
+			response.setContentType("application/json");
+			response.setCharacterEncoding("UTF-8");
+			
+			response.getWriter().write(json);
+			
+			request.getRequestDispatcher("entradaEstoque.jsp").forward(request, response);
 			
 			
 		}catch(Exception e){

@@ -122,6 +122,27 @@
        			var codigo = 	$('#codigo' + id).text();	    $("#fcodigo").val(codigo);
        			var categoria = $('#categoria' + id).text();   $("#fcategoria").val(categoria);
        			
+       			
+       			$.post("../ControleMovEstoque", {codigoTeste : codigo}, function(data){
+       				
+       			});
+       			
+       			
+       			$.ajax({
+       			url: "../ControleMovEstoque",
+       			dataType: "json",
+       			data: "local",
+       			success:function(json){
+       			var local = $(local).text();
+       			alert(local);
+       			}
+       			
+       			});
+       			
+       			$.each(responseJson, function(key, value){
+					alert(value);
+				});
+       			
        			$("#entradaMateriais").modal();
        		});
        		
