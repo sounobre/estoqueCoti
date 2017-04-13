@@ -111,37 +111,22 @@
        		
        		
        		$(".entradaMateriais").on('click', function(){
-       		
-       			var id = $(this).data('id'); $("#fid").val(id);
-       			
-       			$.post("../ControleMovEstoque", {codigoTeste : id}, function(data){
+       	     	var id = $(this).data('id'); $("#fid").val(id);
        				
-       			});
-       			
        			var nome = 		$('#nome' + id).text();		$("#fnome").val(nome);
        			var codigo = 	$('#codigo' + id).text();	    $("#fcodigo").val(codigo);
        			var categoria = $('#categoria' + id).text();   $("#fcategoria").val(categoria);
-       			
-       			
        			$.post("../ControleMovEstoque", {codigoTeste : codigo}, function(data){
+       				//console.log();
+       				// AQUI
+       				var dataJSON = JSON.parse(data);
+       					
+       				var local = JSON.stringify(dataJSON[0].local).replace(/\"/g, ""); $("#flocal").val(local);   				
+       				var qtdEstoque = JSON.stringify(dataJSON[0].qtdEstoque).replace(/\"/g, ""); $("#qtdEstoque").val(qtdEstoque);
+       				var qtdMin = JSON.stringify(dataJSON[0].qtdMin).replace(/\"/g, ""); $("#qtdMin").val(qtdMin); 
+       				var qtdMax = JSON.stringify(dataJSON[0].qtdMax).replace(/\"/g, ""); $("#qtdMax").val(qtdMax); 
        				
        			});
-       			
-       			
-       			$.ajax({
-       			url: "../ControleMovEstoque",
-       			dataType: "json",
-       			data: "local",
-       			success:function(json){
-       			var local = $(local).text();
-       			alert(local);
-       			}
-       			
-       			});
-       			
-       			$.each(responseJson, function(key, value){
-					alert(value);
-				});
        			
        			$("#entradaMateriais").modal();
        		});

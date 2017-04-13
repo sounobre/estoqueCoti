@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
 import model.MovimentacaoEstoque;
 import persistence.MovimentacaoDao;
@@ -80,27 +82,36 @@ protected void buscar(HttpServletRequest request, HttpServletResponse response) 
 }
 
 protected void verificaExistencia(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try{
-			
-			
-			
+		try{	
 			String codigo = request.getParameter("codigoTeste");
 			String query = "select M from MovimentacaoEstoque M where M.codigo = " + codigo;
 			List<MovimentacaoEstoque> listamovestoque = new MovimentacaoDao().existCadastrado(query);
+			String retorno = "";
+		    if (listamovestoque.isEmpty()){
+		      retorno = "Produto não cadastrado";
+		    } else{
+		      retorno = "ok";
+		    }   
 			
-			listamovestoque = new MovimentacaoDao().existCadastrado(query);
+			//listamovestoque = new MovimentacaoDao().existCadastrado(query);
 			
-			String json = new Gson().toJson(listamovestoque);
+	//		JsonElement json = new Gson().toJsonTree(listamovestoque);
 			
-			System.out.println(json.toString());
+	//		System.out.println(json);
 			
-			response.setContentType("application/json");
-			response.setCharacterEncoding("UTF-8");
+	//		response.setContentType("application/json");
+	//		response.setCharacterEncoding("UTF-8");
 			
-			response.getWriter().write(json);
+	//		response.getWriter().write(json.toString());
 			
-			request.getRequestDispatcher("entradaEstoque.jsp").forward(request, response);
+		//	Gson g = new Gson(); //cria um objeto gson
+			JsonElement j = new Gson().toJsonTree(listamovestoque); //você terá um json com sua lista de movimentacao de estoque.
+			//g.addProperty("mensagem", retorno); //adiciona o retorno
+			String json = j.toString(); //aqui você tem seu json prontinho pra ser enviado
 			
+			System.out.println(json);
+			
+			response.getWriter().print(json);
 			
 		}catch(Exception e){
 			e.printStackTrace();

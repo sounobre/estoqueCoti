@@ -135,7 +135,7 @@
 													style="width: 360px; float: left; margin-left: 2%; margin-top: 0%">
 													<label for="local">Local</label> 
 													<select name="local" class="form-control m-b-10">
-												<option selected disabled hidden>Local</option>
+												<option selected disabled hidden id="local"></option>
 												<c:forEach items="${locBean.todosOsLocais() }" var="loc">
 												<option value="${loc.lNome }" > ${loc.lNome} - ${loc.cNome } - ${loc.pNome }</option>
 												</c:forEach>
@@ -145,19 +145,19 @@
 												<div class="form-group"
 													style="width: 130px; float: left; margin-left: 0%; margin-top: 0%">
 													<label for="qtdEstoque">Qtd. em Estoque</label> <input name="qtdEstoque"
-														class="form-control" type="number" min="0">
+														class="form-control" type="number" min="0" id="qtdEstoque">
 												</div>
 												
 												<div class="form-group"
 													style="width: 130px; float: left; margin-left: 2%; margin-top: 0%">
 													<label for="qtdMin">Qtd. Mínima</label> <input name="qtdMin"
-														class="form-control" type="number" min="0">
+														class="form-control" type="number" min="0" id="qtdMin">
 												</div>
 												
 												<div class="form-group"
 													style="width: 130px; float: left; margin-left: 2%; margin-top: 0%">
 													<label for="qtdMax">Qtd. Máxima</label> <input name="qtdMax"
-														class="form-control" type="number" min="0">
+														class="form-control" type="number" min="0" id="qtdMax">
 												</div>
 												
 												
