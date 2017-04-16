@@ -122,7 +122,7 @@ protected void cadastrarEntrada(HttpServletRequest request, HttpServletResponse 
 		 String qtdMaxima = request.getParameter("descricao");
 		 
 		 MovimentacaoEstoque mv = new MovimentacaoEstoque();
-		 mv.set
+		 
 		
 		
 		
