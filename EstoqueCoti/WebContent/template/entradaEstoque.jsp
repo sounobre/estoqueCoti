@@ -108,20 +108,20 @@
 												<div class="form-group"
 													style="width: 200px; float: left; margin-top: 0%; margin-left: 0%">
 													<label for="nome">Nome</label> <input name="nome"
-														class="form-control" type="text" id="fnome">
+														class="form-control" type="text" id="fnome" disabled="disabled">
 														<input name="id" type="hidden" id="fid">
 												</div>			
 					
 												<div class="form-group"
 													style="width: 80px; float: left; margin-top: 0%; margin-left: 2%">
 													<label for="codigo">Código</label> <input name="codigo"
-														class="form-control" type="text" id="fcodigo">
+														class="form-control" type="text" id="fcodigo" disabled="disabled">
 												</div>
 																						
 												<div class="form-group"
 													style="width: 200px; float: left; margin-top: 0%; margin-left: 2%">
 													<label for="categoria">categoria</label> <input name="categoria"
-														class="form-control" type="text" id="fcategoria">
+														class="form-control" type="text" id="fcategoria" disabled="disabled">
 												</div>
 												
 												<div class="form-group"
@@ -135,7 +135,7 @@
 													style="width: 360px; float: left; margin-left: 2%; margin-top: 0%">
 													<label for="local">Local</label> 
 													<select name="local" class="form-control m-b-10">
-												<option selected disabled hidden id="local"></option>
+												<option selected disabled hidden id="local" ></option>
 												<c:forEach items="${locBean.todosOsLocais() }" var="loc">
 												<option value="${loc.lNome }" > ${loc.lNome} - ${loc.cNome } - ${loc.pNome }</option>
 												</c:forEach>

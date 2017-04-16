@@ -50,6 +50,9 @@ protected void execute(HttpServletRequest request, HttpServletResponse response)
 				}
 				else if (url.equalsIgnoreCase("/ControleMovEstoque")){
 					verificaExistencia(request, response);
+				
+				}else if (url.equalsIgnoreCase("/template/cadEntradaEstq.html")){
+					cadastrarEntrada(request, response);
 				}
 				
 				
@@ -93,21 +96,10 @@ protected void verificaExistencia(HttpServletRequest request, HttpServletRespons
 		      retorno = "ok";
 		    }   
 			
-			//listamovestoque = new MovimentacaoDao().existCadastrado(query);
 			
-	//		JsonElement json = new Gson().toJsonTree(listamovestoque);
+			JsonElement j = new Gson().toJsonTree(listamovestoque); 
 			
-	//		System.out.println(json);
-			
-	//		response.setContentType("application/json");
-	//		response.setCharacterEncoding("UTF-8");
-			
-	//		response.getWriter().write(json.toString());
-			
-		//	Gson g = new Gson(); //cria um objeto gson
-			JsonElement j = new Gson().toJsonTree(listamovestoque); //você terá um json com sua lista de movimentacao de estoque.
-			//g.addProperty("mensagem", retorno); //adiciona o retorno
-			String json = j.toString(); //aqui você tem seu json prontinho pra ser enviado
+			String json = j.toString(); 
 			
 			System.out.println(json);
 			
@@ -117,5 +109,56 @@ protected void verificaExistencia(HttpServletRequest request, HttpServletRespons
 			e.printStackTrace();
 		}
 }
+
+protected void cadastrarEntrada(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	try{
+		 
+		 String codigo = request.getParameter("codigo");
+		 String nome = request.getParameter("nome");
+		 String descricao = request.getParameter("descricao");
+		 String qtdEntrada = request.getParameter("qtdEntrada");
+		 String local = request.getParameter("descricao");
+		 String qtdMinima = request.getParameter("descricao");
+		 String qtdMaxima = request.getParameter("descricao");
+		 
+		 MovimentacaoEstoque mv = new MovimentacaoEstoque();
+		 mv.set
+		
+		
+		
+	}catch(Exception e){
+		e.printStackTrace();
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 }

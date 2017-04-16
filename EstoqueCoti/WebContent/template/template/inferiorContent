@@ -121,7 +121,8 @@
        				// AQUI
        				var dataJSON = JSON.parse(data);
        					
-       				var local = JSON.stringify(dataJSON[0].local).replace(/\"/g, ""); $("#flocal").val(local);   				
+       				var local = JSON.stringify(dataJSON[0].local).replace(/\"/g, ""); $("#local").text(local).val(local);   
+       									
        				var qtdEstoque = JSON.stringify(dataJSON[0].qtdEstoque).replace(/\"/g, ""); $("#qtdEstoque").val(qtdEstoque);
        				var qtdMin = JSON.stringify(dataJSON[0].qtdMin).replace(/\"/g, ""); $("#qtdMin").val(qtdMin); 
        				var qtdMax = JSON.stringify(dataJSON[0].qtdMax).replace(/\"/g, ""); $("#qtdMax").val(qtdMax); 
