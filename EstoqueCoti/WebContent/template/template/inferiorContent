@@ -127,7 +127,7 @@
        				var qtdMin = JSON.stringify(dataJSON[0].qtdMin).replace(/\"/g, ""); $("#qtdMin").val(qtdMin); 
        				var qtdMax = JSON.stringify(dataJSON[0].qtdMax).replace(/\"/g, ""); $("#qtdMax").val(qtdMax); 
        				
-       			});
+       			}); 
        			
        			$("#entradaMateriais").modal();
        		});

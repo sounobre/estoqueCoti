@@ -127,7 +127,7 @@
 												<div class="form-group"
 													style="width: 130px; float: left; margin-left: 0%; margin-top: 0%;">
 													<label for="descricao">Qtd. de Entrada</label>
-													<input name="qtdEntrada"
+													<input name="qtdEntrada" 
 														class="form-control" type="number" min="0">
 												</div>
 												
