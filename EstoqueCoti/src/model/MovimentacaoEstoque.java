@@ -25,8 +25,6 @@ public class MovimentacaoEstoque {
 	@Column
 	private String local;
 	@Column
-	private String qtdEntrada;
-	@Column
 	private String qtdEstoque;
 	@Column
 	private String qtdMin;
@@ -41,7 +39,26 @@ public class MovimentacaoEstoque {
 	@Column
 	private Date data;
 	
+	public MovimentacaoEstoque(Integer id, String nome, String codigo, String categoria, String local,
+			String qtdEstoque, String qtdMin, String qtdMax, String loginMov, String tipo, Date data) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.codigo = codigo;
+		this.categoria = categoria;
+		this.local = local;
+		this.qtdEstoque = qtdEstoque;
+		this.qtdMin = qtdMin;
+		this.qtdMax = qtdMax;
+		this.loginMov = loginMov;
+		this.tipo = tipo;
+		this.data = data;
+	}
 	
+	public MovimentacaoEstoque() {
+		super();
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -71,12 +88,6 @@ public class MovimentacaoEstoque {
 	}
 	public void setLocal(String local) {
 		this.local = local;
-	}
-	public String getQtdEntrada() {
-		return qtdEntrada;
-	}
-	public void setQtdEntrada(String qtdEntrada) {
-		this.qtdEntrada = qtdEntrada;
 	}
 	public String getQtdEstoque() {
 		return qtdEstoque;
@@ -114,28 +125,7 @@ public class MovimentacaoEstoque {
 	public void setData(Date data) {
 		this.data = data;
 	}
-	public MovimentacaoEstoque(Integer id, String nome, String codigo, String categoria, String local,
-			String qtdEntrada, String qtdEstoque, String qtdMin, String qtdMax, String loginMov, String tipo,
-			Date data) {
-		super();
-		this.id = id;
-		this.nome = nome;
-		this.codigo = codigo;
-		this.categoria = categoria;
-		this.local = local;
-		this.qtdEntrada = qtdEntrada;
-		this.qtdEstoque = qtdEstoque;
-		this.qtdMin = qtdMin;
-		this.qtdMax = qtdMax;
-		this.loginMov = loginMov;
-		this.tipo = tipo;
-		this.data = data;
-	}
-	public MovimentacaoEstoque() {
-		super();
-	}
 	
-
 	
 	
 	

@@ -75,7 +75,7 @@
 									<td id="categoria${list.id_material}">${list.categoria.categoria }</td>
 									
 									
-									<td><a href="entradaMateriais"
+									<td><a href="entradaMateriais2"
 										class="btn btn-xs btn-info entradaMateriais"
 										data-toggle="modal" name="codigoTeste" data-id="${list.id_material }" >Entrada</a> </td>
 								</tr>
@@ -88,9 +88,9 @@
 						
 						
 						
-							<a class="btn btn-xs btn-info" href="#entradaMateriais"
+							<a class="btn btn-xs btn-info" href="#entradaMateriais2"
 								data-toggle="modal"> Entrada de Materiais </a>
-							<div id="entradaMateriais" class="modal fade"
+							<div id="entradaMateriais2" class="modal fade"
 								aria-hidden="true" aria-labelledby="myModalLabel" role="dialog"
 								tabindex="-1" style="display: none;">
 								<div class="modal-dialog" style="width: 550px;">
@@ -103,7 +103,7 @@
 										</div>
 										<div class="modal-body" style="min-height: 300px;">
 
-											<form action="cadEntradaEstq.html" method="post">
+										<!--  	<form action="cadEntradaEstq.html" method="post"> -->
 					
 												<div class="form-group"
 													style="width: 200px; float: left; margin-top: 0%; margin-left: 0%">
@@ -128,7 +128,7 @@
 													style="width: 130px; float: left; margin-left: 0%; margin-top: 0%;">
 													<label for="descricao">Qtd. de Entrada</label>
 													<input name="qtdEntrada" 
-														class="form-control" type="number" min="0">
+														class="form-control" type="number" min="0" id="qtdEntrada">
 												</div>
 												
 												<div class="form-group"
@@ -164,9 +164,9 @@
 											
 												<div
 													style="width: 30px; margin-top: 0%; float: right; margin-right: 25%">
-													<button class="btn btn-primary" type="submit">Entrada de Material</button>
+													<button class="btn btn-primary btnMoviment" type="submit" >Entrada de Material</button>
 												</div>
-											</form>
+										<!--   </form> -->
 											
 											${modalEntrada }
 										</div>

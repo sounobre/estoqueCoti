@@ -109,16 +109,38 @@
        			$("#alterarFornecedor").modal();
        		});
        		
+       		$(".btnMoviment").on('click', function(){
+       			alert("btnMoviment");
+       			
+       			var id = $("#fid").val();
+       			
+       			var controller = "entrada"; // controlador de função
+       			
+       			var nome = $('#nome' + id).text();
+       			var codigo = $('#codigo' + id).text();
+       			var categoria = $('#categoria' + id).text();
+       			var qtdEntrada = $('#qtdEntrada' + id).text();
+       			var local = $('#local' + id).text();
+       			var qtdEstoque = $('#qtdEstoque' + id).text();
+       			var qtdMinima = $('#qtdMin' + id).text();
+       			var qtdMaxima = $('#qtdMax' + id).text();
+       			
+       			$.post("../ControleMovEstoque", 
+       			{nome : nome, codigoTeste : codigo, categoria : categoria, controller : controller, qtdEntrada : qtdEntrada,
+       			 local: local, qtdEstoque: qtdEstoque, qtdMinima : qtdMinima, qtdMaxima : qtdMaxima}, function(data){
+       		
+       		});	
+       		});
        		
        		$(".entradaMateriais").on('click', function(){
+       		alert("entrada");
        	     	var id = $(this).data('id'); $("#fid").val(id);
        				
        			var nome = 		$('#nome' + id).text();		$("#fnome").val(nome);
        			var codigo = 	$('#codigo' + id).text();	    $("#fcodigo").val(codigo);
        			var categoria = $('#categoria' + id).text();   $("#fcategoria").val(categoria);
        			$.post("../ControleMovEstoque", {codigoTeste : codigo}, function(data){
-       				//console.log();
-       				// AQUI
+       				
        				var dataJSON = JSON.parse(data);
        					
        				var local = JSON.stringify(dataJSON[0].local).replace(/\"/g, ""); $("#local").text(local).val(local);   
@@ -129,7 +151,7 @@
        				
        			}); 
        			
-       			$("#entradaMateriais").modal();
+       			$("#entradaMateriais2").modal();
        		});
        		
        		

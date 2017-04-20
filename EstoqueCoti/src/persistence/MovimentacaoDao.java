@@ -47,5 +47,21 @@ public class MovimentacaoDao {
 			
 		
 	}
+	public Integer qtdEstoque(String codigo) {
+		session = HibernateUtil.getSessionFactory().openSession();
+		query = session.createQuery("select M.qtdEstoque MovimentacaoEstoque M where M.codigo = " + codigo);
+		Integer qtdEstoque = query.getFirstResult();
+		session.close();
+		return qtdEstoque;
+		
+	}
+	
+	public void cadastrarEntrada(MovimentacaoEstoque mv) {
+		session = HibernateUtil.getSessionFactory().openSession();
+		transaction = session.beginTransaction();
+		session.save(mv);
+		transaction.commit();
+		session.close();
+	}
 	
 }

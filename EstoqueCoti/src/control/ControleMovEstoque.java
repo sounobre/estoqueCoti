@@ -2,6 +2,7 @@ package control;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -10,6 +11,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.hibernate.Session;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
@@ -44,6 +48,17 @@ protected void execute(HttpServletRequest request, HttpServletResponse response)
 			try{
 				
 				String url = request.getServletPath();
+				String Controller = request.getParameter("controller");
+				if(Controller != null){
+					url = Controller;
+				}
+				 String codigo = request.getParameter("codigoteste");
+				 String categoria = request.getParameter("categoria");
+				 String nome = request.getParameter("nome");
+				 String qtdEntrada = request.getParameter("qtdEntrada");
+				 String local = request.getParameter("descricao");
+				 String qtdMinima = request.getParameter("descricao");
+				 String qtdMaxima = request.getParameter("descricao");
 				
 				if(url.equalsIgnoreCase("/template/buscaMaterialExist.html")){
 					buscar(request, response);
@@ -51,7 +66,7 @@ protected void execute(HttpServletRequest request, HttpServletResponse response)
 				else if (url.equalsIgnoreCase("/ControleMovEstoque")){
 					verificaExistencia(request, response);
 				
-				}else if (url.equalsIgnoreCase("/template/cadEntradaEstq.html")){
+				}else if (url.equalsIgnoreCase("entrada")){
 					cadastrarEntrada(request, response);
 				}
 				
@@ -104,7 +119,7 @@ protected void verificaExistencia(HttpServletRequest request, HttpServletRespons
 			System.out.println(json);
 			
 			response.getWriter().print(json);
-			
+					
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -113,16 +128,37 @@ protected void verificaExistencia(HttpServletRequest request, HttpServletRespons
 protected void cadastrarEntrada(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	try{
 		 
-		 String codigo = request.getParameter("codigo");
+		 
+		 String codigo = request.getParameter("codigoteste");
+		 String categoria = request.getParameter("categoria");
 		 String nome = request.getParameter("nome");
-		 String descricao = request.getParameter("descricao");
 		 String qtdEntrada = request.getParameter("qtdEntrada");
 		 String local = request.getParameter("descricao");
 		 String qtdMinima = request.getParameter("descricao");
 		 String qtdMaxima = request.getParameter("descricao");
 		 
 		 MovimentacaoEstoque mv = new MovimentacaoEstoque();
+		 HttpSession session = request.getSession(); //resgata usuário logado
 		 
+		 Integer emEstoque = new MovimentacaoDao().qtdEstoque(codigo);
+		 Integer entrando = new Integer (qtdEntrada);
+		 String estoqueAtualizado = Integer.toString(emEstoque + entrando);
+		 
+		 mv.setLoginMov((String) session.getAttribute("nomeP"));
+		 mv.setTipo("Entrada");
+		 mv.setData(new Date());
+		 
+		 mv.setCodigo(codigo);
+		 mv.setCategoria(categoria);
+		 mv.setLocal(local);
+		 mv.setNome(nome);
+		 mv.setQtdEstoque(estoqueAtualizado);
+		 mv.setQtdMin(qtdMinima);
+		 mv.setQtdMax(qtdMaxima);
+		 
+		 new MovimentacaoDao().cadastrarEntrada(mv);
+		 
+		 request.getRequestDispatcher("/template/cadEntradaEstq.html").forward(request, response);
 		
 		
 		
