@@ -109,38 +109,27 @@
        			$("#alterarFornecedor").modal();
        		});
        		
-       		$(".btnMoviment").on('click', function(){
-       			alert("btnMoviment");
-       			
-       			var id = $("#fid").val();
-       			
-       			var controller = "entrada"; // controlador de função
-       			
-       			var nome = $('#nome' + id).text();
-       			var codigo = $('#codigo' + id).text();
-       			var categoria = $('#categoria' + id).text();
-       			var qtdEntrada = $('#qtdEntrada' + id).text();
-       			var local = $('#local' + id).text();
-       			var qtdEstoque = $('#qtdEstoque' + id).text();
-       			var qtdMinima = $('#qtdMin' + id).text();
-       			var qtdMaxima = $('#qtdMax' + id).text();
-       			
-       			$.post("../ControleMovEstoque", 
-       			{nome : nome, codigoTeste : codigo, categoria : categoria, controller : controller, qtdEntrada : qtdEntrada,
-       			 local: local, qtdEstoque: qtdEstoque, qtdMinima : qtdMinima, qtdMaxima : qtdMaxima}, function(data){
        		
-       		});	
-       		});
        		
        		$(".entradaMateriais").on('click', function(){
-       		alert("entrada");
+       		
        	     	var id = $(this).data('id'); $("#fid").val(id);
        				
        			var nome = 		$('#nome' + id).text();		$("#fnome").val(nome);
        			var codigo = 	$('#codigo' + id).text();	    $("#fcodigo").val(codigo);
        			var categoria = $('#categoria' + id).text();   $("#fcategoria").val(categoria);
        			$.post("../ControleMovEstoque", {codigoTeste : codigo}, function(data){
+       			
+       			
        				
+       			var retorno = data;  
+       				
+       			if(retorno == ""	){
+       				retorno2 = "Produto Não Cadastrado"
+       				
+       				$("#retorno").text(retorno2); 
+       			}else{	
+       			
        				var dataJSON = JSON.parse(data);
        					
        				var local = JSON.stringify(dataJSON[0].local).replace(/\"/g, ""); $("#local").text(local).val(local);   
@@ -149,9 +138,13 @@
        				var qtdMin = JSON.stringify(dataJSON[0].qtdMin).replace(/\"/g, ""); $("#qtdMin").val(qtdMin); 
        				var qtdMax = JSON.stringify(dataJSON[0].qtdMax).replace(/\"/g, ""); $("#qtdMax").val(qtdMax); 
        				
+       				var retorno2 = ""
+       				}
        			}); 
        			
        			$("#entradaMateriais2").modal();
+       			
+       			
        		});
        		
        		
@@ -193,9 +186,7 @@
        			$("#.alterarLocal").modal();
        	});	
        			
-       $('.modal').on('hidden.bs.modal', function(){
-   						 $(this).find('form')[0].reset();
-							});
+       
 							
 							
 		$('#pesqForn').change(function(){
@@ -252,7 +243,37 @@
 						});
 						
 						
+						$(".btnMoviment").on('click', function(){
+       			alert("btnMoviment");
+       			
+       			var id = $("#fid").val();
+       			
+       			var controller = "entrada"; // controlador de função
+       			
+       			var nome2 = $('#entradaMateriais2 #fnome').val();
+       			var codigo = $('#entradaMateriais2 #fcodigo').val();
+       			var categoria = $('#entradaMateriais2 #fcategoria').val();
+       			var qtdEntrada = $('#entradaMateriais2 #qtdEntrada').val();
+       			var local = $('#entradaMateriais2 #local').val();
+       			var qtdEstoque = $('#entradaMateriais2 #qtdEstoque').val();
+       			 var qtdMinima = $('#entradaMateriais2 #qtdMin').val();
+       			 var qtdMaxima = $('#entradaMateriais2 #qtdMax').val();
+       			
+       			$.post("../ControleMovEstoque", 
+       			{ controller : controller, codigo : codigo, nome : nome2 , qtdEntrada : qtdEntrada , categoria : categoria, local : local, qtdEstoque : qtdEstoque, qtdMinima : qtdMinima, qtdMaxima : qtdMaxima}, function(data){
+       					//  	
+       		
+       		});	
+       		});
 							
+							
+			$('.modal').on('hidden.bs.modal', function(){
+   						// $(this).find('form')[0].reset();
+   						$(".modal-body input").val("");
+   						$(".modal-body select").text();
+   						$(".modal-body #retorno").text("");
+   						//$(this).removeData('bs.modal');
+							});				
 					
 					</script>
 		

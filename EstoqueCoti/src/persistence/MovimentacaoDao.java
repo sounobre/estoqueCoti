@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
+import model.HistoricoEstoque;
 import model.Materiais;
 import model.MovimentacaoEstoque;
 
@@ -47,16 +48,32 @@ public class MovimentacaoDao {
 			
 		
 	}
-	public Integer qtdEstoque(String codigo) {
+	public String qtdEstoque(String codigo) {
 		session = HibernateUtil.getSessionFactory().openSession();
-		query = session.createQuery("select M.qtdEstoque MovimentacaoEstoque M where M.codigo = " + codigo);
-		Integer qtdEstoque = query.getFirstResult();
+		query = session.createQuery("select M.qtdEstoque from MovimentacaoEstoque M where M.codigo = '"+codigo+"'");
+		String qtdEstoque = (String) query.uniqueResult();
+		System.out.println(qtdEstoque);
 		session.close();
 		return qtdEstoque;
 		
 	}
 	
 	public void cadastrarEntrada(MovimentacaoEstoque mv) {
+		session = HibernateUtil.getSessionFactory().openSession();
+		transaction = session.beginTransaction();
+		session.save(mv);
+		transaction.commit();
+		session.close();
+	}
+	
+	public void atualizarEntrada(MovimentacaoEstoque mv) {
+		session = HibernateUtil.getSessionFactory().openSession();
+		transaction = session.beginTransaction();
+		session.update(mv);
+		transaction.commit();
+		session.close();
+	}
+	public void cadastrarEntradaHistorico(HistoricoEstoque mv) {
 		session = HibernateUtil.getSessionFactory().openSession();
 		transaction = session.beginTransaction();
 		session.save(mv);

@@ -18,6 +18,7 @@ import org.hibernate.Session;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import model.MovimentacaoEstoque;
 import persistence.MovimentacaoDao;
@@ -26,7 +27,8 @@ import persistence.MovimentacaoDao;
 @WebServlet(name = "/ControleMovEstoque", urlPatterns = {"/ControleMovEstoque","/template/buscaMaterialExist.html","/template/cadEntradaEstq.html"})
 public class ControleMovEstoque extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    
+	private Boolean cadastrado = false;
     
     public ControleMovEstoque() {
         super();
@@ -51,14 +53,9 @@ protected void execute(HttpServletRequest request, HttpServletResponse response)
 				String Controller = request.getParameter("controller");
 				if(Controller != null){
 					url = Controller;
+					
 				}
-				 String codigo = request.getParameter("codigoteste");
-				 String categoria = request.getParameter("categoria");
-				 String nome = request.getParameter("nome");
-				 String qtdEntrada = request.getParameter("qtdEntrada");
-				 String local = request.getParameter("descricao");
-				 String qtdMinima = request.getParameter("descricao");
-				 String qtdMaxima = request.getParameter("descricao");
+				 
 				
 				if(url.equalsIgnoreCase("/template/buscaMaterialExist.html")){
 					buscar(request, response);
@@ -104,21 +101,30 @@ protected void verificaExistencia(HttpServletRequest request, HttpServletRespons
 			String codigo = request.getParameter("codigoTeste");
 			String query = "select M from MovimentacaoEstoque M where M.codigo = " + codigo;
 			List<MovimentacaoEstoque> listamovestoque = new MovimentacaoDao().existCadastrado(query);
-			String retorno = "";
+			
 		    if (listamovestoque.isEmpty()){
-		      retorno = "Produto não cadastrado";
+		      cadastrado = false;
+
+		    //  JsonParser parser = new JsonParser();
+		    //  JsonObject retorno = parser.parse("{\"retorno\" :\"ProdutoNaoCadastrado\"}").getAsJsonObject();
+		     
+        //      response.getWriter().print(retorno);
+				
 		    } else{
-		      retorno = "ok";
+		      cadastrado = true;
+		      
+		      JsonElement j = new Gson().toJsonTree(listamovestoque); 
+				
+				String json = j.toString(); 
+			//	JsonParser parser = new JsonParser();
+			  //  JsonObject retorno = parser.parse(\"retorno\" :\"ProdutoCadastrado\").getAsJsonObject();
+			//    String ret = retorno.toString();
+			    
+				response.getWriter().print(json);
 		    }   
 			
 			
-			JsonElement j = new Gson().toJsonTree(listamovestoque); 
 			
-			String json = j.toString(); 
-			
-			System.out.println(json);
-			
-			response.getWriter().print(json);
 					
 		}catch(Exception e){
 			e.printStackTrace();
@@ -129,18 +135,18 @@ protected void cadastrarEntrada(HttpServletRequest request, HttpServletResponse 
 	try{
 		 
 		 
-		 String codigo = request.getParameter("codigoteste");
+		 String codigo = request.getParameter("codigo");
 		 String categoria = request.getParameter("categoria");
 		 String nome = request.getParameter("nome");
 		 String qtdEntrada = request.getParameter("qtdEntrada");
-		 String local = request.getParameter("descricao");
-		 String qtdMinima = request.getParameter("descricao");
-		 String qtdMaxima = request.getParameter("descricao");
+		 String local = request.getParameter("local");
+		 String qtdMinima = request.getParameter("qtdMinima");
+		 String qtdMaxima = request.getParameter("qtdMaxima");
 		 
 		 MovimentacaoEstoque mv = new MovimentacaoEstoque();
 		 HttpSession session = request.getSession(); //resgata usuário logado
 		 
-		 Integer emEstoque = new MovimentacaoDao().qtdEstoque(codigo);
+		 Integer emEstoque = new Integer (new MovimentacaoDao().qtdEstoque(codigo));
 		 Integer entrando = new Integer (qtdEntrada);
 		 String estoqueAtualizado = Integer.toString(emEstoque + entrando);
 		 
@@ -156,8 +162,11 @@ protected void cadastrarEntrada(HttpServletRequest request, HttpServletResponse 
 		 mv.setQtdMin(qtdMinima);
 		 mv.setQtdMax(qtdMaxima);
 		 
+		 if(cadastrado){
+			 new MovimentacaoDao().atualizarEntrada(mv);
+		 }else{
 		 new MovimentacaoDao().cadastrarEntrada(mv);
-		 
+		 }
 		 request.getRequestDispatcher("/template/cadEntradaEstq.html").forward(request, response);
 		
 		

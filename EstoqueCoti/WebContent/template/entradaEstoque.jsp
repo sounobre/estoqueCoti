@@ -115,7 +115,7 @@
 												<div class="form-group"
 													style="width: 80px; float: left; margin-top: 0%; margin-left: 2%">
 													<label for="codigo">Código</label> <input name="codigo"
-														class="form-control" type="text" id="fcodigo" disabled="disabled">
+														class="form-control" type="text" id="fcodigo" >
 												</div>
 																						
 												<div class="form-group"
@@ -168,7 +168,9 @@
 												</div>
 										<!--   </form> -->
 											
-											${modalEntrada }
+											<div id="retorno" style="width: 300px; margin-top: 0%; float: right; margin-right: 0%; font-size: 20px; color: red; ">
+											
+											</div>
 										</div>
 									</div>
 								</div>
