@@ -20,6 +20,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import model.HistoricoEstoque;
 import model.MovimentacaoEstoque;
 import persistence.MovimentacaoDao;
 
@@ -134,7 +135,7 @@ protected void verificaExistencia(HttpServletRequest request, HttpServletRespons
 protected void cadastrarEntrada(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	try{
 		 
-		 
+		 Integer id = new Integer (request.getParameter("id"));
 		 String codigo = request.getParameter("codigo");
 		 String categoria = request.getParameter("categoria");
 		 String nome = request.getParameter("nome");
@@ -142,14 +143,21 @@ protected void cadastrarEntrada(HttpServletRequest request, HttpServletResponse 
 		 String local = request.getParameter("local");
 		 String qtdMinima = request.getParameter("qtdMinima");
 		 String qtdMaxima = request.getParameter("qtdMaxima");
+		 String qtdEstoque = request.getParameter("qtdEstoque");
 		 
 		 MovimentacaoEstoque mv = new MovimentacaoEstoque();
 		 HttpSession session = request.getSession(); //resgata usuário logado
 		 
-		 Integer emEstoque = new Integer (new MovimentacaoDao().qtdEstoque(codigo));
+		 Integer emEstoque = 0;
+		 if(cadastrado){
+		 emEstoque = new Integer (new MovimentacaoDao().qtdEstoque(codigo));
+		 }else {
+			 emEstoque = new Integer (qtdEstoque); 
+		 }
 		 Integer entrando = new Integer (qtdEntrada);
 		 String estoqueAtualizado = Integer.toString(emEstoque + entrando);
 		 
+		 mv.setId(id);
 		 mv.setLoginMov((String) session.getAttribute("nomeP"));
 		 mv.setTipo("Entrada");
 		 mv.setData(new Date());
@@ -162,12 +170,28 @@ protected void cadastrarEntrada(HttpServletRequest request, HttpServletResponse 
 		 mv.setQtdMin(qtdMinima);
 		 mv.setQtdMax(qtdMaxima);
 		 
+		 HistoricoEstoque he = new HistoricoEstoque();
+		 he.setLoginMov((String) session.getAttribute("nomeP"));
+		 he.setTipo("Entrada");
+		 he.setData(new Date());
+		 
+		 he.setCodigo(codigo);
+		 he.setCategoria(categoria);
+		 he.setLocal(local);
+		 he.setNome(nome);
+		 he.setQtdEstoque(estoqueAtualizado);
+		 he.setQtdMin(qtdMinima);
+		 he.setQtdMax(qtdMaxima);
+		 he.setQtdEntradaSaida(qtdEntrada);
+		 
 		 if(cadastrado){
 			 new MovimentacaoDao().atualizarEntrada(mv);
+			 new MovimentacaoDao().cadastrarEntradaHistorico(he);
 		 }else{
 		 new MovimentacaoDao().cadastrarEntrada(mv);
+		 new MovimentacaoDao().cadastrarEntradaHistorico(he);
 		 }
-		 request.getRequestDispatcher("/template/cadEntradaEstq.html").forward(request, response);
+		 request.getRequestDispatcher("/template/entradaEstoque.jsp").forward(request, response);
 		
 		
 		

@@ -244,7 +244,7 @@
 						
 						
 						$(".btnMoviment").on('click', function(){
-       			alert("btnMoviment");
+       			
        			
        			var id = $("#fid").val();
        			
@@ -260,7 +260,7 @@
        			 var qtdMaxima = $('#entradaMateriais2 #qtdMax').val();
        			
        			$.post("../ControleMovEstoque", 
-       			{ controller : controller, codigo : codigo, nome : nome2 , qtdEntrada : qtdEntrada , categoria : categoria, local : local, qtdEstoque : qtdEstoque, qtdMinima : qtdMinima, qtdMaxima : qtdMaxima}, function(data){
+       			{ controller : controller, id : id, codigo : codigo, nome : nome2 , qtdEntrada : qtdEntrada , categoria : categoria, local : local, qtdEstoque : qtdEstoque, qtdMinima : qtdMinima, qtdMaxima : qtdMaxima}, function(data){
        					//  	
        		
        		});	

@@ -12,12 +12,13 @@ import javax.persistence.Table;
 @Entity
 @Table(name="estoque")
 public class MovimentacaoEstoque {
-	@Id
+	
 	@GeneratedValue(strategy= GenerationType.AUTO)
 	@Column
 	private Integer id;
 	@Column
 	private String nome;
+	@Id
 	@Column
 	private String codigo;
 	@Column

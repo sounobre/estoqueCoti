@@ -38,9 +38,10 @@ public class HistoricoEstoque {
 	private String tipo; //entrada ou saída
 	@Column
 	private Date data;
-	
-	public HistoricoEstoque(Integer id, String nome, String codigo, String categoria, String local,
-			String qtdEstoque, String qtdMin, String qtdMax, String loginMov, String tipo, Date data) {
+	@Column
+	private String qtdEntradaSaida;
+	public HistoricoEstoque(Integer id, String nome, String codigo, String categoria, String local, String qtdEstoque,
+			String qtdMin, String qtdMax, String loginMov, String tipo, Date data, String qtdEntradaSaida) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -53,12 +54,11 @@ public class HistoricoEstoque {
 		this.loginMov = loginMov;
 		this.tipo = tipo;
 		this.data = data;
+		this.qtdEntradaSaida = qtdEntradaSaida;
 	}
-	
 	public HistoricoEstoque() {
 		super();
 	}
-
 	public Integer getId() {
 		return id;
 	}
@@ -125,6 +125,20 @@ public class HistoricoEstoque {
 	public void setData(Date data) {
 		this.data = data;
 	}
+	public String getQtdEntradaSaida() {
+		return qtdEntradaSaida;
+	}
+	public void setQtdEntradaSaida(String qtdEntradaSaida) {
+		this.qtdEntradaSaida = qtdEntradaSaida;
+	}
+	@Override
+	public String toString() {
+		return "HistoricoEstoque [id=" + id + ", nome=" + nome + ", codigo=" + codigo + ", categoria=" + categoria
+				+ ", local=" + local + ", qtdEstoque=" + qtdEstoque + ", qtdMin=" + qtdMin + ", qtdMax=" + qtdMax
+				+ ", loginMov=" + loginMov + ", tipo=" + tipo + ", data=" + data + ", qtdEntradaSaida="
+				+ qtdEntradaSaida + "]";
+	}
+	
 	
 	
 	

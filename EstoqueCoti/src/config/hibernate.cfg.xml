@@ -26,6 +26,8 @@
 		<mapping class="model.Funcionario" />
 		<mapping class="model.Local" />
 		<mapping class="model.MovimentacaoEstoque" />
+		<mapping class="model.HistoricoEstoque" />
+		
 		
 		
 		
