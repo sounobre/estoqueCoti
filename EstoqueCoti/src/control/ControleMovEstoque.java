@@ -66,9 +66,11 @@ protected void execute(HttpServletRequest request, HttpServletResponse response)
 				
 				}else if (url.equalsIgnoreCase("entrada")){
 					cadastrarEntrada(request, response);
+					
+				}else if (url.equalsIgnoreCase("saida")){
+					cadastrarSaida(request, response);
+				
 				}
-				
-				
 				
 			}catch(Exception e){
 				e.printStackTrace();
@@ -87,6 +89,30 @@ protected void buscar(HttpServletRequest request, HttpServletResponse response) 
 		if(tipoPesquisa.equalsIgnoreCase("todos")){
 			query = "select M.nome, M.codigo, C.categoria from Materiais M  "
 					+ " inner join M.categoria as C";
+			List<MovimentacaoEstoque> listaDeMateriais = new MovimentacaoDao().buscar();
+			request.setAttribute("listaDeMateriais", listaDeMateriais);
+			request.getRequestDispatcher("entradaEstoque.jsp").forward(request, response);
+			
+		} else if(tipoPesquisa.equalsIgnoreCase("nome")){
+			query = "select M.nome, M.codigo, C.categoria from Materiais M  "
+					+ " inner join M.categoria as C"
+					+ "where M.nome = " + palavraPesquisa;
+			List<MovimentacaoEstoque> listaDeMateriais = new MovimentacaoDao().buscar();
+			request.setAttribute("listaDeMateriais", listaDeMateriais);
+			request.getRequestDispatcher("entradaEstoque.jsp").forward(request, response);
+			
+		}else if(tipoPesquisa.equalsIgnoreCase("codigo")){
+			query = "select M.nome, M.codigo, C.categoria from Materiais M  "
+					+ " inner join M.categoria as C"
+					+ "where M.codigo = " + palavraPesquisa;
+			List<MovimentacaoEstoque> listaDeMateriais = new MovimentacaoDao().buscar();
+			request.setAttribute("listaDeMateriais", listaDeMateriais);
+			request.getRequestDispatcher("entradaEstoque.jsp").forward(request, response);
+			
+		}else if(tipoPesquisa.equalsIgnoreCase("categoria")){
+			query = "select M.nome, M.codigo, C.categoria from Materiais M  "
+					+ " inner join M.categoria as C"
+					+ "where M.codigo = " + palavraPesquisa;
 			List<MovimentacaoEstoque> listaDeMateriais = new MovimentacaoDao().buscar();
 			request.setAttribute("listaDeMateriais", listaDeMateriais);
 			request.getRequestDispatcher("entradaEstoque.jsp").forward(request, response);
@@ -191,13 +217,82 @@ protected void cadastrarEntrada(HttpServletRequest request, HttpServletResponse 
 		 new MovimentacaoDao().cadastrarEntrada(mv);
 		 new MovimentacaoDao().cadastrarEntradaHistorico(he);
 		 }
-		 request.getRequestDispatcher("/template/entradaEstoque.jsp").forward(request, response);
+		 
 		
 		
 		
 	}catch(Exception e){
 		e.printStackTrace();
 	}
+}
+	protected void cadastrarSaida(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try{
+			 
+			 Integer id = new Integer (request.getParameter("id"));
+			 String codigo = request.getParameter("codigo");
+			 String categoria = request.getParameter("categoria");
+			 String nome = request.getParameter("nome");
+			 String qtdEntrada = request.getParameter("qtdEntrada");
+			 String local = request.getParameter("local");
+			 String qtdMinima = request.getParameter("qtdMinima");
+			 String qtdMaxima = request.getParameter("qtdMaxima");
+			 String qtdEstoque = request.getParameter("qtdEstoque");
+			 
+			 MovimentacaoEstoque mv = new MovimentacaoEstoque();
+			 HttpSession session = request.getSession(); //resgata usuário logado
+			 
+			 Integer emEstoque = 0;
+			 if(cadastrado){
+			 emEstoque = new Integer (new MovimentacaoDao().qtdEstoque(codigo));
+			 }else {
+				 emEstoque = new Integer (qtdEstoque); 
+			 }
+			 Integer entrando = new Integer (qtdEntrada);
+			 String estoqueAtualizado = Integer.toString(emEstoque - entrando);
+			 
+			 mv.setId(id);
+			 mv.setLoginMov((String) session.getAttribute("nomeP"));
+			 mv.setTipo("Saida");
+			 mv.setData(new Date());
+			 
+			 mv.setCodigo(codigo);
+			 mv.setCategoria(categoria);
+			 mv.setLocal(local);
+			 mv.setNome(nome);
+			 mv.setQtdEstoque(estoqueAtualizado);
+			 mv.setQtdMin(qtdMinima);
+			 mv.setQtdMax(qtdMaxima);
+			 
+			 HistoricoEstoque he = new HistoricoEstoque();
+			 he.setLoginMov((String) session.getAttribute("nomeP"));
+			 he.setTipo("Saida");
+			 he.setData(new Date());
+			 
+			 he.setCodigo(codigo);
+			 he.setCategoria(categoria);
+			 he.setLocal(local);
+			 he.setNome(nome);
+			 he.setQtdEstoque(estoqueAtualizado);
+			 he.setQtdMin(qtdMinima);
+			 he.setQtdMax(qtdMaxima);
+			 he.setQtdEntradaSaida(qtdEntrada);
+			 
+			 if(cadastrado){
+				 new MovimentacaoDao().atualizarEntrada(mv);
+				 new MovimentacaoDao().cadastrarEntradaHistorico(he);
+			 }else{
+			 new MovimentacaoDao().cadastrarEntrada(mv);
+			 new MovimentacaoDao().cadastrarEntradaHistorico(he);
+			 }
+			 
+			
+			
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+
+	
 	
 }
 

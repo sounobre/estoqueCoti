@@ -77,7 +77,13 @@
 									
 									<td><a href="entradaMateriais2"
 										class="btn btn-xs btn-info entradaMateriais"
-										data-toggle="modal" name="codigoTeste" data-id="${list.id_material }" >Entrada</a> </td>
+										data-toggle="modal" name="codigoTeste" data-id="${list.id_material }" >Entrada</a>
+										 
+										<a href="entradaMateriais2"
+										class="btn btn-xs btn-danger saidaMateriais"
+										data-toggle="modal" name="codigoTeste" data-id="${list.id_material }" >Saida</a> 
+										
+										</td>
 								</tr>
 
 
@@ -110,12 +116,13 @@
 													<label for="nome">Nome</label> <input name="nome"
 														class="form-control" type="text" id="fnome" disabled="disabled">
 														<input name="id" type="hidden" id="fid">
+														<input name="controller" type="hidden" id="controller">
 												</div>			
 					
 												<div class="form-group"
 													style="width: 80px; float: left; margin-top: 0%; margin-left: 2%">
 													<label for="codigo">Código</label> <input name="codigo"
-														class="form-control" type="text" id="fcodigo" >
+														class="form-control" type="text" id="fcodigo" disabled="disabled">
 												</div>
 																						
 												<div class="form-group"

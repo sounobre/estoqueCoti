@@ -141,11 +141,52 @@
        				var retorno2 = ""
        				}
        			}); 
+       			var controller = "entrada";$("#controller").val(controller);
        			
        			$("#entradaMateriais2").modal();
        			
        			
        		});
+       		
+       		$(".saidaMateriais").on('click', function(){
+       		
+       	     	var id = $(this).data('id'); $("#fid").val(id);
+       				
+       			var nome = 		$('#nome' + id).text();		$("#fnome").val(nome);
+       			var codigo = 	$('#codigo' + id).text();	    $("#fcodigo").val(codigo);
+       			var categoria = $('#categoria' + id).text();   $("#fcategoria").val(categoria);
+       			$.post("../ControleMovEstoque", {codigoTeste : codigo}, function(data){
+       			
+       			
+       				
+       			var retorno = data;  
+       				
+       			if(retorno == ""	){
+       				retorno2 = "Produto Não Cadastrado"
+       				
+       				$("#retorno").text(retorno2); 
+       			}else{	
+       			
+       				var dataJSON = JSON.parse(data);
+       					
+       				var local = JSON.stringify(dataJSON[0].local).replace(/\"/g, ""); $("#local").text(local).val(local);   
+       									
+       				var qtdEstoque = JSON.stringify(dataJSON[0].qtdEstoque).replace(/\"/g, ""); $("#qtdEstoque").val(qtdEstoque);
+       				var qtdMin = JSON.stringify(dataJSON[0].qtdMin).replace(/\"/g, ""); $("#qtdMin").val(qtdMin); 
+       				var qtdMax = JSON.stringify(dataJSON[0].qtdMax).replace(/\"/g, ""); $("#qtdMax").val(qtdMax); 
+       				
+       				var retorno2 = ""
+       				}
+       			}); 
+       			var controller = "saida"; $("#controller").val(controller);
+       			
+       			$("#entradaMateriais2").modal();
+       			
+       			
+       		});
+       		
+       		
+       		
        		
        		
        	$(".alteraFuncionario").on('click', function(){
@@ -243,12 +284,17 @@
 						});
 						
 						
-						$(".btnMoviment").on('click', function(){
+			$(".btnMoviment").on('click', function(){
        			
-       			
+       			var controller = $('#entradaMateriais2 #controller').val();
+       			if (controller == "entrada") {
+       			alert("Entrada de materiais");
+       			} else {
+       			alert("Saida de materiais");
+       			}
        			var id = $("#fid").val();
        			
-       			var controller = "entrada"; // controlador de função
+       			//var controller = "entrada"; // controlador de função
        			
        			var nome2 = $('#entradaMateriais2 #fnome').val();
        			var codigo = $('#entradaMateriais2 #fcodigo').val();
@@ -261,11 +307,14 @@
        			
        			$.post("../ControleMovEstoque", 
        			{ controller : controller, id : id, codigo : codigo, nome : nome2 , qtdEntrada : qtdEntrada , categoria : categoria, local : local, qtdEstoque : qtdEstoque, qtdMinima : qtdMinima, qtdMaxima : qtdMaxima}, function(data){
-       					//  	
-       		
+       					  	
+       			$('#entradaMateriais2').modal("hide");
        		});	
        		});
-							
+				
+				
+				
+				
 							
 			$('.modal').on('hidden.bs.modal', function(){
    						// $(this).find('form')[0].reset();
