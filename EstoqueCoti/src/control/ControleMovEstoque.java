@@ -1,7 +1,9 @@
 package control;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -14,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.hibernate.Session;
+import org.hibernate.engine.spi.SessionImplementor;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
@@ -22,6 +25,7 @@ import com.google.gson.JsonParser;
 
 import model.HistoricoEstoque;
 import model.MovimentacaoEstoque;
+import persistence.HibernateUtil;
 import persistence.MovimentacaoDao;
 
 
@@ -38,7 +42,20 @@ public class ControleMovEstoque extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		execute(request, response);
+			try{
+				
+				SessionImplementor sim = (SessionImplementor) HibernateUtil.getSessionFactory().openSession();
+				Connection con = sim.connection();
+				
+				InputStream arquivo = getServletContext().getResourceAsStream("/teste.jasper");
+				
+			//	byte[] pdf = JasperRunManage
+				
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			
+		
 	}
 
 	
@@ -87,33 +104,29 @@ protected void buscar(HttpServletRequest request, HttpServletResponse response) 
 		String query = "";
 		
 		if(tipoPesquisa.equalsIgnoreCase("todos")){
-			query = "select M.nome, M.codigo, C.categoria from Materiais M  "
-					+ " inner join M.categoria as C";
+			
 			List<MovimentacaoEstoque> listaDeMateriais = new MovimentacaoDao().buscar();
 			request.setAttribute("listaDeMateriais", listaDeMateriais);
 			request.getRequestDispatcher("entradaEstoque.jsp").forward(request, response);
 			
 		} else if(tipoPesquisa.equalsIgnoreCase("nome")){
-			query = "select M.nome, M.codigo, C.categoria from Materiais M  "
-					+ " inner join M.categoria as C"
-					+ "where M.nome = " + palavraPesquisa;
-			List<MovimentacaoEstoque> listaDeMateriais = new MovimentacaoDao().buscar();
+			query = "select M from Materiais as M  "
+					+ "where M.nome = '" + palavraPesquisa + "'";
+			List<MovimentacaoEstoque> listaDeMateriais = new MovimentacaoDao().buscarDetalhes(query);
 			request.setAttribute("listaDeMateriais", listaDeMateriais);
 			request.getRequestDispatcher("entradaEstoque.jsp").forward(request, response);
 			
 		}else if(tipoPesquisa.equalsIgnoreCase("codigo")){
-			query = "select M.nome, M.codigo, C.categoria from Materiais M  "
-					+ " inner join M.categoria as C"
-					+ "where M.codigo = " + palavraPesquisa;
-			List<MovimentacaoEstoque> listaDeMateriais = new MovimentacaoDao().buscar();
+			query = "select M from Materiais as M  "
+					+ "where M.codigo = '" + palavraPesquisa+"'";
+			List<MovimentacaoEstoque> listaDeMateriais = new MovimentacaoDao().buscarDetalhes(query);
 			request.setAttribute("listaDeMateriais", listaDeMateriais);
 			request.getRequestDispatcher("entradaEstoque.jsp").forward(request, response);
 			
 		}else if(tipoPesquisa.equalsIgnoreCase("categoria")){
-			query = "select M.nome, M.codigo, C.categoria from Materiais M  "
-					+ " inner join M.categoria as C"
-					+ "where M.codigo = " + palavraPesquisa;
-			List<MovimentacaoEstoque> listaDeMateriais = new MovimentacaoDao().buscar();
+			query = "select M from Materiais as M  "
+					+ "where M.categoria.categoria = '" + palavraPesquisa + "'";
+			List<MovimentacaoEstoque> listaDeMateriais = new MovimentacaoDao().buscarDetalhes(query);
 			request.setAttribute("listaDeMateriais", listaDeMateriais);
 			request.getRequestDispatcher("entradaEstoque.jsp").forward(request, response);
 		}
@@ -132,10 +145,7 @@ protected void verificaExistencia(HttpServletRequest request, HttpServletRespons
 		    if (listamovestoque.isEmpty()){
 		      cadastrado = false;
 
-		    //  JsonParser parser = new JsonParser();
-		    //  JsonObject retorno = parser.parse("{\"retorno\" :\"ProdutoNaoCadastrado\"}").getAsJsonObject();
-		     
-        //      response.getWriter().print(retorno);
+		    
 				
 		    } else{
 		      cadastrado = true;
@@ -143,10 +153,7 @@ protected void verificaExistencia(HttpServletRequest request, HttpServletRespons
 		      JsonElement j = new Gson().toJsonTree(listamovestoque); 
 				
 				String json = j.toString(); 
-			//	JsonParser parser = new JsonParser();
-			  //  JsonObject retorno = parser.parse(\"retorno\" :\"ProdutoCadastrado\").getAsJsonObject();
-			//    String ret = retorno.toString();
-			    
+			
 				response.getWriter().print(json);
 		    }   
 			

@@ -20,13 +20,13 @@ public class MovimentacaoDao {
 	Query query;
 	Criteria crit;
 	
-/*	public List<MovimentacaoEstoque> buscar(String q) {
+	public List<MovimentacaoEstoque> buscarDetalhes(String q) {
 		session = HibernateUtil.getSessionFactory().openSession();
 		query = session.createQuery(q);
 		List<MovimentacaoEstoque> lista = query.list();
 		session.close();
 		return lista;
-	}*/
+	}
 	
 	
 	public List<MovimentacaoEstoque> buscar() {
@@ -80,5 +80,9 @@ public class MovimentacaoDao {
 		transaction.commit();
 		session.close();
 	}
+	
+	//public return_type name() {
+		
+	//}
 	
 }
