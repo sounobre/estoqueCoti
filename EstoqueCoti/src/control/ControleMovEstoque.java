@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +26,7 @@ import com.google.gson.JsonParser;
 
 import model.HistoricoEstoque;
 import model.MovimentacaoEstoque;
+import net.sf.jasperreports.engine.JasperRunManager;
 import persistence.HibernateUtil;
 import persistence.MovimentacaoDao;
 
@@ -47,9 +49,13 @@ public class ControleMovEstoque extends HttpServlet {
 				SessionImplementor sim = (SessionImplementor) HibernateUtil.getSessionFactory().openSession();
 				Connection con = sim.connection();
 				
-				InputStream arquivo = getServletContext().getResourceAsStream("/teste.jasper");
+				InputStream arquivo = getServletContext().getResourceAsStream("/relatorios/Materiais.jasper");
 				
-			//	byte[] pdf = JasperRunManage
+				byte[] pdf = JasperRunManager.runReportToPdf(arquivo,null,con);
+				
+				ServletOutputStream out = response.getOutputStream();
+				out.write(pdf);
+				out.flush();
 				
 			}catch(Exception e){
 				e.printStackTrace();

@@ -14,6 +14,7 @@
              		    <a href="cadastro.jsp" class=" btn btn-primary btn-lg col-md-2 " style="height: 80px; padding-top: 25px; font-weight: bold; margin-left: 5px ">Materiais </a>   
             		   
             		    <a href="cadCategoria.jsp" class=" btn btn-primary btn-lg col-md-2 " style="height: 80px; padding-top: 25px; font-weight: bold; margin-left: 5px ">Categorias </a>  
+            		       
             		            		 
             		  </div> 
             		  
