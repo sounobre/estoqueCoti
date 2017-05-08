@@ -52,7 +52,7 @@ public class MovimentacaoDao {
 		session = HibernateUtil.getSessionFactory().openSession();
 		query = session.createQuery("select M.qtdEstoque from MovimentacaoEstoque M where M.codigo = '"+codigo+"'");
 		String qtdEstoque = (String) query.uniqueResult();
-		System.out.println(qtdEstoque);
+		
 		session.close();
 		return qtdEstoque;
 		
@@ -81,8 +81,14 @@ public class MovimentacaoDao {
 		session.close();
 	}
 	
-	//public return_type name() {
+	public List<HistoricoEstoque> RelEntrada(String q) {
+		session = HibernateUtil.getSessionFactory().openSession();
+		List<HistoricoEstoque> lista = new ArrayList<HistoricoEstoque>();
+		query = session.createQuery(q);
+		lista = query.list();
 		
-	//}
+		session.close();
+		return lista;
+	}
 	
 }

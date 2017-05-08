@@ -16,6 +16,8 @@
             		    <a href="cadCategoria.jsp" class=" btn btn-primary btn-lg col-md-2 " style="height: 80px; padding-top: 25px; font-weight: bold; margin-left: 5px ">Categorias </a>  
             		    
             		    <a href="../ControleRelatorios2" class=" btn btn-primary btn-lg col-md-2 " id="testes1" style="height: 80px; padding-top: 25px; font-weight: bold; margin-left: 5px ">Relatórios </a>
+            		    
+            		    <a href="../ControleRelatorios" class=" btn btn-primary btn-lg col-md-2 " id="testes1" style="height: 80px; padding-top: 25px; font-weight: bold; margin-left: 5px ">Relatórios Materiais </a>
             		            		 
             		  </div> 
             		  
