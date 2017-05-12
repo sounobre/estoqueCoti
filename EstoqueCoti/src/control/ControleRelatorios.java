@@ -1,8 +1,10 @@
 package control;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.hibernate.engine.spi.SessionImplementor;
 
 import model.HistoricoEstoque;
+import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperRunManager;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import persistence.HibernateUtil;
@@ -25,7 +28,7 @@ import persistence.MovimentacaoDao;
 /**
  * Servlet implementation class ControleRelatorios
  */
-@WebServlet({"/ControleRelatorios", "/ControleRelatorios2"})
+@WebServlet({"/ControleRelatorios", "/ControleRelatorios2","/relentrada"})
 public class ControleRelatorios extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -53,7 +56,7 @@ public class ControleRelatorios extends HttpServlet {
 			
 			String url = request.getServletPath();
 		
-		if(url.equalsIgnoreCase("/ControleRelatorios2")){
+		if(url.equalsIgnoreCase("/relentrada")){
 		relEntrada(request, response);
 		
 		}else if(url.equalsIgnoreCase("/ControleRelatorios")){
@@ -73,11 +76,11 @@ protected void relatorios(HttpServletRequest request, HttpServletResponse respon
 		
 		InputStream arquivo = getServletContext().getResourceAsStream("/relatorios/Materiais.jasper");
 		
-		Map param = new HashMap();
+	//	Map param = new HashMap();
 		
-		param.put("cod", "23");
+	//	param.put("cod", "23");
 		
-		byte[] pdf = JasperRunManager.runReportToPdf(arquivo,param,con);
+		byte[] pdf = JasperRunManager.runReportToPdf(arquivo,null,con);
 		
 		ServletOutputStream out = response.getOutputStream();
 		out.write(pdf);
@@ -94,21 +97,40 @@ protected void relEntrada(HttpServletRequest request, HttpServletResponse respon
 		SessionImplementor sim = (SessionImplementor) HibernateUtil.getSessionFactory().openSession();
 		Connection con = sim.connection();
 		
-		InputStream arquivo = getServletContext().getResourceAsStream("/relatorios/RelEntrada3.jasper");
+		String dataini = request.getParameter("dataini");
+	    	String dtini[] = dataini.split("/");
+        	String diai = dtini[0];
+        	String mesi = dtini[1];
+        	String anoi = dtini[2];
+               System.out.println(mesi +"/"+diai+"/"+anoi);
+               
+		String datafim = request.getParameter("datafim");
+	        String dtfim[] = datafim.split("/");
+	     	String diaf = dtfim[0];
+	     	String mesf = dtfim[1];
+	     	String anof = dtfim[2];
+	     System.out.println(mesf +"/"+diaf+"/"+anof);
 		
-		String query = "select H from HistoricoEstoque as H";
+		HashMap param = new HashMap();
+		param.put("dataini",'"' + mesi +"/"+diai+"/"+anoi + " 00:00:00" + '"');
 		
-		List<HistoricoEstoque> lista = new MovimentacaoDao().RelEntrada(query);
+		System.out.println(param.toString());
 		
-		System.out.println(lista.toString());
+		param.put("datafim", '"' + mesf +"/"+diaf+"/"+anof + " 23:59:59" + '"');
 		
-		JRBeanCollectionDataSource ds = new JRBeanCollectionDataSource(lista);
+		System.out.println(param.toString());
 		
-		byte[] pdf = JasperRunManager.runReportToPdf(arquivo, null ,ds);
 		
-		ServletOutputStream out = response.getOutputStream();
+		
+		InputStream arquivo = getServletContext().getResourceAsStream("/relatorios/RelMoviment.jasper");
+			
+		byte[] pdf = JasperRunManager.runReportToPdf(arquivo, param ,con);
+		
+		ServletOutputStream out = response.getOutputStream(); 
 		out.write(pdf);
 		out.flush();
+		
+		
 		
 	}catch(Exception e){
 		e.printStackTrace();
