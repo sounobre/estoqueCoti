@@ -102,21 +102,21 @@ protected void relEntrada(HttpServletRequest request, HttpServletResponse respon
         	String diai = dtini[0];
         	String mesi = dtini[1];
         	String anoi = dtini[2];
-               System.out.println(mesi +"/"+diai+"/"+anoi);
+               System.out.println(mesi +"-"+diai+"-"+anoi);
                
 		String datafim = request.getParameter("datafim");
 	        String dtfim[] = datafim.split("/");
 	     	String diaf = dtfim[0];
 	     	String mesf = dtfim[1];
 	     	String anof = dtfim[2];
-	     System.out.println(mesf +"/"+diaf+"/"+anof);
+	     System.out.println(mesf +"-"+diaf+"-"+anof);
 		
 		HashMap param = new HashMap();
-		param.put("dataini",'"' + mesi +"/"+diai+"/"+anoi + " 00:00:00" + '"');
+		param.put("dataini",'"' + anoi +"-"+mesi+"-"+diai + " 00:00:00" + '"');
 		
 		System.out.println(param.toString());
 		
-		param.put("datafim", '"' + mesf +"/"+diaf+"/"+anof + " 23:59:59" + '"');
+		param.put("datafim", '"' + anof +"-"+mesf+"-"+diaf + " 23:59:59" + '"');
 		
 		System.out.println(param.toString());
 		
