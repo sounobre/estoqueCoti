@@ -33,7 +33,7 @@
                 <div id="RelEntradaSaida" class="modal fade"
 								aria-hidden="true" aria-labelledby="myModalLabel" role="dialog"
 								tabindex="-1" style="display: none;">
-								<div class="modal-dialog" style="width: 550px;">
+								<div class="modal-dialog" style="width: 480px;">
 									<div class="modal-content">
 
 										<div class="modal-header">
@@ -41,7 +41,7 @@
 												type="button">×</button>
 											<h4 class="modal-title" id="nomeRel"></h4>
 										</div>
-										<div class="modal-body" style="min-height: 300px;">
+										<div class="modal-body" style="min-height: 230px;">
 
 									   	<form action="../relentrada" method="post"> 
 					
@@ -56,9 +56,17 @@
 													<label for="codigo">Data Final</label> <input name="datafim"
 														class="form-control" type="date" id="dtfim" >
 												</div>
+												
+												
+													<label for="codigo">Tipo de Movimentação</label> 
+													<br>
+													<input name="tipMov"  type="radio" value="entrada" > Entrada<br>
+													<input name="tipMov"  type="radio" value="saida" > Saída<br>
+													<input name="tipMov"  type="radio" value="entradaesaida" > Entrada e Saída<br>
+												
 																							
 												<div
-													style="width: 30px; margin-top: 0%; float: right; margin-right: 25%">
+													style="width: 30px; margin-top: 0%; float: right; margin-right: 15%">
 													<button class="btn btn-primary btnPesquisaRel" type="submit" >Pesquisar</button>
 												</div>
 										   </form> 

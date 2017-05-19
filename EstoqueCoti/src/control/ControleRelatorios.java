@@ -97,31 +97,34 @@ protected void relEntrada(HttpServletRequest request, HttpServletResponse respon
 		SessionImplementor sim = (SessionImplementor) HibernateUtil.getSessionFactory().openSession();
 		Connection con = sim.connection();
 		
+		String tipoMov = request.getParameter("tipMov");
+		
 		String dataini = request.getParameter("dataini");
 	    	String dtini[] = dataini.split("/");
         	String diai = dtini[0];
         	String mesi = dtini[1];
         	String anoi = dtini[2];
-               System.out.println(mesi +"-"+diai+"-"+anoi);
-               
+   
 		String datafim = request.getParameter("datafim");
 	        String dtfim[] = datafim.split("/");
 	     	String diaf = dtfim[0];
 	     	String mesf = dtfim[1];
 	     	String anof = dtfim[2];
-	     System.out.println(mesf +"-"+diaf+"-"+anof);
-		
+
 		HashMap param = new HashMap();
-		param.put("dataini",'"' + anoi +"-"+mesi+"-"+diai + " 00:00:00" + '"');
+		param.put("dataini",  anoi +"-"+mesi+"-"+diai + " 00:00:00" );
+		param.put("datafim", anof +"-"+mesf+"-"+diaf + " 23:59:59" );
 		
-		System.out.println(param.toString());
-		
-		param.put("datafim", '"' + anof +"-"+mesf+"-"+diaf + " 23:59:59" + '"');
-		
-		System.out.println(param.toString());
-		
-		
-		
+		if(tipoMov.equalsIgnoreCase("entrada")){
+			param.put("tipmov", "entrada" );
+			
+		}else if(tipoMov.equalsIgnoreCase("saida")){
+			param.put("tipmov", "saida" );
+			
+		}else if(tipoMov.equalsIgnoreCase("entradaesaida")){
+			param.put("tipmov", "entrada or tipo = "+'"'+"saida"+'"');
+		}
+
 		InputStream arquivo = getServletContext().getResourceAsStream("/relatorios/RelMoviment.jasper");
 			
 		byte[] pdf = JasperRunManager.runReportToPdf(arquivo, param ,con);
@@ -129,9 +132,7 @@ protected void relEntrada(HttpServletRequest request, HttpServletResponse respon
 		ServletOutputStream out = response.getOutputStream(); 
 		out.write(pdf);
 		out.flush();
-		
-		
-		
+
 	}catch(Exception e){
 		e.printStackTrace();
 	}

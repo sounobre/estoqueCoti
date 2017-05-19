@@ -326,7 +326,7 @@
 				
 		$('#relEntrada').on('click', function(){
 			
-			$('#nomeRel').text("Relatório de Entradas!");
+			$('#nomeRel').text("Relatório de Movimentção!");
 			
 			$('#RelEntradaSaida').modal();
 							
