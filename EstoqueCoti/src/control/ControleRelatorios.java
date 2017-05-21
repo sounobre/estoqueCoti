@@ -116,13 +116,13 @@ protected void relEntrada(HttpServletRequest request, HttpServletResponse respon
 		param.put("datafim", anof +"-"+mesf+"-"+diaf + " 23:59:59" );
 		
 		if(tipoMov.equalsIgnoreCase("entrada")){
-			param.put("tipmov", "entrada" );
+			param.put("tipmov", "and he.tipo = 'entrada'" );
 			
 		}else if(tipoMov.equalsIgnoreCase("saida")){
-			param.put("tipmov", "saida" );
+			param.put("tipmov", "and he.tipo = 'saida'" );
 			
 		}else if(tipoMov.equalsIgnoreCase("entradaesaida")){
-			param.put("tipmov", "entrada or tipo = "+'"'+"saida"+'"');
+			param.put("tipmov", " ");
 		}
 
 		InputStream arquivo = getServletContext().getResourceAsStream("/relatorios/RelMoviment.jasper");

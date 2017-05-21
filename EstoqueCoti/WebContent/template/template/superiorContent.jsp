@@ -93,8 +93,11 @@ function CheckCatAltMat(val){
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </a>
+               
                 <div class="navbar-right">
                     <ul class="nav navbar-nav">
+                    
+                    
 
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
@@ -117,6 +120,9 @@ function CheckCatAltMat(val){
                                     <a href="#"><i class="fa fa-question fa-fw pull-right"></i> <span class=
                                         "badge pull-right">11</span> FAQ</a>
                                 </li>-->
+                                
+                                
+                                
 
                                 <li class="divider"></li>
 
@@ -204,8 +210,13 @@ function CheckCatAltMat(val){
                       
                       
                     </aside>
-
+                    	
                     <aside class="right-side">
+                    <section class="panel" id="abaixoEstoque">
+                    <div class="panel-heading" style="font-size: xx-large; text-align: center; color: red">
+                    <a> Ítens abaixo do limite permitido no estoque!</a>
+                    </div>
+					</section>
                     
                     
                     
