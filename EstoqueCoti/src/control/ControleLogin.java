@@ -60,7 +60,19 @@ protected void execute(HttpServletRequest request, HttpServletResponse response)
 					session.setAttribute("login", login);
 					session.setAttribute("nomeP", func.getNome());
 					
+					if(new LoginDao().verificaMinimo().size() > 0) {
+						request.setAttribute("bol", "<section class=\"panel\" id=\"abaixoEstoque\"> "
+                 + "  <div class=\"panel-heading\" style=\"font-size: xx-large; text-align: center; color: red\">"
+                 + "  <a> Ítens abaixo do limite permitido no estoque!</a> "
+                 + "  </div>   "
+				+ "	</section>");
+					}
+					
+					
 					response.sendRedirect("template/indCadastro.jsp");
+					
+					
+					
 				}else{
 					request.setAttribute("msg", "<div class = 'alert alert-info'>"+ "Email ou senha Incorretos!"+"</div>");
 					request.getRequestDispatcher("index.jsp").forward(request, response);

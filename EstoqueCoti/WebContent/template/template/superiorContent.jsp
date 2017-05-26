@@ -212,11 +212,7 @@ function CheckCatAltMat(val){
                     </aside>
                     	
                     <aside class="right-side">
-                    <section class="panel" id="abaixoEstoque">
-                    <div class="panel-heading" style="font-size: xx-large; text-align: center; color: red">
-                    <a> Ítens abaixo do limite permitido no estoque!</a>
-                    </div>
-					</section>
+                    ${bol}
                     
                     
                     

@@ -11,6 +11,7 @@ import org.hibernate.Transaction;
 
 import model.Fornecedor;
 import model.Funcionario;
+import model.MovimentacaoEstoque;
 import model.Pessoa;
 
 
@@ -38,5 +39,16 @@ public class LoginDao {
 		Funcionario func = (Funcionario) query.uniqueResult();
 		session.close();
 		return func;
+	}
+	
+	public List<MovimentacaoEstoque> verificaMinimo() {
+		session = HibernateUtil.getSessionFactory().openSession();
+		transaction = session.beginTransaction();
+		query = session.createQuery("select E from MovimentacaoEstoque E where "
+				+ "E.qtdEstoque < E.qtdMin");	
+		List<MovimentacaoEstoque> lista = query.list();
+		session.close();
+		return lista;
+		
 	}
 }
