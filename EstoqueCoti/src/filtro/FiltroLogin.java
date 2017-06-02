@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import control.ControleLogin;
+
 /**
  * Servlet Filter implementation class FiltroLogin
  */
@@ -27,13 +29,11 @@ import javax.servlet.http.HttpSession;
 					, 
 		urlPatterns = { 
 				"/FiltroLogin", 
-				"/template/*"
+				//"/template/*"
 		})
 public class FiltroLogin implements Filter {
 
-    /**
-     * Default constructor. 
-     */
+    
     public FiltroLogin() {
         // TODO Auto-generated constructor stub
     }
@@ -50,13 +50,23 @@ public class FiltroLogin implements Filter {
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		
+		
 		HttpServletResponse res = (HttpServletResponse) response;
 		HttpServletRequest req = (HttpServletRequest) request;
+		
+		
+		String url = req.getServletPath();
+		
 		HttpSession session = req.getSession();
 		
+	   if((session.getAttribute("login") == null) && (url.equalsIgnoreCase("/template/login.jsp"))){	
+		ControleLogin cl = new ControleLogin();
+		cl.execute(req, res);
+	   }
 		
-		
-		if(session.getAttribute("login") != null ){
+	  
+		if((session.getAttribute("login") != null) && (url.equalsIgnoreCase("/template/login.jsp")) || (url.equalsIgnoreCase("/template/index.jsp")
+				|| (session.getAttribute("login") != null) )){
 			//Se estiver logado, deixa a pagina ser exibida
 			chain.doFilter(request, response);
 		}else{
@@ -69,7 +79,7 @@ public class FiltroLogin implements Filter {
 	 * @see Filter#init(FilterConfig)
 	 */
 	public void init(FilterConfig fConfig) throws ServletException {
-		// TODO Auto-generated method stub
+		
 	}
 
 }

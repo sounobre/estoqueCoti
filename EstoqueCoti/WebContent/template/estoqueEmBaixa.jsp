@@ -3,12 +3,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-
+<!--  
 <jsp:useBean id="cBean" class="control.ControleMateriais"></jsp:useBean>
 <jsp:useBean id="locBean" class="persistence.LocalDao"></jsp:useBean>
 <jsp:useBean id="cDaoBean" class="persistence.MateriaisDao"></jsp:useBean>
 <jsp:useBean id="movBean" class="persistence.MovimentacaoDao"></jsp:useBean>
-
+  -->
+  <jsp:useBean id="movMinEst" class="control.ControleLogin"></jsp:useBean> 
+  
 <!-- Main content -->
 
 <!--tab nav start-->
@@ -26,8 +28,7 @@
 					<section class="panel">
 						<div class="panel-body">
 						
-						<form action="buscaMaterialExist.html" method="post">
-
+				<!--  	<form action="buscaMaterialExist.html" method="post">  
 
 						<div class="col-lg-2">
 							<select name="selectPesquisaForn" class="form-control" id="pesqForn">
@@ -49,10 +50,9 @@
 								<i class="fa fa-search"></i>
 							</button>
 						</span>
-
-					</form>
-
-					<c:if test="${fn:length(listaDeMateriais) > 0 }">
+ </form> -->
+					
+					<c:if test="${fn:length(lista) > 0 }">
 
 						<br>
 						<table class="table table-hover">
@@ -66,22 +66,22 @@
 
 
 
-							<c:forEach items="${listaDeMateriais }" var="list">
+							<c:forEach items="${lista }" var="list">
 
 
 								<tr>
-									<td id="nome${list.id_material}">${list.nome }</td>
-									<td id="codigo${list.id_material}">${list.codigo }</td>
-									<td id="categoria${list.id_material}">${list.categoria.categoria }</td>
+									<td id="nome${list.id}">${list.nome }</td>
+									<td id="codigo${list.id}">${list.codigo }</td>
+									<td id="categoria${list.id}">${list.categoria }</td>
 									
 									
 									<td><a href="entradaMateriais2"
 										class="btn btn-xs btn-info entradaMateriais"
-										data-toggle="modal" name="codigoTeste" data-id="${list.id_material }" >Entrada</a>
+										data-toggle="modal" name="codigoTeste" data-id="${list.id }" >Entrada</a>
 										 
 										<a href="entradaMateriais2"
 										class="btn btn-xs btn-danger saidaMateriais"
-										data-toggle="modal" name="codigoTeste" data-id="${list.id_material }" >Saida</a> 
+										data-toggle="modal" name="codigoTeste" data-id="${list.id }" >Saida</a> 
 										
 										</td>
 								</tr>
@@ -108,9 +108,9 @@
 										</div>
 										<div class="modal-body" style="min-height: 300px;">
 
-										<!--  	<form action="cadEntradaEstq.html" method="post"> -->
+										<form action="cadEntradaEstq.html" method="post"> 
 					
-												<div class="form-group"
+									             <div class="form-group"
 													style="width: 200px; float: left; margin-top: 0%; margin-left: 0%">
 													<label for="nome">Nome</label> <input name="nome"
 														class="form-control" type="text" id="fnome" disabled="disabled">
@@ -172,15 +172,15 @@
 													style="width: 30px; margin-top: 0%; float: right; margin-right: 25%">
 													<button class="btn btn-primary btnMoviment" type="submit" >Entrada de Material</button>
 												</div> 
-										<!--   </form> -->
+									 </form> 
 											
-											<div id="retorno" style="width: 300px; margin-top: 0%; float: right; margin-right: 0%; font-size: 20px; color: red; ">
+										  	<div id="retorno" style="width: 300px; margin-top: 0%; float: right; margin-right: 0%; font-size: 20px; color: red; ">
 											
 											</div>
 										</div>
 									</div>
 								</div>
-							</div>
+							</div> 
 						</div>
 					</section>
 					

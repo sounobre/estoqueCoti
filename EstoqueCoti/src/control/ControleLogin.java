@@ -13,16 +13,17 @@ import javax.servlet.http.HttpSession;
 import org.firebirdsql.jdbc.parser.JaybirdSqlParser.function_return;
 
 import model.Funcionario;
+import model.MovimentacaoEstoque;
 import persistence.FuncionarioDao;
 import persistence.LoginDao;
 
 /**
  * Servlet implementation class ControleLogin
  */
-@WebServlet({"/ControleLogin","/login.html", "/template/logout.html"})
+@WebServlet({"/ControleLogin","/template/login.jsp", "/template/logout.html","/template/estoqueEmBaixa.jsp"})
 public class ControleLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	   
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -40,15 +41,17 @@ public class ControleLogin extends HttpServlet {
 
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		execute(request, response);
+		
 	}
 
-protected void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try{
-			
+				
 				String url = request.getServletPath();
 				
-				if(url.equalsIgnoreCase("/login.html")){
+				if(url.equalsIgnoreCase("/template/login.jsp")){
 					String login = request.getParameter("login");
 					String senha = request.getParameter("senha");
 					
@@ -60,17 +63,20 @@ protected void execute(HttpServletRequest request, HttpServletResponse response)
 					session.setAttribute("login", login);
 					session.setAttribute("nomeP", func.getNome());
 					
-					if(new LoginDao().verificaMinimo().size() > 0) {
-						request.setAttribute("bol", "<section class=\"panel\" id=\"abaixoEstoque\"> "
-                 + "  <div class=\"panel-heading\" style=\"font-size: xx-large; text-align: center; color: red\">"
-                 + "  <a> Ítens abaixo do limite permitido no estoque!</a> "
+				
+										
+				if(new LoginDao().verificaMinimo().size() > 0) {
+						request.setAttribute("bol", "<section class='panel' id='abaixoEstoque'> "
+                 + "  <div class='panel-heading' style='font-size: large; text-align: center; color: red'>"
+                 + "  <a href = '/EstoqueCoti/template/estoqueEmBaixa.jsp'> Existem itens com quantidade abaixo do limite permitido no estoque!</a> "
                  + "  </div>   "
 				+ "	</section>");
+						request.getRequestDispatcher("/template/indCadastro.jsp").forward(request, response);
 					}
 					
+				
 					
-					response.sendRedirect("template/indCadastro.jsp");
-					
+											
 					
 					
 				}else{
@@ -86,10 +92,32 @@ protected void execute(HttpServletRequest request, HttpServletResponse response)
 					session.invalidate();
 					
 					response.sendRedirect( request.getContextPath() + "/");
+				}else if(url.equalsIgnoreCase("/template/login.jsp")){
+										
+					response.sendRedirect("/template/login.jsp");
+					
+				} else if(url.equalsIgnoreCase("/template/estoqueEmBaixa.jsp")){
+					estoqueEmBaixa(request, response);
 				}
 			
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 	}
+
+public void estoqueEmBaixa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	try{
+		
+		List<MovimentacaoEstoque> lista =  new LoginDao().verificaMinimo();
+		request.setAttribute("lista", lista);
+		request.getRequestDispatcher("/template/estoqueEmBaixa.jsp").forward(request, response);
+		
+	}catch(Exception e){
+		e.printStackTrace();
+	}
+	
+	
+	
+}
+
 }
