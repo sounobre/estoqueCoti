@@ -28,7 +28,7 @@
 					<section class="panel">
 						<div class="panel-body">
 						
-				<!--  	<form action="buscaMaterialExist.html" method="post">  
+				 	<form action="buscaMaterialExist.html" method="post">  
 
 						<div class="col-lg-2">
 							<select name="selectPesquisaForn" class="form-control" id="pesqForn">
@@ -50,7 +50,7 @@
 								<i class="fa fa-search"></i>
 							</button>
 						</span>
- </form> -->
+ </form> 
 					
 					<c:if test="${fn:length(lista) > 0 }">
 

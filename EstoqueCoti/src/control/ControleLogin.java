@@ -20,7 +20,7 @@ import persistence.LoginDao;
 /**
  * Servlet implementation class ControleLogin
  */
-@WebServlet({"/ControleLogin","/template/login.jsp", "/template/logout.html","/template/estoqueEmBaixa.jsp"})
+@WebServlet({"/ControleLogin","/template/login.jsp", "/template/logout.html","/template/estoqueEmBaixa.html"})
 public class ControleLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	   
@@ -68,7 +68,7 @@ public void execute(HttpServletRequest request, HttpServletResponse response) th
 				if(new LoginDao().verificaMinimo().size() > 0) {
 						request.setAttribute("bol", "<section class='panel' id='abaixoEstoque'> "
                  + "  <div class='panel-heading' style='font-size: large; text-align: center; color: red'>"
-                 + "  <a href = '/EstoqueCoti/template/estoqueEmBaixa.jsp'> Existem itens com quantidade abaixo do limite permitido no estoque!</a> "
+                 + "  <a href = '/EstoqueCoti/template/estoqueEmBaixa.html'> Existem itens com quantidade abaixo do limite permitido no estoque!</a> "
                  + "  </div>   "
 				+ "	</section>");
 						request.getRequestDispatcher("/template/indCadastro.jsp").forward(request, response);
@@ -96,7 +96,7 @@ public void execute(HttpServletRequest request, HttpServletResponse response) th
 										
 					response.sendRedirect("/template/login.jsp");
 					
-				} else if(url.equalsIgnoreCase("/template/estoqueEmBaixa.jsp")){
+				} else if(url.equalsIgnoreCase("/template/estoqueEmBaixa.html")){
 					estoqueEmBaixa(request, response);
 				}
 			

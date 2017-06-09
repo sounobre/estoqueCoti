@@ -45,7 +45,7 @@ public class LoginDao {
 		session = HibernateUtil.getSessionFactory().openSession();
 		transaction = session.beginTransaction();
 		query = session.createQuery("select E from MovimentacaoEstoque E where "
-				+ "E.qtdEstoque < E.qtdMin");	
+				+ "cast(E.qtdEstoque as int) < cast(E.qtdMin as int)");	
 		List<MovimentacaoEstoque> lista = query.list();
 		session.close();
 		return lista;
